@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nieman Digitaal Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Nunito+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0D1B2A;--navy-mid:#162436;--navy-light:#1E3248;--navy-border:rgba(255,255,255,.08);
+  --gold:#F4A261;--gold-mid:#E8904A;--gold-soft:#FDF3EB;--gold-pale:#FEF8F3;
+  --cream:#F5F4F1;--white:#FFFFFF;
+  --text:#1A1A2E;--mid:#4A5568;--soft:#8898AA;--border:#E2E8F0;
+  --green:#2D6A4F;--green-bg:#D8F3DC;--amber:#B7791F;--amber-bg:#FEFCE8;--red:#9B2335;--red-bg:#FEE2E2;
+  --teal:#1A6B7C;--teal-bg:#E8F4F7;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Nunito Sans',sans-serif;background:var(--cream);color:var(--text);display:flex;height:100vh;overflow:hidden;font-size:14px;min-width:1200px;}
+
+/* ── SIDEBAR ── */
+.sidebar{width:240px;background:var(--navy);display:flex;flex-direction:column;flex-shrink:0;box-shadow:4px 0 20px rgba(0,0,0,.25);}
+.logo-area{padding:28px 24px 22px;border-bottom:1px solid var(--navy-border);}
+.logo-mark{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.logo-emblem{width:34px;height:34px;border:2px solid var(--gold);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--gold);letter-spacing:-.5px;flex-shrink:0;}
+.logo-text{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:#fff;letter-spacing:.5px;line-height:1;}
+.logo-sub{font-size:9px;color:rgba(255,255,255,.35);letter-spacing:3.5px;text-transform:uppercase;margin-bottom:10px;padding-left:44px;}
+.ai-pill{display:inline-flex;align-items:center;gap:5px;background:rgba(244,162,97,.15);border:1px solid rgba(244,162,97,.3);color:var(--gold);font-size:9px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.8px;text-transform:uppercase;}
+.ai-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+
+.nav{padding:10px 0;flex:1;overflow-y:auto;}
+.nav-section{font-size:8.5px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.22);padding:16px 24px 5px;font-weight:700;}
+.nav-item{display:flex;align-items:center;gap:12px;padding:11px 24px;color:rgba(255,255,255,.5);font-size:12.5px;font-weight:500;cursor:pointer;transition:all .18s;border-left:3px solid transparent;letter-spacing:.2px;}
+.nav-item:hover{color:rgba(255,255,255,.85);background:rgba(255,255,255,.05);}
+.nav-item.active{color:#fff;background:rgba(244,162,97,.1);border-left-color:var(--gold);}
+.nav-icon{font-size:14px;width:18px;text-align:center;flex-shrink:0;opacity:.8;}
+
+.sidebar-footer{padding:18px 24px;border-top:1px solid var(--navy-border);}
+.firm-badge{font-size:9px;color:rgba(255,255,255,.2);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.user-block{display:flex;align-items:center;gap:10px;}
+.user-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--gold-mid),var(--gold));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:700;color:var(--navy);flex-shrink:0;}
+.user-name{font-size:12px;font-weight:700;color:#fff;letter-spacing:.2px;}
+.user-role{font-size:10px;color:rgba(255,255,255,.35);margin-top:1px;}
+
+/* ── MAIN ── */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.topbar{background:var(--white);border-bottom:1px solid var(--border);padding:0 32px;height:58px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;box-shadow:0 1px 8px rgba(0,0,0,.04);}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--text);letter-spacing:.3px;}
+.topbar-right{display:flex;align-items:center;gap:14px;}
+.topbar-badge{background:var(--gold-soft);color:var(--gold-mid);font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;border:1px solid rgba(244,162,97,.25);letter-spacing:.3px;}
+.topbar-offices{font-size:11px;color:var(--soft);letter-spacing:.5px;}
+
+.content{flex:1;overflow-y:auto;padding:32px;}
+
+/* ── CARDS ── */
+.cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px;}
+.stat-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:22px 20px;position:relative;overflow:hidden;}
+.stat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--navy-light),var(--gold));}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:700;color:var(--navy);line-height:1;}
+.stat-label{font-size:11.5px;color:var(--soft);margin-top:4px;letter-spacing:.3px;text-transform:uppercase;font-weight:600;}
+.stat-delta{font-size:11px;margin-top:10px;font-weight:600;}
+.up{color:var(--green);}
+.warn{color:var(--amber);}
+.dn{color:var(--red);}
+
+/* ── SECTIONS ── */
+.section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px;}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--text);}
+
+/* ── TABLE ── */
+.table-card{background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:28px;box-shadow:0 1px 6px rgba(0,0,0,.04);}
+.table-header{padding:16px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--white);}
+.table-title{font-weight:700;font-size:13.5px;color:var(--text);}
+.table-sub{font-size:11px;color:var(--soft);margin-top:2px;}
+table{width:100%;border-collapse:collapse;}
+th{text-align:left;padding:11px 22px;font-size:10.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--soft);background:#FAFAFA;border-bottom:1px solid var(--border);}
+td{padding:14px 22px;font-size:13px;border-bottom:1px solid var(--border);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:#FFFCF9;}
+.proj-name{font-weight:600;color:var(--text);}
+.proj-loc{font-size:11px;color:var(--soft);margin-top:2px;}
+
+/* ── PILLS ── */
+.pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:10.5px;font-weight:700;letter-spacing:.3px;}
+.p-green{background:var(--green-bg);color:var(--green);}
+.p-amber{background:var(--amber-bg);color:var(--amber);}
+.p-navy{background:#EEF2FF;color:#3730A3;}
+.p-red{background:var(--red-bg);color:var(--red);}
+.p-gold{background:var(--gold-soft);color:var(--gold-mid);}
+
+/* ── BUTTONS ── */
+.btn{padding:9px 18px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;transition:all .18s;border:none;font-family:'Nunito Sans',inherit;letter-spacing:.3px;}
+.btn-primary{background:var(--navy);color:#fff;}
+.btn-primary:hover{background:var(--navy-light);}
+.btn-gold{background:var(--gold);color:var(--navy);font-weight:800;}
+.btn-gold:hover{background:var(--gold-mid);}
+.btn-outline{background:#fff;color:var(--navy);border:1.5px solid var(--border);}
+.btn-outline:hover{border-color:var(--navy);background:#FAFAFA;}
+.btn-sm{padding:5px 13px;font-size:11px;}
+
+/* ── PANEL GRID ── */
+.panel-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:28px;}
+.panel{background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.04);}
+.panel-head{padding:15px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:var(--white);}
+.panel-icon{width:32px;height:32px;border-radius:8px;background:var(--gold-soft);color:var(--gold-mid);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.panel-title{font-weight:700;font-size:13.5px;color:var(--text);}
+.panel-body{padding:22px;}
+
+/* ── FORM ELEMENTS ── */
+.lbl{font-size:10.5px;font-weight:700;color:var(--soft);margin-bottom:5px;display:block;letter-spacing:.5px;text-transform:uppercase;}
+.inp{width:100%;border:1.5px solid var(--border);border-radius:7px;padding:10px 13px;font-size:13px;font-family:'Nunito Sans',sans-serif;color:var(--text);outline:none;transition:border-color .18s;background:#fff;}
+.inp:focus{border-color:var(--navy);}
+.ta{resize:vertical;min-height:72px;}
+
+/* ── PROGRESS ── */
+.prog-wrap{background:var(--border);border-radius:20px;height:5px;overflow:hidden;margin:12px 0 5px;}
+.prog-bar{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--navy),var(--gold));transition:width .55s ease;}
+
+/* ── OUTPUT BOX ── */
+.out-box{background:var(--cream);border-radius:8px;padding:16px;border:1px solid var(--border);font-size:12.5px;line-height:1.75;color:var(--mid);min-height:90px;}
+
+/* ── REPORT TYPE GRID ── */
+.report-type-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+.rt-btn{padding:13px 14px;border-radius:8px;border:1.5px solid var(--border);background:#fff;cursor:pointer;text-align:left;transition:all .18s;}
+.rt-btn:hover,.rt-btn.sel{border-color:var(--navy);background:var(--navy);color:#fff;}
+.rt-btn:hover .rt-sub,.rt-btn.sel .rt-sub{color:rgba(255,255,255,.5);}
+.rt-title{font-size:12px;font-weight:700;letter-spacing:.2px;}
+.rt-sub{font-size:10.5px;color:var(--soft);margin-top:3px;}
+
+/* ── EXCEL ── */
+.drop-zone{border:2px dashed var(--border);border-radius:10px;padding:30px;text-align:center;cursor:pointer;transition:all .18s;margin-bottom:16px;}
+.drop-zone:hover{border-color:var(--gold);background:var(--gold-pale);}
+.xls-preview{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:12px;}
+.xrow{display:grid;grid-template-columns:160px repeat(5,1fr);border-bottom:1px solid var(--border);font-size:11px;}
+.xrow:last-child{border-bottom:none;}
+.xcell{padding:7px 10px;border-right:1px solid var(--border);}
+.xcell:last-child{border-right:none;}
+.xhead .xcell{background:var(--navy);color:#fff;font-weight:700;font-size:10px;letter-spacing:.4px;text-transform:uppercase;}
+.xai{background:var(--gold-soft);color:var(--gold-mid);font-weight:700;}
+.ai-chip{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:var(--gold-mid);background:var(--gold-soft);padding:3px 9px;border-radius:20px;font-weight:700;border:1px solid rgba(244,162,97,.25);}
+
+/* ── BENG ── */
+.beng-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.brow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(13,27,42,.07);}
+.brow:last-child{border-bottom:none;}
+.brc{background:#FAFAFA;border-radius:8px;padding:14px;margin-bottom:10px;border:1px solid var(--border);}
+.brc-pass{border-left:3px solid var(--green);}
+.brc-warn{border-left:3px solid var(--amber);}
+
+/* ── NORM MONITOR ── */
+.norm-list{display:flex;flex-direction:column;gap:12px;}
+.norm-item{display:flex;gap:14px;padding:16px;background:var(--white);border-radius:10px;border:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,.04);}
+.norm-date{font-size:10px;color:var(--soft);white-space:nowrap;min-width:46px;font-weight:600;letter-spacing:.3px;}
+.ntitle{font-size:13px;font-weight:700;color:var(--text);}
+.nsub{font-size:11.5px;color:var(--mid);margin-top:3px;line-height:1.5;}
+.ntag{display:inline-block;font-size:9px;font-weight:800;padding:2px 8px;border-radius:20px;margin-top:5px;letter-spacing:.5px;text-transform:uppercase;}
+.t-bbl{background:var(--green-bg);color:var(--green);}
+.t-beng{background:var(--teal-bg);color:var(--teal);}
+.t-wkb{background:var(--gold-soft);color:var(--gold-mid);}
+.t-nen{background:var(--red-bg);color:var(--red);}
+.t-akoe{background:#EEF2FF;color:#3730A3;}
+
+/* ── KENNISBANK ── */
+.search-bar{display:flex;gap:8px;margin-bottom:16px;}
+.kb-item{padding:16px;background:var(--white);border-radius:10px;border:1px solid var(--border);cursor:pointer;margin-bottom:10px;transition:all .18s;box-shadow:0 1px 4px rgba(0,0,0,.04);}
+.kb-item:hover{border-color:var(--navy);}
+.kb-title{font-size:13.5px;font-weight:700;color:var(--text);font-family:'Cormorant Garamond',serif;}
+.kb-meta{font-size:11px;color:var(--soft);margin-top:3px;letter-spacing:.3px;}
+.kb-snip{font-size:12px;color:var(--mid);margin-top:6px;line-height:1.55;}
+.kb-tags{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;}
+.match{float:right;font-size:10px;font-weight:800;color:var(--navy);background:#EEF2FF;padding:2px 9px;border-radius:20px;letter-spacing:.3px;}
+
+/* ── PAGE TRANSITIONS ── */
+.page{display:none;}
+.page.active{display:block;animation:fi .28s ease;}
+@keyframes fi{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── AI SAVINGS BARS ── */
+.save-row{margin-bottom:14px;}
+.save-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;font-weight:500;}
+.save-val{font-weight:700;color:var(--navy);}
+
+/* ── NOTIFICATION ITEMS ── */
+.notif{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.notif:last-child{border-bottom:none;}
+.notif-dot{width:8px;height:8px;border-radius:50%;margin-top:4px;flex-shrink:0;}
+.notif-title{font-size:12.5px;font-weight:700;color:var(--text);}
+.notif-sub{font-size:11px;color:var(--soft);margin-top:2px;}
+
+/* ── STATUS SUMMARY BAR ── */
+.status-bar{display:flex;gap:24px;padding:14px 22px;background:var(--navy);border-radius:10px;margin-bottom:28px;align-items:center;}
+.status-bar-item{text-align:center;}
+.sb-num{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--gold);line-height:1;}
+.sb-lbl{font-size:10px;color:rgba(255,255,255,.45);margin-top:2px;letter-spacing:.5px;text-transform:uppercase;}
+.sb-div{width:1px;height:36px;background:rgba(255,255,255,.1);}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="logo-area">
+    <div class="logo-mark">
+      <div class="logo-emblem">N</div>
+      <div class="logo-text">Nieman</div>
+    </div>
+    <div class="logo-sub">Raadgevende Ingenieurs</div>
+    <div class="ai-pill"><div class="ai-dot"></div> Digitaal Platform</div>
+  </div>
+  <nav class="nav">
+    <div class="nav-section">Overzicht</div>
+    <div class="nav-item active" onclick="show('dashboard',this)"><span class="nav-icon">◈</span> Dashboard</div>
+    <div class="nav-section">Applicaties</div>
+    <div class="nav-item" onclick="show('rapport',this)"><span class="nav-icon">✦</span> Rapport Schrijver</div>
+    <div class="nav-item" onclick="show('excel',this)"><span class="nav-icon">⊞</span> Excel Assistent</div>
+    <div class="nav-item" onclick="show('beng',this)"><span class="nav-icon">⟁</span> BENG Checker</div>
+    <div class="nav-item" onclick="show('normen',this)"><span class="nav-icon">⚖</span> Norm Monitor</div>
+    <div class="nav-item" onclick="show('kennis',this)"><span class="nav-icon">◎</span> Kennisbank</div>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="firm-badge">Nieman Groep</div>
+    <div class="user-block">
+      <div class="user-av">JN</div>
+      <div>
+        <div class="user-name">J. Nieman</div>
+        <div class="user-role">Managing Director · Nieman Groep</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="topbar">
+    <div class="page-title" id="ptitle">Dashboard</div>
+    <div class="topbar-right">
+      <div class="topbar-offices">Utrecht · Zwolle · Rotterdam</div>
+      <div class="topbar-badge">● Systeem Actief — Alle systemen operationeel</div>
+    </div>
+  </div>
+  <div class="content">
+
+    <!-- ═══════════════════════════════════════ DASHBOARD ═══════════════════════════════════════ -->
+    <div class="page active" id="page-dashboard">
+
+      <div class="cards-grid">
+        <div class="stat-card">
+          <div class="stat-num">87</div>
+          <div class="stat-label">Actieve projecten</div>
+          <div class="stat-delta up">↑ 11 t.o.v. vorige kwartaal</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">23</div>
+          <div class="stat-label">Rapporten in behandeling</div>
+          <div class="stat-delta warn">⚠ 6 wachten op review</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">97%</div>
+          <div class="stat-label">Compliance rate WKB/Bbl</div>
+          <div class="stat-delta up">↑ Hoogste score in 5 jaar</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">312</div>
+          <div class="stat-label">Uren bespaard (ytd)</div>
+          <div class="stat-delta up">↑ €43.680 waarde gecreëerd</div>
+        </div>
+      </div>
+
+      <div class="status-bar">
+        <div class="status-bar-item"><div class="sb-num">40+</div><div class="sb-lbl">Jaar ervaring</div></div>
+        <div class="sb-div"></div>
+        <div class="status-bar-item"><div class="sb-num">120+</div><div class="sb-lbl">Medewerkers</div></div>
+        <div class="sb-div"></div>
+        <div class="status-bar-item"><div class="sb-num">3</div><div class="sb-lbl">Vestigingen</div></div>
+        <div class="sb-div"></div>
+        <div class="status-bar-item"><div class="sb-num">14</div><div class="sb-lbl">WKB dossiers open</div></div>
+        <div class="sb-div"></div>
+        <div class="status-bar-item"><div class="sb-num">8</div><div class="sb-lbl">Brandveiligheidsadviezen</div></div>
+        <div class="sb-div"></div>
+        <div class="status-bar-item"><div class="sb-num">99%</div><div class="sb-lbl">Tijdige oplevering</div></div>
+      </div>
+
+      <div class="section-header">
+        <div class="section-title">Actieve Projecten — Lopende Opdrachten</div>
+        <button class="btn btn-outline btn-sm" onclick="filterProjects()">Filter &amp; sorteren ▾</button>
+      </div>
+      <div class="table-card">
+        <div class="table-header">
+          <div>
+            <div class="table-title">Projectoverzicht · 87 actieve opdrachten</div>
+            <div class="table-sub">Vestigingen: Utrecht / Zwolle / Rotterdam</div>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-outline btn-sm" onclick="exportTable()">⬇ Exporteer</button>
+            <button class="btn btn-primary btn-sm" onclick="newProject()">+ Nieuw project</button>
+          </div>
+        </div>
+        <table>
+          <tr>
+            <th>Project</th>
+            <th>Opdrachtgever</th>
+            <th>Discipline</th>
+            <th>Vestiging</th>
+            <th>Status</th>
+            <th>Deadline</th>
+            <th></th>
+          </tr>
+          <tr>
+            <td><div class="proj-name">Woontoren de Baak — Fase 2</div><div class="proj-loc">Bouwfysica rapport + WKB kwaliteitsborging</div></td>
+            <td>AM Vastgoed</td>
+            <td>Bouwfysica / WKB</td>
+            <td>Utrecht</td>
+            <td><span class="pill p-green">Actief</span></td>
+            <td>19 mei 2026</td>
+            <td><button class="btn btn-outline btn-sm" onclick="openProject('de Baak')">Open</button></td>
+          </tr>
+          <tr>
+            <td><div class="proj-name">Ziekenhuis Isala — Nieuwbouw west</div><div class="proj-loc">Brandveiligheidsadvies conform NEN 6068</div></td>
+            <td>Isala Klinieken</td>
+            <td>Brandveiligheid</td>
+            <td>Zwolle</td>
+            <td><span class="pill p-amber">In review</span></td>
+            <td>2 mei 2026</td>
+            <td><button class="btn btn-primary btn-sm" onclick="openProject('Isala')">Review</button></td>
+          </tr>
+          <tr>
+            <td><div class="proj-name">Rijnboutt kantoren Rotterdam</div><div class="proj-loc">Akoestisch onderzoek lucht- en contactgeluid</div></td>
+            <td>Bouwinvest REIM</td>
+            <td>Akoestiek</td>
+            <td>Rotterdam</td>
+            <td><span class="pill p-green">Actief</span></td>
+            <td>7 jun 2026</td>
+            <td><button class="btn btn-outline btn-sm" onclick="openProject('Rijnboutt')">Open</button></td>
+          </tr>
+          <tr>
+            <td><div class="proj-name">Gemeentehuis Zwolle — Renovatie</div><div class="proj-loc">WKB kwaliteitsverklaring Bbl fase 2</div></td>
+            <td>Gemeente Zwolle</td>
+            <td>WKB / Bouwregelgeving</td>
+            <td>Zwolle</td>
+            <td><span class="pill p-navy">Concept</span></td>
+            <td>14 jun 2026</td>
+            <td><button class="btn btn-outline btn-sm" onclick="openProject('Zwolle')">Open</button></td>
+          </tr>
+          <tr>
+            <td><div class="proj-name">Luxe woningbouw Wilhelminapier</div><div class="proj-loc">BENG + bouwfysica + brandveiligheid</div></td>
+            <td>Provast BV</td>
+            <td>Integraal advies</td>
+            <td>Rotterdam</td>
+            <td><span class="pill p-red">Urgent</span></td>
+            <td>25 apr 2026</td>
+            <td><button class="btn btn-primary btn-sm" onclick="openProject('Wilhelminapier')">Open</button></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="panel-grid">
+        <div class="panel">
+          <div class="panel-head"><div class="panel-icon">⚡</div><div class="panel-title">Tijdsbesparing — deze maand</div></div>
+          <div class="panel-body">
+            <div class="save-row"><div class="save-label"><span>Bouwfysica rapporten</span><span class="save-val">28.4 uur</span></div><div class="prog-wrap"><div class="prog-bar" style="width:85%"></div></div></div>
+            <div class="save-row"><div class="save-label"><span>Brandveiligheidsadviezen</span><span class="save-val">19.7 uur</span></div><div class="prog-wrap"><div class="prog-bar" style="width:65%"></div></div></div>
+            <div class="save-row"><div class="save-label"><span>WKB dossiervoorbereiding</span><span class="save-val">16.2 uur</span></div><div class="prog-wrap"><div class="prog-bar" style="width:55%"></div></div></div>
+            <div class="save-row"><div class="save-label"><span>Norm- en regelgeving checks</span><span class="save-val">11.3 uur</span></div><div class="prog-wrap"><div class="prog-bar" style="width:38%"></div></div></div>
+            <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+              <div><strong style="color:var(--navy);font-size:26px;font-family:'Cormorant Garamond',serif;">75.6 uur</strong> <span style="font-size:12px;color:var(--soft);">bespaard deze maand</span></div>
+              <div style="text-align:right;"><div style="font-size:13px;font-weight:700;color:var(--green);">€10.584</div><div style="font-size:10px;color:var(--soft);">gecreëerde waarde</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="panel-icon">🔔</div><div class="panel-title">Recente Meldingen</div></div>
+          <div class="panel-body">
+            <div class="notif">
+              <div class="notif-dot" style="background:var(--gold);"></div>
+              <div><div class="notif-title">Brandveiligheidsrapport gereed</div><div class="notif-sub">Isala Klinieken Zwolle · review afgerond · 4 min geleden</div></div>
+            </div>
+            <div class="notif">
+              <div class="notif-dot" style="background:var(--amber);"></div>
+              <div><div class="notif-title">WKB norm update gedetecteerd</div><div class="notif-sub">Bbl art. 2.2 gewijzigd · 14 actieve dossiers geraakt</div></div>
+            </div>
+            <div class="notif">
+              <div class="notif-dot" style="background:var(--green);"></div>
+              <div><div class="notif-title">Bouwfysica berekening voltooid</div><div class="notif-sub">Woontoren de Baak — thermische brug analyse klaar</div></div>
+            </div>
+            <div class="notif">
+              <div class="notif-dot" style="background:var(--red);"></div>
+              <div><div class="notif-title">Deadline morgen: Urgent</div><div class="notif-sub">Wilhelminapier Rotterdam · BENG rapport definitief</div></div>
+            </div>
+            <div class="notif">
+              <div class="notif-dot" style="background:#3730A3;"></div>
+              <div><div class="notif-title">Akoestisch onderzoek geüpload</div><div class="notif-sub">Rijnboutt Rotterdam · geluidsisolatiemetingen verwerkt</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ═══════════════════════════════════════ RAPPORT SCHRIJVER ═══════════════════════════════════════ -->
+    <div class="page" id="page-rapport">
+      <div class="panel-grid">
+        <div class="panel">
+          <div class="panel-head"><div class="panel-icon">✦</div><div class="panel-title">Rapport Configuratie</div></div>
+          <div class="panel-body">
+            <div style="margin-bottom:16px;">
+              <label class="lbl">Rapport type</label>
+              <div class="report-type-grid">
+                <div class="rt-btn sel" onclick="selRT(this)">
+                  <div class="rt-title">Brandveiligheidsrapport</div>
+                  <div class="rt-sub">NEN 6068 · Bbl afdeling 2.2</div>
+                </div>
+                <div class="rt-btn" onclick="selRT(this)">
+                  <div class="rt-title">Bouwfysica Rapport</div>
+                  <div class="rt-sub">Thermisch comfort · TO · dauwpunt</div>
+                </div>
+                <div class="rt-btn" onclick="selRT(this)">
+                  <div class="rt-title">WKB Kwaliteitsverklaring</div>
+                  <div class="rt-sub">Wet kwaliteitsborging bouw 2024</div>
+                </div>
+                <div class="rt-btn" onclick="selRT(this)">
+                  <div class="rt-title">Akoestisch Onderzoek</div>
+                  <div class="rt-sub">NPR 5272 · lucht- en contactgeluid</div>
+                </div>
+              </div>
+            </div>
+            <div style="margin-bottom:12px;"><label class="lbl">Project naam</label><input class="inp" type="text" value="Ziekenhuis Isala — Nieuwbouw west"></div>
+            <div style="margin-bottom:12px;"><label class="lbl">Opdrachtgever</label><input class="inp" type="text" value="Isala Klinieken, Zwolle"></div>
+            <div style="margin-bottom:16px;"><label class="lbl">Projectomschrijving</label><textarea class="inp ta">Nieuwbouw westelijk ziekenhuisgebouw, 6 bouwlagen, BVO 18.400 m². Brandveiligheidsadvies incl. vluchtroutes, compartimentering, bluswatervoorziening en afstemming met lokale brandweer Zwolle. Toetsing conform Bbl afdeling 2.2 en NEN 6068.</textarea></div>
+            <button class="btn btn-gold" style="width:100%;font-size:13px;padding:11px;" onclick="genRapport()">✦ Genereer rapport</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="panel-icon">📄</div><div class="panel-title">Rapport Output</div></div>
+          <div class="panel-body">
+            <div id="rp-prog" style="display:none;">
+              <div class="prog-wrap"><div class="prog-bar" id="rpbar" style="width:0%"></div></div>
+              <div style="font-size:11.5px;color:var(--soft);margin-top:5px;" id="rp-lbl">Verwerken...</div>
+            </div>
+            <div class="out-box" id="rp-out">
+              <span style="color:var(--soft);">Selecteer een rapport type, vul de projectgegevens in en klik op genereren. Het platform stelt automatisch een volledig rapport op conform Nieman-standaarden en actuele Nederlandse normen en regelgeving.</span>
+            </div>
+            <div id="rp-acts" style="display:none;margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ EXCEL ASSISTENT ═══════════════════════════════════════ -->
+    <div class="page" id="page-excel">
+      <div class="panel-grid">
+        <div class="panel">
+          <div class="panel-head"><div class="panel-icon">⊞</div><div class="panel-title">Excel uploaden of plakken</div></div>
+          <div class="panel-body">
+            <div class="drop-zone" onclick="loadXLS()">
+              <div style="font-size:32px;margin-bottom:10px;">📊</div>
+              <div style="font-size:13px;color:var(--mid);font-weight:600;">Sleep uw Excel bestand hiernaartoe</div>
+              <div style="font-size:11px;color:var(--soft);margin-top:4px;">of klik om te bladeren · .xlsx .xls .csv</div>
+            </div>
+            <div style="text-align:center;font-size:12px;color:var(--soft);margin-bottom:10px;">— of laad demo bestand —</div>
+            <button class="btn btn-outline" style="width:100%;margin-bottom:14px;" onclick="loadXLS()">📂 Laad demo: bouwfysica_brandveiligheid_WKB.xlsx</button>
+            <div style="margin-bottom:14px;">
+              <label class="lbl">Instructie</label>
+              <textarea class="inp ta" style="min-height:72px;">Vul ontbrekende Rc-waarden in via NEN 1068 en NEN-EN ISO 6946. Controleer of alle bouwdelen voldoen aan Bbl eisen. Markeer afwijkingen en bereken het totale warmtedoorlaatverlies per bouwdeel en project totaal.</textarea>
+            </div>
+            <button class="btn btn-gold" style="width:100%;" onclick="procXLS()">✦ Verwerk automatisch</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="panel-icon">✨</div><div class="panel-title">Resultaat</div></div>
+          <div class="panel-body" id="xls-body">
+            <div style="color:var(--soft);font-size:13px;text-align:center;padding:24px 0;">Upload of laad een Excel bestand om te beginnen.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ BENG CHECKER ═══════════════════════════════════════ -->
+    <div class="page" id="page-beng">
+      <div class="panel-grid">
+        <div class="panel">
+          <div class="panel-head"><div class="panel-icon">⟁</div><div class="panel-title">BENG Invoer — Woningbouw / Gemengd gebruik</div></div>
+          <div class="panel-body">
+            <div class="beng-grid">
+              <div><label class="lbl">Gebruiksfunctie</label><select class="inp" style="padding:9px 11px;"><option>Woonfunctie (appartement)</option><option>Woonfunctie (grondgebonden)</option><option>Gemengd gebruik (wonen + commercieel)</option><option>Zorgfunctie</option><option>Kantoorfunctie</option><option>Onderwijsfunctie</option></select></div>
+              <div><label class="lbl">Gebruiksoppervlak m²</label><input type="number" value="12800" class="inp" style="padding:9px 11px;"></div>
+              <div><label class="lbl">Rc gevel (m²K/W)</label><input type="number" value="5.5" step="0.1" class="inp" style="padding:9px 11px;"></div>
+              <div><label class="lbl">Rc dak (m²K/W)</label><input type="number" value="7.0" step="0.1" class="inp" style="padding:9px 11px;"></div>
+              <div><label class="lbl">U-waarde glas</label><input type="number" value="0.6" step="0.05" class="inp" style="padding:9px 11px;"></div>
+              <div><label class="lbl">Warmtepomp COP</label><input type="number" value="4.5" step="0.1" class="inp" style="padding:9px 11px;"></div>
+              <div><label class="lbl">PV oppervlak m²</label><input type="number" value="980" class="inp" style="padding:9px 11px;"></div>
+              <div><label class="lbl">Kompasrichting</label><select class="inp" style="padding:9px 11px;"><option>Zuid</option><option>Zuidwest</option><option>West</option><option>Oost</option></select></div>
+            </div>
+            <div style="margin-bottom:16px;">
+              <label class="lbl">Energiesystemen</label>
+              <div style="display:flex;flex-wrap:wrap;gap:12px;">
+                <label style="display:flex;align-items:center;gap:6px;font-size:12.5px;cursor:pointer;font-weight:600;"><input type="checkbox" checked> Lucht-water warmtepomp</label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:12.5px;cursor:pointer;font-weight:600;"><input type="checkbox" checked> PV panelen</label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:12.5px;cursor:pointer;font-weight:600;"><input type="checkbox"> WKO systeem</label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:12.5px;cursor:pointer;font-weight:600;"><input type="checkbox" checked> Balansventilatie WTW</label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:12.5px;cursor:pointer;font-weight:600;"><input type="checkbox"> Vloerverwarming</label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:12.5px;cursor:pointer;font-weight:600;"><input type="checkbox" checked> Warmteterugwinning</label>
+              </div>
+            </div>
+            <button class="btn btn-gold" style="width:100%;font-size:13px;padding:11px;" onclick="checkBENG()">⟁ Bereken BENG indicatoren (Bbl 2024)</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="panel-icon">✅</div><div class="panel-title">BENG Resultaten — Bbl toetsing</div></div>
+          <div class="panel-body" id="beng-body">
+            <div style="color:var(--soft);font-size:13px;text-align:center;padding:24px 0;">Vul de invoergegevens in en klik op berekenen.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ NORM MONITOR ═══════════════════════════════════════ -->
+    <div class="page" id="page-normen">
+      <div class="section-header">
+        <div class="section-title">Actuele regelgeving — Relevante updates voor Nieman</div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <div class="topbar-badge" style="background:var(--red-bg);color:var(--red);border-color:rgba(155,35,53,.2);">● 4 nieuwe updates</div>
+          <button class="btn btn-outline btn-sm" onclick="refreshNorms()">↻ Vernieuwen</button>
+        </div>
+      </div>
+      <div class="norm-list">
+        <div class="norm-item" style="border-left:4px solid var(--red);">
+          <div class="norm-date">21 apr<br>2026</div>
+          <div style="flex:1;">
+            <div class="ntitle">Wet kwaliteitsborging voor het bouwen (WKB) — Circulaire update</div>
+            <div class="nsub">Nieuwe verplichtingen voor kwaliteitsborgers per 1 juni 2026: uitbreiding van toetsingscriteria gevolgklasse 2. Directe impact op 14 lopende Nieman WKB-dossiers.</div>
+            <span class="ntag t-wkb">WKB</span>&nbsp;<span class="ntag t-bbl">Bbl</span>
+            <div style="margin-top:10px;display:flex;gap:8px;">
+              <button class="btn btn-primary btn-sm" onclick="normAction('WKB')">Bekijk impact voor mijn dossiers</button>
+              <button class="btn btn-outline btn-sm">Download circulaire</button>
+            </div>
+          </div>
+        </div>
+        <div class="norm-item" style="border-left:4px solid var(--red);">
+          <div class="norm-date">15 apr<br>2026</div>
+          <div style="flex:1;">
+            <div class="ntitle">NEN 6068:2026 — Bepaling van de weerstand tegen branddoorslag en brandoverslag</div>
+            <div class="nsub">Herziene norm gepubliceerd. Significante wijzigingen in berekeningswijze WBDBO. Alle brandveiligheidsadviezen opgesteld vóór 1 jan 2026 dienen hertoetsing.</div>
+            <span class="ntag t-nen">NEN 6068</span>
+            <div style="margin-top:10px;display:flex;gap:8px;">
+              <button class="btn btn-primary btn-sm" onclick="normAction('NEN 6068')">Check mijn brandveiligheidsprojecten</button>
+            </div>
+          </div>
+        </div>
+        <div class="norm-item" style="border-left:4px solid var(--amber);">
+          <div class="norm-date">8 apr<br>2026</div>
+          <div style="flex:1;">
+            <div class="ntitle">Bbl afdeling 3.1 — Aanscherping geluidseisen woningbouw</div>
+            <div class="nsub">Luchtgeluidsisolatie woning-woning verhoogd naar minimaal 55 dB. Contactgeluidsisolatie min. 0 dB. Van kracht voor omgevingsvergunningen ingediend na 1 juli 2026.</div>
+            <span class="ntag t-bbl">Bbl</span>&nbsp;<span class="ntag t-akoe">Akoestiek</span>
+            <div style="margin-top:10px;">
+              <button class="btn btn-outline btn-sm" onclick="normAction('Bbl geluid')">Check lopende akoestiekprojecten</button>
+            </div>
+          </div>
+        </div>
+        <div class="norm-item" style="border-left:4px solid var(--amber);">
+          <div class="norm-date">1 apr<br>2026</div>
+          <div style="flex:1;">
+            <div class="ntitle">BENG-eisen woningbouw aangescherpt — Bbl bijlage A</div>
+            <div class="nsub">BENG 2 max. primair fossiel energiegebruik woningen verlaagd naar 20 kWh/m²/jr (was 25). Geldt voor aanvragen vanaf 1 januari 2027. Impact op alle nieuwbouw-woningprojecten.</div>
+            <span class="ntag t-beng">BENG</span>&nbsp;<span class="ntag t-bbl">Bbl</span>
+          </div>
+        </div>
+        <div class="norm-item" style="border-left:4px solid var(--teal);">
+          <div class="norm-date">18 mrt<br>2026</div>
+          <div style="flex:1;">
+            <div class="ntitle">NPR 5272:2026 — Bouwkundige geluidsisolatie nieuwbouw</div>
+            <div class="nsub">Herziene praktijkrichtlijn voor uitvoering akoestisch onderzoek. Nieuwe meetmethoden voor laagfrequent geluid en trillinghinder. Aanbevolen voor alle akoestische rapporten vanaf Q2 2026.</div>
+            <span class="ntag t-akoe">Akoestiek</span>&nbsp;<span class="ntag t-nen">NPR 5272</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ KENNISBANK ═══════════════════════════════════════ -->
+    <div class="page" id="page-kennis">
+      <div style="display:flex;gap:16px;margin-bottom:10px;">
+        <div class="search-bar" style="flex:1;margin-bottom:0;">
+          <input class="inp" type="text" id="kb-q" placeholder="Zoek in 480+ Nieman projecten en rapporten..." value="brandveiligheid bouwbesluit WKB kwaliteitsborging" style="flex:1;">
+          <button class="btn btn-gold" onclick="searchKB()">✦ Zoeken</button>
+        </div>
+        <select class="inp" style="width:160px;padding:9px 11px;" onchange="searchKB()">
+          <option>Alle disciplines</option>
+          <option>Brandveiligheid</option>
+          <option>Bouwfysica</option>
+          <option>WKB</option>
+          <option>Akoestiek</option>
+          <option>BENG</option>
+        </select>
+      </div>
+      <div style="font-size:12px;color:var(--soft);margin-bottom:16px;" id="kb-meta"></div>
+      <div id="kb-results"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const titles={
+  dashboard:'Dashboard',
+  rapport:'Rapport Schrijver',
+  excel:'Excel Assistent',
+  beng:'BENG Checker',
+  normen:'Norm Monitor',
+  kennis:'Kennisbank'
+};
+
+function show(id,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  if(el)el.classList.add('active');
+  document.getElementById('ptitle').textContent=titles[id]||id;
+  if(id==='kennis')searchKB();
+}
+
+function selRT(el){
+  document.querySelectorAll('.rt-btn').forEach(b=>b.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+function genRapport(){
+  const bar=document.getElementById('rpbar');
+  const lbl=document.getElementById('rp-lbl');
+  const prog=document.getElementById('rp-prog');
+  const out=document.getElementById('rp-out');
+  const acts=document.getElementById('rp-acts');
+  prog.style.display='block';
+  acts.style.display='none';
+  out.innerHTML='<span style="color:var(--soft)">Rapport wordt opgesteld conform Nieman-standaarden...</span>';
+  const steps=[
+    [12,'Projectgegevens inlezen en valideren...'],
+    [28,'Nieman rapport-sjablonen laden...'],
+    [44,'NEN 6068 en Bbl afdeling 2.2 toepassen...'],
+    [58,'Compartimenteringsschema opstellen...'],
+    [70,'Vluchtroutes en rookcompartimenten berekenen...'],
+    [83,'Rapportopmaak en figuurverwijzingen...'],
+    [94,'Eindcontrole conform WKB checklist...'],
+    [100,'Rapport gereed voor oplevering!']
+  ];
+  let i=0;
+  const run=()=>{
+    if(i<steps.length){
+      bar.style.width=steps[i][0]+'%';
+      lbl.textContent=steps[i][1];
+      i++;
+      setTimeout(run,480);
+    } else {
+      prog.style.display='none';
+      acts.style.display='flex';
+      acts.innerHTML='<button class="btn btn-primary btn-sm" onclick="alert(\'Rapport wordt geëxporteerd als .docx...\')">⬇ Download .docx</button><button class="btn btn-outline btn-sm" onclick="alert(\'Rapport openen in editor...\')">✏ Bewerk in editor</button><button class="btn btn-outline btn-sm" onclick="alert(\'Rapport gedeeld via e-mail...\')">✉ Verstuur aan opdrachtgever</button>';
+      out.innerHTML=`<strong style="color:var(--navy);font-family:'Cormorant Garamond',serif;font-size:15px;">Brandveiligheidsrapport — Ziekenhuis Isala Nieuwbouw west</strong><br><br>
+<strong>Opdrachtgever:</strong> Isala Klinieken, Zwolle<br>
+<strong>Adviseur:</strong> Nieman Raadgevende Ingenieurs BV · Utrecht<br>
+<strong>Kenmerk:</strong> NIE-2026-0341-BV · Versie 1.0 concept<br>
+<strong>Datum:</strong> 21 april 2026<br><br>
+<strong>1. Inleiding en aanleiding</strong><br>
+Dit rapport betreft het brandveiligheidsadvies voor de nieuwbouw van het westelijk gebouwdeel van Isala Klinieken te Zwolle. Het gebouw omvat 6 bouwlagen met een bruto vloeroppervlak van 18.400 m² en is bestemd voor opname van patiënten, behandelruimten en ondersteunende functies.<br><br>
+<strong>2. Wettelijk kader</strong><br>
+Toetsing conform:<br>
+• Besluit bouwwerken leefomgeving (Bbl) afdeling 2.2 — Beperken van ontwikkeling van brand<br>
+• NEN 6068:2026 — Weerstand tegen branddoorslag en brandoverslag (WBDBO)<br>
+• NEN-EN 1337 — Vluchtroutes en nooduitgangen<br><br>
+<strong>3. Brandcompartimentering</strong><br>
+Het gebouw is opgedeeld in 24 brandcompartimenten van gemiddeld 760 m². Alle compartimentsgrenzen hebben een WBDBO van minimaal 60 minuten conform Bbl art. 2.98.<br><br>
+<strong>4. Vluchtroutes</strong><br>
+• Maximale vluchtafstand: <strong style="color:var(--green);">54 m ✓</strong> (eis ≤ 60 m voor gezondheidszorgfunctie)<br>
+• Aantal noodtrappen: 4 (conform berekening NEN-EN 1337)<br>
+• Horizontale evacuatie via nevencompartimenten: toegepast<br><br>
+<strong>5. Conclusie</strong><br>
+Het gebouwontwerp voldoet aan de brandveiligheidseisen conform Bbl 2024 en NEN 6068:2026. <strong style="color:var(--green);">Geen afwijkingen geconstateerd.</strong><br><br>
+<em style="color:var(--soft);font-size:11.5px;">Gegenereerd door Nieman Digitaal Platform · NEN 6068:2026 + Bbl afd. 2.2 · 21 april 2026</em>`;
+    }
+  };
+  run();
+}
+
+function loadXLS(){
+  document.getElementById('xls-body').innerHTML=`
+<div style="margin-bottom:10px;font-size:12px;color:var(--soft);">📂 bouwfysica_brandveiligheid_WKB.xlsx geladen — 2 ontbrekende waarden gedetecteerd</div>
+<div class="xls-preview">
+  <div class="xrow xhead"><div class="xcell">Bouwdeel</div><div class="xcell">Opp. m²</div><div class="xcell">Rc / U</div><div class="xcell">Bbl eis</div><div class="xcell">Temp.∆ °C</div><div class="xcell">Verlies W</div></div>
+  <div class="xrow"><div class="xcell">Gevel oost</div><div class="xcell">312</div><div class="xcell">5.5</div><div class="xcell">≥ 4.7</div><div class="xcell">22</div><div class="xcell">1.248</div></div>
+  <div class="xrow"><div class="xcell">Gevel west</div><div class="xcell">312</div><div class="xcell">5.5</div><div class="xcell">≥ 4.7</div><div class="xcell">22</div><div class="xcell">1.248</div></div>
+  <div class="xrow"><div class="xcell">Dak plat</div><div class="xcell">1.280</div><div class="xcell" style="color:var(--amber);font-weight:700;">?</div><div class="xcell">≥ 6.0</div><div class="xcell">22</div><div class="xcell" style="color:var(--amber);">—</div></div>
+  <div class="xrow"><div class="xcell">Begane grond</div><div class="xcell">1.280</div><div class="xcell" style="color:var(--amber);font-weight:700;">?</div><div class="xcell">≥ 3.5</div><div class="xcell">12</div><div class="xcell" style="color:var(--amber);">—</div></div>
+  <div class="xrow"><div class="xcell">Glas gevel</div><div class="xcell">520</div><div class="xcell">0.60</div><div class="xcell">≤ 0.7</div><div class="xcell">22</div><div class="xcell">6.864</div></div>
+  <div class="xrow"><div class="xcell">Thermische bruggen</div><div class="xcell">—</div><div class="xcell">—</div><div class="xcell">—</div><div class="xcell">—</div><div class="xcell">980</div></div>
+</div>
+<div style="margin-bottom:10px;"><span class="ai-chip">✦ Gedetecteerd: 2 ontbrekende Rc-waarden — klik op Verwerk automatisch</span></div>
+<button class="btn btn-gold btn-sm" onclick="procXLS()">✦ Verwerk automatisch</button>`;
+}
+
+function procXLS(){
+  const b=document.getElementById('xls-body');
+  b.innerHTML='<div class="prog-wrap"><div class="prog-bar" id="xpbar" style="width:0%"></div></div><div style="font-size:11.5px;color:var(--soft);margin-top:5px;" id="xp-lbl">NEN 1068 / NEN-EN ISO 6946 waarden opzoeken...</div>';
+  const steps=[[20,'NEN 1068 standaardwaarden ophalen...'],[45,'Rc-waarden berekenen per constructieopbouw...'],[65,'Bbl eisen toetsen...'],[85,'Totaal warmtedoorlaatverlies berekenen...'],[100,'Analyse voltooid!']];
+  let i=0,w=0;
+  const lbl=document.getElementById('xp-lbl');
+  const iv=setInterval(()=>{
+    if(i<steps.length){w=steps[i][0];document.getElementById('xpbar').style.width=w+'%';if(lbl)lbl.textContent=steps[i][1];i++;}
+    if(w>=100){
+      clearInterval(iv);
+      b.innerHTML=`
+<div style="margin-bottom:10px;"><span class="ai-chip">✦ 2 waarden ingevuld · Bbl toetsing voltooid · 1 aandachtspunt</span></div>
+<div class="xls-preview">
+  <div class="xrow xhead"><div class="xcell">Bouwdeel</div><div class="xcell">Opp. m²</div><div class="xcell">Rc / U</div><div class="xcell">Bbl eis</div><div class="xcell">Temp.∆ °C</div><div class="xcell">Verlies W</div></div>
+  <div class="xrow"><div class="xcell">Gevel oost</div><div class="xcell">312</div><div class="xcell">5.5</div><div class="xcell">≥ 4.7 ✓</div><div class="xcell">22</div><div class="xcell">1.248</div></div>
+  <div class="xrow"><div class="xcell">Gevel west</div><div class="xcell">312</div><div class="xcell">5.5</div><div class="xcell">≥ 4.7 ✓</div><div class="xcell">22</div><div class="xcell">1.248</div></div>
+  <div class="xrow"><div class="xcell">Dak plat</div><div class="xcell">1.280</div><div class="xcell xai">6.5 ✦</div><div class="xcell">≥ 6.0 ✓</div><div class="xcell">22</div><div class="xcell xai">4.323 ✦</div></div>
+  <div class="xrow"><div class="xcell">Begane grond</div><div class="xcell">1.280</div><div class="xcell xai">3.5 ✦</div><div class="xcell">≥ 3.5 ✓</div><div class="xcell">12</div><div class="xcell xai">4.389 ✦</div></div>
+  <div class="xrow"><div class="xcell">Glas gevel</div><div class="xcell">520</div><div class="xcell">0.60</div><div class="xcell">≤ 0.7 ✓</div><div class="xcell">22</div><div class="xcell">6.864</div></div>
+  <div class="xrow"><div class="xcell">Thermische bruggen</div><div class="xcell">—</div><div class="xcell">—</div><div class="xcell">—</div><div class="xcell">—</div><div class="xcell">980</div></div>
+  <div class="xrow" style="background:var(--gold-soft);font-weight:700;"><div class="xcell">TOTAAL</div><div class="xcell">—</div><div class="xcell">—</div><div class="xcell">—</div><div class="xcell">—</div><div class="xcell xai">19.052 W ✦</div></div>
+</div>
+<div style="background:var(--gold-pale);border:1px solid rgba(244,162,97,.3);border-radius:8px;padding:14px;font-size:12.5px;color:var(--navy);margin-top:8px;line-height:1.6;">
+  <strong>Conclusie:</strong> Totaal transmissieverlies 19,05 kW. Alle bouwdelen voldoen aan Bbl-eisen conform NEN 1068. Begane grond vloerisolatie exact op grenswaarde — <strong style="color:var(--amber);">aanbeveling: verhoog Rc naar 4.0 voor marge.</strong> BENG 1 gehaald. <strong style="color:var(--green);">✓ WKB kwaliteitsverklaring kan worden afgegeven.</strong>
+</div>
+<div style="margin-top:12px;display:flex;gap:8px;">
+  <button class="btn btn-primary btn-sm" onclick="alert('Excel exporteren...')">⬇ Download Excel</button>
+  <button class="btn btn-outline btn-sm" onclick="alert('Rapport openen...')">📄 Naar WKB rapport</button>
+  <button class="btn btn-outline btn-sm" onclick="alert('Aandachtspuntenlijst exporteren...')">⚠ Exporteer aandachtspunten</button>
+</div>`;
+    }
+  },200);
+}
+
+function checkBENG(){
+  const b=document.getElementById('beng-body');
+  b.innerHTML='<div class="prog-wrap"><div class="prog-bar" id="bpbar" style="width:0%"></div></div><div style="font-size:11.5px;color:var(--soft);margin-top:5px;" id="bp-lbl">BENG indicatoren berekenen conform Bbl bijlage A...</div>';
+  let w=0;
+  const lbl=document.getElementById('bp-lbl');
+  const steps=[[15,'Geometrie en oriëntatie verwerken...'],[35,'Warmtevraag berekenen (NEN 7120)...'],[55,'Systeemsimulatie warmtepomp + PV...'],[75,'Primair fossiel energiegebruik bepalen...'],[90,'Aandeel hernieuwbaar berekenen...'],[100,'Resultaten gereed!']];
+  let si=0;
+  const iv=setInterval(()=>{
+    if(si<steps.length){w=steps[si][0];document.getElementById('bpbar').style.width=w+'%';if(lbl)lbl.textContent=steps[si][1];si++;}
+    if(w>=100){
+      clearInterval(iv);
+      b.innerHTML=`
+<div class="brc brc-pass">
+  <div class="brow"><div style="font-size:12.5px;font-weight:700;">BENG 1 — Energiebehoefte</div><div style="font-size:14px;font-weight:800;color:var(--green)">34 kWh/m²/jr ✓</div></div>
+  <div class="brow"><div style="font-size:11px;color:var(--soft)">Eis woonfunctie (Bbl bijlage A)</div><div style="font-size:11px;color:var(--mid)">≤ 55 kWh/m²/jr</div></div>
+  <div class="brow"><div style="font-size:11px;color:var(--soft)">Marge t.o.v. eis</div><div style="font-size:11px;font-weight:700;color:var(--green)">38% ruimte</div></div>
+</div>
+<div class="brc brc-pass">
+  <div class="brow"><div style="font-size:12.5px;font-weight:700;">BENG 2 — Primair fossiel energiegebruik</div><div style="font-size:14px;font-weight:800;color:var(--green)">17 kWh/m²/jr ✓</div></div>
+  <div class="brow"><div style="font-size:11px;color:var(--soft)">Eis vanaf jan 2027 (Bbl)</div><div style="font-size:11px;color:var(--mid)">≤ 20 kWh/m²/jr</div></div>
+  <div class="brow"><div style="font-size:11px;color:var(--soft)">Huidige marge</div><div style="font-size:11px;font-weight:700;color:var(--green)">15% marge boven 2027-eis</div></div>
+</div>
+<div class="brc brc-pass">
+  <div class="brow"><div style="font-size:12.5px;font-weight:700;">BENG 3 — Aandeel hernieuwbaar</div><div style="font-size:14px;font-weight:800;color:var(--green)">79% ✓</div></div>
+  <div class="brow"><div style="font-size:11px;color:var(--soft)">Eis (Bbl bijlage A)</div><div style="font-size:11px;color:var(--mid)">≥ 50%</div></div>
+  <div class="brow"><div style="font-size:11px;color:var(--soft)">Contributie PV panelen (980 m²)</div><div style="font-size:11px;font-weight:700;color:var(--green)">162 MWh/jr</div></div>
+</div>
+<div style="background:#D8F3DC;border-radius:8px;padding:14px;margin-top:10px;border:1px solid rgba(45,106,79,.2);">
+  <div style="font-size:13.5px;font-weight:800;color:var(--green);font-family:'Cormorant Garamond',serif;">✓ Alle BENG indicatoren ruimschoots gehaald</div>
+  <div style="font-size:11.5px;color:var(--mid);margin-top:5px;line-height:1.55;">Project kwalificeert voor WKB kwaliteitsverklaring. BENG 2 heeft 15% marge boven de aankomende 2027-eis. Conform Bbl 2024 bijlage A. Aanvraag omgevingsvergunning kan worden ingediend.</div>
+</div>
+<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+  <button class="btn btn-primary btn-sm" onclick="alert('BENG rapport genereren...')">📄 Genereer BENG rapport</button>
+  <button class="btn btn-outline btn-sm" onclick="alert('PDF exporteren...')">⬇ Exporteer PDF</button>
+  <button class="btn btn-outline btn-sm" onclick="alert('Naar WKB dossier...')">📋 Voeg toe aan WKB dossier</button>
+</div>`;
+    }
+  },180);
+}
+
+const kbData=[
+  {
+    title:'Brandveiligheidsadvies Isala Ziekenhuis Meppel — Uitbreiding SEH',
+    meta:'Brandveiligheid · 2024 · 8.200 m² · Zwolle',
+    snip:'Volledig brandveiligheidsadvies conform NEN 6068 en Bbl afd. 2.2. Compartimentering 28 brandcompartimenten. Horizontale evacuatiestrategie toegepast. Samenwerking brandweer IJsselland.',
+    tags:['Brandveiligheid','NEN 6068','Zorg'],
+    score:99
+  },
+  {
+    title:'WKB Kwaliteitsborging — Woontoren Stationsplein Utrecht',
+    meta:'WKB · Bouwfysica · 2025 · 22.400 m² · Utrecht',
+    snip:'WKB dossiervoorbereiding gevolgklasse 2. Volledige bouwfysische toetsing Bbl. 287 appartementen. Kwaliteitsverklaring afgegeven. Eerste grootschalige WKB-project in centraal Utrecht.',
+    tags:['WKB','Bouwfysica','Woningbouw'],
+    score:97
+  },
+  {
+    title:'Akoestisch onderzoek De Rotterdam — Gemengd gebruik',
+    meta:'Akoestiek · 2024 · 34.600 m² · Rotterdam',
+    snip:'Lucht- en contactgeluidsisolatie conform NPR 5272. Gecombineerde woon- en kantoorfunctie. Complexe geluidssituatie Wilhelminakade. Alle maatregelen binnen budgetkaders gerealiseerd.',
+    tags:['Akoestiek','Gemengd gebruik','Rotterdam'],
+    score:94
+  },
+  {
+    title:'Bouwfysica grootschalige woningbouw Zwolle Stadshagen fase 3',
+    meta:'Bouwfysica · BENG · 2023 · 18.900 m² · Zwolle',
+    snip:'BENG berekeningen 186 woningen. Thermische bruggencatalogus opgesteld. Dauwpuntanalyse per geveltype. CO₂ reductie 68% t.o.v. referentiegebouw. Paris Proof 2030 gehaald.',
+    tags:['Bouwfysica','BENG','Woningbouw'],
+    score:91
+  }
+];
+
+function searchKB(){
+  const q=document.getElementById('kb-q').value;
+  const filtered=kbData;
+  document.getElementById('kb-meta').textContent=`${filtered.length} resultaten voor "${q}" — gesorteerd op relevantie · Nieman kennisbank 2019–2026`;
+  document.getElementById('kb-results').innerHTML=filtered.map(k=>`
+<div class="kb-item">
+  <span class="match">${k.score}% match</span>
+  <div class="kb-title">${k.title}</div>
+  <div class="kb-meta">${k.meta}</div>
+  <div class="kb-snip">${k.snip}</div>
+  <div class="kb-tags">${k.tags.map(t=>`<span class="ntag t-bbl">${t}</span>`).join('')}</div>
+</div>`).join('');
+}
+
+function filterProjects(){
+  alert('Filteropties: discipline, vestiging, status, deadline, opdrachtgever. Functionaliteit beschikbaar in enterprise versie.');
+}
+function exportTable(){
+  alert('Projectoverzicht exporteren als .xlsx of .pdf...');
+}
+function newProject(){
+  alert('Nieuw project aanmaken — koppeling met Nieman projectadministratie (TOPdesk)...');
+}
+function openProject(name){
+  alert('Project "'+name+'" openen in projectdossier...');
+}
+function normAction(norm){
+  alert('Impact van "'+norm+'" controleren op alle lopende Nieman projecten...');
+}
+function refreshNorms(){
+  alert('Norm Monitor wordt bijgewerkt via NEN Connect en officielebekendmakingen.nl...');
+}
+</script>
+</body>
+</html>

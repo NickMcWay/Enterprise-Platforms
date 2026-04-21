@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VIAC AI Platform</title>
+<title>VIAC Digitaal Platform</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 :root{--teal:#0A5C6B;--teal-mid:#0D7A8E;--teal-light:#E6F4F7;--teal-glow:#1AABB8;--cream:#F7F9FA;--white:#FFFFFF;--text:#1A2E32;--mid:#4A6670;--soft:#8AA8B0;--border:#D4E8EC;--accent:#E07B39;--accent-soft:#FFF1E8;--green:#2A9D5C;--amber:#E5A623;--red:#C0392B;}
@@ -117,12 +117,12 @@ tr:hover td{background:#F0F8FA;}
   <div class="logo-area">
     <div class="logo-text">VIAC</div>
     <div class="logo-sub">Adviseurs</div>
-    <div class="ai-pill">✦ AI Platform</div>
+    <div class="ai-pill">✦ Slim Platform</div>
   </div>
   <nav class="nav">
     <div class="nav-section">Overzicht</div>
     <div class="nav-item active" onclick="show('dashboard',this)"><span class="nav-icon">◈</span> Dashboard</div>
-    <div class="nav-section">AI Applicaties</div>
+    <div class="nav-section">Applicaties</div>
     <div class="nav-item" onclick="show('rapport',this)"><span class="nav-icon">✦</span> Rapport Schrijver</div>
     <div class="nav-item" onclick="show('excel',this)"><span class="nav-icon">⊞</span> Excel Assistent</div>
     <div class="nav-item" onclick="show('beng',this)"><span class="nav-icon">⟁</span> BENG Checker</div>
@@ -141,7 +141,7 @@ tr:hover td{background:#F0F8FA;}
   <div class="topbar">
     <div class="page-title" id="ptitle">Dashboard</div>
     <div class="topbar-right">
-      <div class="topbar-badge">🟢 AI Actief</div>
+      <div class="topbar-badge">🟢 Systeem Actief</div>
     </div>
   </div>
   <div class="content">
@@ -149,7 +149,7 @@ tr:hover td{background:#F0F8FA;}
     <div class="page active" id="page-dashboard">
       <div class="cards-grid">
         <div class="stat-card"><div class="stat-num">24</div><div class="stat-label">Actieve projecten</div><div class="stat-delta up">↑ 3 t.o.v. vorige maand</div></div>
-        <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">Rapporten in behandeling</div><div class="stat-delta warn">⚠ 2 wachten op AI-review</div></div>
+        <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">Rapporten in behandeling</div><div class="stat-delta warn">⚠ 2 wachten op review</div></div>
         <div class="stat-card"><div class="stat-num">94%</div><div class="stat-label">BENG compliance rate</div><div class="stat-delta up">↑ Beste kwartaal ooit</div></div>
       </div>
       <div class="section-header"><div class="section-title">Actieve Projecten</div></div>
@@ -166,7 +166,7 @@ tr:hover td{background:#F0F8FA;}
       </div>
       <div class="panel-grid">
         <div class="panel">
-          <div class="panel-head"><div class="panel-icon">⚡</div><div class="panel-title">AI Tijdsbesparing deze maand</div></div>
+          <div class="panel-head"><div class="panel-icon">⚡</div><div class="panel-title">Tijdsbesparing deze maand</div></div>
           <div class="panel-body">
             <div style="margin-bottom:12px;"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span>Rapport generatie</span><span style="font-weight:600;color:var(--teal)">14.5 uur</span></div><div class="prog-wrap"><div class="prog-bar" style="width:82%"></div></div></div>
             <div style="margin-bottom:12px;"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span>Excel berekeningen</span><span style="font-weight:600;color:var(--teal)">9.2 uur</span></div><div class="prog-wrap"><div class="prog-bar" style="width:58%"></div></div></div>
@@ -175,10 +175,10 @@ tr:hover td{background:#F0F8FA;}
           </div>
         </div>
         <div class="panel">
-          <div class="panel-head"><div class="panel-icon">🔔</div><div class="panel-title">Recente AI Meldingen</div></div>
+          <div class="panel-head"><div class="panel-icon">🔔</div><div class="panel-title">Recente Meldingen</div></div>
           <div class="panel-body">
             <div style="display:flex;flex-direction:column;gap:10px;">
-              <div style="display:flex;gap:10px;"><div style="width:7px;height:7px;border-radius:50%;background:var(--accent);margin-top:5px;flex-shrink:0;"></div><div><div style="font-size:12.5px;font-weight:600;">BENG rapport klaar</div><div style="font-size:11px;color:var(--soft);">Wooncomplex Leidsche Rijn · 2 min geleden</div></div></div>
+              <div style="display:flex;gap:10px;"><div style="width:7px;height:7px;border-radius:50%;background:var(--accent);margin-top:5px;flex-shrink:0;"></div><div><div style="font-size:12.5px;font-weight:600;">Rapport gereed</div><div style="font-size:11px;color:var(--soft);">Wooncomplex Leidsche Rijn · 2 min geleden</div></div></div>
               <div style="display:flex;gap:10px;"><div style="width:7px;height:7px;border-radius:50%;background:var(--amber);margin-top:5px;flex-shrink:0;"></div><div><div style="font-size:12.5px;font-weight:600;">Norm update gedetecteerd</div><div style="font-size:11px;color:var(--soft);">NEN 8700 · versie 2026 beschikbaar</div></div></div>
               <div style="display:flex;gap:10px;"><div style="width:7px;height:7px;border-radius:50%;background:var(--green);margin-top:5px;flex-shrink:0;"></div><div><div style="font-size:12.5px;font-weight:600;">Excel sheet verwerkt</div><div style="font-size:11px;color:var(--soft);">UMCU Vleugel B · warmteverlies klaar</div></div></div>
               <div style="display:flex;gap:10px;"><div style="width:7px;height:7px;border-radius:50%;background:var(--red);margin-top:5px;flex-shrink:0;"></div><div><div style="font-size:12.5px;font-weight:600;">Deadline morgen</div><div style="font-size:11px;color:var(--soft);">Kantoor Papendorp · Paris Proof check</div></div></div>
@@ -204,14 +204,14 @@ tr:hover td{background:#F0F8FA;}
             <div style="margin-bottom:12px;"><label class="lbl">Project naam</label><input class="inp" type="text" value="Kantoor Papendorp fase 2"></div>
             <div style="margin-bottom:12px;"><label class="lbl">Opdrachtgever</label><input class="inp" type="text" value="Syntrus Achmea Real Estate"></div>
             <div style="margin-bottom:14px;"><label class="lbl">Projectomschrijving</label><textarea class="inp ta">Transformatie naar Paris Proof kantoor. Scope: volledige W/E renovatie, warmtepomp, PV installatie 72 kWp, LED verlichting, BMS integratie.</textarea></div>
-            <button class="btn btn-primary" style="width:100%;" onclick="genRapport()">✦ Genereer rapport met AI</button>
+            <button class="btn btn-primary" style="width:100%;" onclick="genRapport()">✦ Genereer rapport</button>
           </div>
         </div>
         <div class="panel">
-          <div class="panel-head"><div class="panel-icon">📄</div><div class="panel-title">AI Rapport Output</div></div>
+          <div class="panel-head"><div class="panel-icon">📄</div><div class="panel-title">Rapport Output</div></div>
           <div class="panel-body">
             <div id="rp-prog" style="display:none;"><div class="prog-wrap"><div class="prog-bar" id="rpbar" style="width:0%"></div></div><div style="font-size:11px;color:var(--mid);margin-top:4px;" id="rp-lbl">Verwerken...</div></div>
-            <div class="out-box" id="rp-out"><span style="color:var(--soft);">Configureer en klik op genereren. De AI stelt automatisch een volledig rapport op gebaseerd op VIAC-templates en actuele normen.</span></div>
+            <div class="out-box" id="rp-out"><span style="color:var(--soft);">Configureer en klik op genereren. Het platform stelt automatisch een volledig rapport op gebaseerd op VIAC-templates en actuele normen.</span></div>
             <div id="rp-acts" style="display:none;margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;"></div>
           </div>
         </div>
@@ -226,12 +226,12 @@ tr:hover td{background:#F0F8FA;}
             <div class="drop-zone" onclick="loadXLS()"><div style="font-size:28px;margin-bottom:8px;">📊</div><div style="font-size:13px;color:var(--mid);font-weight:500;">Sleep uw Excel bestand hiernaartoe</div><div style="font-size:11px;color:var(--soft);margin-top:3px;">of klik om te bladeren · .xlsx .xls .csv</div></div>
             <div style="text-align:center;font-size:12px;color:var(--soft);margin-bottom:10px;">— of laad demo bestand —</div>
             <button class="btn btn-outline" style="width:100%;margin-bottom:12px;" onclick="loadXLS()">📂 Laad demo: warmteverliesberekening.xlsx</button>
-            <div style="margin-bottom:12px;"><label class="lbl">AI Instructie</label><textarea class="inp ta" style="min-height:60px;">Vul ontbrekende U-waarden in via NEN 1068 standaardwaarden en bereken het totale warmteverlies per bouwdeel.</textarea></div>
-            <button class="btn btn-primary" style="width:100%;" onclick="procXLS()">✦ Verwerk met AI</button>
+            <div style="margin-bottom:12px;"><label class="lbl">Instructie</label><textarea class="inp ta" style="min-height:60px;">Vul ontbrekende U-waarden in via NEN 1068 standaardwaarden en bereken het totale warmteverlies per bouwdeel.</textarea></div>
+            <button class="btn btn-primary" style="width:100%;" onclick="procXLS()">✦ Verwerk automatisch</button>
           </div>
         </div>
         <div class="panel">
-          <div class="panel-head"><div class="panel-icon">✨</div><div class="panel-title">AI Resultaat</div></div>
+          <div class="panel-head"><div class="panel-icon">✨</div><div class="panel-title">Resultaat</div></div>
           <div class="panel-body" id="xls-body"><div style="color:var(--soft);font-size:13px;text-align:center;padding:20px 0;">Upload of laad een Excel bestand om te beginnen.</div></div>
         </div>
       </div>
@@ -319,16 +319,16 @@ function show(id,el){
 function selRT(el){document.querySelectorAll('.rt-btn').forEach(b=>b.classList.remove('sel'));el.classList.add('sel');}
 function genRapport(){
   const bar=document.getElementById('rpbar'),lbl=document.getElementById('rp-lbl'),prog=document.getElementById('rp-prog'),out=document.getElementById('rp-out'),acts=document.getElementById('rp-acts');
-  prog.style.display='block';acts.style.display='none';out.innerHTML='<span style="color:var(--soft)">AI genereert rapport...</span>';
+  prog.style.display='block';acts.style.display='none';out.innerHTML='<span style="color:var(--soft)">Rapport wordt opgesteld...</span>';
   const steps=[[15,'Projectgegevens verwerken...'],[35,'VIAC templates laden...'],[55,'Paris Proof normen toepassen...'],[75,'Installatieschema opstellen...'],[92,'Rapport opmaken...'],[100,'Rapport gereed!']];
-  let i=0;const run=()=>{if(i<steps.length){bar.style.width=steps[i][0]+'%';lbl.textContent=steps[i][1];i++;setTimeout(run,450);}else{prog.style.display='none';acts.style.display='flex';acts.innerHTML='<button class="btn btn-primary btn-sm">⬇ Download .docx</button><button class="btn btn-outline btn-sm">✏ Bewerk</button>';out.innerHTML=`<strong style="color:var(--teal);font-family:'Playfair Display',serif;">BENG Rapportage — Kantoor Papendorp fase 2</strong><br><br><strong>Opdrachtgever:</strong> Syntrus Achmea Real Estate<br><strong>Adviseur:</strong> VIAC Adviseurs BV · 21 april 2026<br><br><strong>1. Projectomschrijving</strong><br>Transformatie van het kantoorgebouw Papendorp fase 2 naar een Paris Proof gebouw. BVO: 2.840 m². Volledige renovatie W/E installaties.<br><br><strong>2. Installatieconcept</strong><br>Lucht-water warmtepomp (COP 4,2) + PV 72 kWp + WTW ventilatie η=88%. Gasaansluiting verwijderd.<br><br><strong>3. BENG Indicatoren</strong><br>• BENG 1: <strong style="color:var(--green)">42 kWh/m²/jr ✓</strong> (eis ≤50)<br>• BENG 2: <strong style="color:var(--green)">27 kWh/m²/jr ✓</strong> (eis ≤30 na 2027)<br>• BENG 3: <strong style="color:var(--green)">68% ✓</strong> (eis ≥50%)<br><br><em style="color:var(--soft);">Gegenereerd door VIAC AI Platform · NEN 7120 + Paris Proof 2030</em>`;}};run();
+  let i=0;const run=()=>{if(i<steps.length){bar.style.width=steps[i][0]+'%';lbl.textContent=steps[i][1];i++;setTimeout(run,450);}else{prog.style.display='none';acts.style.display='flex';acts.innerHTML='<button class="btn btn-primary btn-sm">⬇ Download .docx</button><button class="btn btn-outline btn-sm">✏ Bewerk</button>';out.innerHTML=`<strong style="color:var(--teal);font-family:'Playfair Display',serif;">BENG Rapportage — Kantoor Papendorp fase 2</strong><br><br><strong>Opdrachtgever:</strong> Syntrus Achmea Real Estate<br><strong>Adviseur:</strong> VIAC Adviseurs BV · 21 april 2026<br><br><strong>1. Projectomschrijving</strong><br>Transformatie van het kantoorgebouw Papendorp fase 2 naar een Paris Proof gebouw. BVO: 2.840 m². Volledige renovatie W/E installaties.<br><br><strong>2. Installatieconcept</strong><br>Lucht-water warmtepomp (COP 4,2) + PV 72 kWp + WTW ventilatie η=88%. Gasaansluiting verwijderd.<br><br><strong>3. BENG Indicatoren</strong><br>• BENG 1: <strong style="color:var(--green)">42 kWh/m²/jr ✓</strong> (eis ≤50)<br>• BENG 2: <strong style="color:var(--green)">27 kWh/m²/jr ✓</strong> (eis ≤30 na 2027)<br>• BENG 3: <strong style="color:var(--green)">68% ✓</strong> (eis ≥50%)<br><br><em style="color:var(--soft);">Opgesteld door VIAC Digitaal Platform · NEN 7120 + Paris Proof 2030</em>`;}};run();
 }
 function loadXLS(){
-  document.getElementById('xls-body').innerHTML=`<div style="margin-bottom:10px;font-size:12px;color:var(--soft);">📂 warmteverliesberekening.xlsx geladen</div><div class="xls-preview"><div class="xrow xhead"><div class="xcell">Bouwdeel</div><div class="xcell">Opp. m²</div><div class="xcell">U-waarde</div><div class="xcell">Temp.∆</div><div class="xcell">Verlies W</div></div><div class="xrow"><div class="xcell">Gevel noord</div><div class="xcell">184</div><div class="xcell">0.21</div><div class="xcell">22</div><div class="xcell">849</div></div><div class="xrow"><div class="xcell">Gevel oost</div><div class="xcell">96</div><div class="xcell">0.21</div><div class="xcell">22</div><div class="xcell">443</div></div><div class="xrow"><div class="xcell">Dak</div><div class="xcell">710</div><div class="xcell" style="color:var(--amber);font-weight:600;">?</div><div class="xcell">22</div><div class="xcell" style="color:var(--amber);">—</div></div><div class="xrow"><div class="xcell">Begane grond</div><div class="xcell">710</div><div class="xcell" style="color:var(--amber);font-weight:600;">?</div><div class="xcell">10</div><div class="xcell" style="color:var(--amber);">—</div></div><div class="xrow"><div class="xcell">Glas totaal</div><div class="xcell">340</div><div class="xcell">0.70</div><div class="xcell">22</div><div class="xcell">5.236</div></div></div><div style="margin-bottom:10px;"><span class="ai-chip">✦ AI detecteert 2 ontbrekende waarden</span></div><button class="btn btn-primary btn-sm" onclick="procXLS()">✦ Verwerk met AI</button>`;
+  document.getElementById('xls-body').innerHTML=`<div style="margin-bottom:10px;font-size:12px;color:var(--soft);">📂 warmteverliesberekening.xlsx geladen</div><div class="xls-preview"><div class="xrow xhead"><div class="xcell">Bouwdeel</div><div class="xcell">Opp. m²</div><div class="xcell">U-waarde</div><div class="xcell">Temp.∆</div><div class="xcell">Verlies W</div></div><div class="xrow"><div class="xcell">Gevel noord</div><div class="xcell">184</div><div class="xcell">0.21</div><div class="xcell">22</div><div class="xcell">849</div></div><div class="xrow"><div class="xcell">Gevel oost</div><div class="xcell">96</div><div class="xcell">0.21</div><div class="xcell">22</div><div class="xcell">443</div></div><div class="xrow"><div class="xcell">Dak</div><div class="xcell">710</div><div class="xcell" style="color:var(--amber);font-weight:600;">?</div><div class="xcell">22</div><div class="xcell" style="color:var(--amber);">—</div></div><div class="xrow"><div class="xcell">Begane grond</div><div class="xcell">710</div><div class="xcell" style="color:var(--amber);font-weight:600;">?</div><div class="xcell">10</div><div class="xcell" style="color:var(--amber);">—</div></div><div class="xrow"><div class="xcell">Glas totaal</div><div class="xcell">340</div><div class="xcell">0.70</div><div class="xcell">22</div><div class="xcell">5.236</div></div></div><div style="margin-bottom:10px;"><span class="ai-chip">✦ 2 ontbrekende waarden gedetecteerd</span></div><button class="btn btn-primary btn-sm" onclick="procXLS()">✦ Verwerk automatisch</button>`;
 }
 function procXLS(){
   const b=document.getElementById('xls-body');b.innerHTML='<div class="prog-wrap"><div class="prog-bar" id="xpbar" style="width:0%"></div></div><div style="font-size:11px;color:var(--mid);margin-top:4px;">NEN 1068 waarden opzoeken...</div>';
-  let w=0;const iv=setInterval(()=>{w+=8;document.getElementById('xpbar').style.width=w+'%';if(w>=100){clearInterval(iv);b.innerHTML=`<div style="margin-bottom:8px;"><span class="ai-chip">✦ 2 waarden ingevuld · totaal berekend</span></div><div class="xls-preview"><div class="xrow xhead"><div class="xcell">Bouwdeel</div><div class="xcell">Opp. m²</div><div class="xcell">U-waarde</div><div class="xcell">Temp.∆</div><div class="xcell">Verlies W</div></div><div class="xrow"><div class="xcell">Gevel noord</div><div class="xcell">184</div><div class="xcell">0.21</div><div class="xcell">22</div><div class="xcell">849</div></div><div class="xrow"><div class="xcell">Gevel oost</div><div class="xcell">96</div><div class="xcell">0.21</div><div class="xcell">22</div><div class="xcell">443</div></div><div class="xrow"><div class="xcell">Dak</div><div class="xcell">710</div><div class="xcell xai">0.20 ✦</div><div class="xcell">22</div><div class="xcell xai">3.124 ✦</div></div><div class="xrow"><div class="xcell">Begane grond</div><div class="xcell">710</div><div class="xcell xai">0.25 ✦</div><div class="xcell">10</div><div class="xcell xai">1.775 ✦</div></div><div class="xrow"><div class="xcell">Glas totaal</div><div class="xcell">340</div><div class="xcell">0.70</div><div class="xcell">22</div><div class="xcell">5.236</div></div><div class="xrow" style="background:var(--teal-light);font-weight:700;"><div class="xcell">TOTAAL</div><div class="xcell">—</div><div class="xcell">—</div><div class="xcell">—</div><div class="xcell xai">11.427 W ✦</div></div></div><div style="background:var(--teal-light);border-radius:8px;padding:12px;font-size:12px;color:var(--teal);margin-top:8px;"><strong>AI Conclusie:</strong> Transmissieverlies 11,4 kW. Voldoet aan BENG eis. <strong style="color:var(--green);">✓ BENG 1 gehaald.</strong></div><div style="margin-top:10px;display:flex;gap:8px;"><button class="btn btn-primary btn-sm">⬇ Download Excel</button><button class="btn btn-outline btn-sm">📄 Naar rapport</button></div>`;}},100);
+  let w=0;const iv=setInterval(()=>{w+=8;document.getElementById('xpbar').style.width=w+'%';if(w>=100){clearInterval(iv);b.innerHTML=`<div style="margin-bottom:8px;"><span class="ai-chip">✦ 2 waarden ingevuld · totaal berekend</span></div><div class="xls-preview"><div class="xrow xhead"><div class="xcell">Bouwdeel</div><div class="xcell">Opp. m²</div><div class="xcell">U-waarde</div><div class="xcell">Temp.∆</div><div class="xcell">Verlies W</div></div><div class="xrow"><div class="xcell">Gevel noord</div><div class="xcell">184</div><div class="xcell">0.21</div><div class="xcell">22</div><div class="xcell">849</div></div><div class="xrow"><div class="xcell">Gevel oost</div><div class="xcell">96</div><div class="xcell">0.21</div><div class="xcell">22</div><div class="xcell">443</div></div><div class="xrow"><div class="xcell">Dak</div><div class="xcell">710</div><div class="xcell xai">0.20 ✦</div><div class="xcell">22</div><div class="xcell xai">3.124 ✦</div></div><div class="xrow"><div class="xcell">Begane grond</div><div class="xcell">710</div><div class="xcell xai">0.25 ✦</div><div class="xcell">10</div><div class="xcell xai">1.775 ✦</div></div><div class="xrow"><div class="xcell">Glas totaal</div><div class="xcell">340</div><div class="xcell">0.70</div><div class="xcell">22</div><div class="xcell">5.236</div></div><div class="xrow" style="background:var(--teal-light);font-weight:700;"><div class="xcell">TOTAAL</div><div class="xcell">—</div><div class="xcell">—</div><div class="xcell">—</div><div class="xcell xai">11.427 W ✦</div></div></div><div style="background:var(--teal-light);border-radius:8px;padding:12px;font-size:12px;color:var(--teal);margin-top:8px;"><strong>Conclusie:</strong> Transmissieverlies 11,4 kW. Voldoet aan BENG eis. <strong style="color:var(--green);">✓ BENG 1 gehaald.</strong></div><div style="margin-top:10px;display:flex;gap:8px;"><button class="btn btn-primary btn-sm">⬇ Download Excel</button><button class="btn btn-outline btn-sm">📄 Naar rapport</button></div>`;}},100);
 }
 function checkBENG(){
   const b=document.getElementById('beng-body');b.innerHTML='<div class="prog-wrap"><div class="prog-bar" id="bpbar" style="width:0%"></div></div>';

@@ -1,0 +1,52 @@
+Onderwerp: Digitaal werkplatform voor Nieman — brandveiligheid, WKB en bouwfysica versneld
+
+Geachte heer/mevrouw,
+
+Nieman Raadgevende Ingenieurs heeft in 40 jaar een uitzonderlijke positie opgebouwd in bouwfysica, brandveiligheid en bouwregelgeving. Met 120+ medewerkers en vestigingen in Utrecht, Zwolle en Rotterdam draait er dagelijks een grote hoeveelheid rapportage, normcontrole en kwaliteitsborging — precies het type werk dat het meest te winnen heeft bij slimme digitale ondersteuning.
+
+Wij hebben een werkend demo-platform gebouwd, specifiek ingericht op de disciplines en werkprocessen van Nieman.
+
+Wat het platform doet:
+
+→ Rapport Schrijver
+   Stel een brandveiligheidsrapport, bouwfysica-rapport, WKB-kwaliteitsverklaring
+   of akoestisch onderzoek op in een fractie van de gebruikelijke tijd.
+   De output volgt de Nieman-structuur en verwijst automatisch naar de juiste
+   NEN-normen, Bbl-artikelen en WKB-vereisten.
+
+→ Excel Assistent
+   Laad een bouwfysica- of WKB-compliance sheet.
+   Het platform herkent ontbrekende waarden, vult ze in via NEN 1068 of NPR-standaarden
+   en toetst het resultaat direct aan de geldende kwaliteitsborgingseisen.
+
+→ BENG Checker
+   Snel BENG 1/2/3 doorrekenen voor woningbouw- en utiliteitsprojecten,
+   met directe verwijzing naar de relevante Bbl-bijlagen en de eisen vanaf 2027.
+
+→ Norm Monitor
+   Wijzigingen in WKB-circulaires, NEN 6068, brandveiligheidsnormen en Bbl
+   worden automatisch bijgehouden en direct relevant gemaakt voor uw lopende projecten —
+   over alle vestigingen heen.
+
+→ Kennisbank
+   Uw projectarchief — van Isala Klinieken Zwolle tot grootschalige woningbouwprojecten
+   in Rotterdam — wordt doorzoekbaar op discipline, norm, gebouwtype en locatie.
+   Uw medewerkers vinden het juiste referentieproject direct, zonder intern navragen.
+
+Gebouwd op uw eigen infrastructuur. Volledig onder uw beheer.
+
+Een organisatie als Nieman werkt met vertrouwelijke opdrachtgeversdata, juridisch relevante kwaliteitsverklaringen en eigendomsgebonden projectkennis. Dat mag niet op externe servers staan — en dat hoeft ook niet.
+
+Dit platform wordt volledig on-premise geïmplementeerd: op de eigen servers van Nieman, achter uw bestaande beveiligingsinfrastructuur. Alle data wordt end-to-end versleuteld opgeslagen. Geen externe cloudprovider heeft toegang. Geen projectdata wordt gedeeld of gebruikt buiten uw organisatie. Volledig GDPR-conform, auditeerbaar en in lijn met de kwaliteitsborgingseisen die Nieman zelf aan opdrachtgevers stelt.
+
+De schaalvoordelen voor een organisatie als Nieman zijn aanzienlijk. Bij bureaus van vergelijkbare omvang zien wij besparingen van 80–120 uur per maand op terugkerende rapportage, normcontroles en kwaliteitsborging — verdeeld over teams en vestigingen.
+
+Ik zou u graag 20 minuten de tijd vragen voor een live demo, ingericht op de werkprocessen van Nieman.
+
+Met vriendelijke groet,
+
+[Uw naam]
+[Telefoonnummer]
+[E-mailadres]
+
+P.S. De demo is volledig werkend, gestyled in de uitstraling van Nieman Raadgevende Ingenieurs en bevat voorbeeldprojecten uit uw eigen disciplines. U ziet direct hoe het platform er voor uw organisatie uit zou zien.

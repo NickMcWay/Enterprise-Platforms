@@ -1,0 +1,48 @@
+Onderwerp: Exploitatieadvies in een kwart van de tijd — demo voor DIA Groep
+
+Geachte heer/mevrouw,
+
+DIA Groep levert installatieadvies waar anderen afhaken — van TivoliVredenburg tot Windpark Zeewolde. Dat vraagt om scherpe ingenieurs én om tools die hun werk bijhouden.
+
+Wij hebben een werkend demo-platform gebouwd, specifiek ingericht voor DIA Groep. Het platform neemt de terugkerende, tijdrovende taken uit handen — zodat uw engineers zich kunnen richten op het advieswerk dat er echt toe doet.
+
+Wat het platform doet:
+
+→ Exploitatieadvies Assistent
+   Stel een volledig exploitatieadvies op voor een cultureel gebouw of sportcomplex in minuten.
+   Gebaseerd op de werkmethodiek en projecttypen van DIA Groep.
+
+→ Excel Assistent
+   Laad een energieverbruikssheet van een bestaand gebouw.
+   Het platform analyseert de verbruikspatronen, vult referentiewaarden in via NEN-normen
+   en berekent besparingspotenties per installatie-onderdeel.
+
+→ BENG Checker
+   Voer snel een bijeenkomst- of logiesfunctie in en ontvang direct BENG 1/2/3 indicatoren —
+   inclusief advies als een indicator niet gehaald wordt.
+
+→ Norm Monitor
+   Wijzigingen in Bbl, NEN en Paris Proof worden automatisch bijgehouden,
+   direct relevant gemaakt voor de actieve projecten van DIA.
+
+→ Projectkennisbank
+   Uw projectarchief — van Kovelswade tot Sportcampus Leidsche Rijn — wordt doorzoekbaar
+   op gebouwtype, installatiesysteem en locatie.
+
+Uw data blijft intern. Altijd.
+
+Het platform draait op de eigen server van DIA Groep. Geen cloudabonnement waarbij projectgegevens naar externe partijen gaan. Geen training op uw vertrouwelijke opdrachtgeversdata. Alles versleuteld opgeslagen, uitsluitend toegankelijk voor uw eigen medewerkers.
+
+Eerst denken, dan doen — dat geldt ook voor dataveiligheid.
+
+De gemiddelde tijdsbesparing die wij zien bij adviesbureaus met vergelijkbare projectomvang: 30–40 uur per maand op rapportage, normcontroles en Excel-bewerkingen.
+
+Kan ik u 20 minuten laten zien hoe dit er voor DIA Groep concreet uitziet?
+
+Met vriendelijke groet,
+
+[Uw naam]
+[Telefoonnummer]
+[E-mailadres]
+
+P.S. De demo is al volledig gestyled in de uitstraling van DIA Groep en bevat voorbeeldprojecten die u zult herkennen.
