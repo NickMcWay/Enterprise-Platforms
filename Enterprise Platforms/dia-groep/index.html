@@ -8,7 +8,7 @@
 <style>
 :root{
   --bg:#12151A;--bg2:#1A1E26;--bg3:#22273200;--surface:#1E2330;--surface2:#252B3B;
-  --orange:#FF6B2B;--orange-dim:#cc5522;--orange-glow:rgba(255,107,43,.15);--orange-soft:#2a1a12;
+  --teal-accent:#00C896;--teal-dim:#00A87E;--teal-glow:rgba(0,200,150,.12);--teal-soft:#0a1f1a;
   --text:#E8EAF0;--mid:#8B94A8;--soft:#555E72;--border:#2C3347;--border2:#363D52;
   --green:#2ECC71;--green-bg:rgba(46,204,113,.1);--amber:#F0B429;--amber-bg:rgba(240,180,41,.1);
   --red:#E74C3C;--red-bg:rgba(231,76,60,.1);--teal:#00B8D9;--teal-bg:rgba(0,184,217,.1);
@@ -20,32 +20,32 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
 .logo-area{padding:24px 20px 18px;border-bottom:1px solid var(--border);}
 .logo-text{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:#fff;letter-spacing:2px;text-transform:uppercase;}
 .logo-sub{font-family:'Barlow Condensed',sans-serif;font-size:10px;color:var(--mid);letter-spacing:3.5px;text-transform:uppercase;margin-top:2px;}
-.ai-pill{display:inline-block;background:var(--orange);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;padding:2px 9px;border-radius:2px;margin-top:10px;letter-spacing:1.5px;text-transform:uppercase;}
+.ai-pill{display:inline-block;background:var(--teal-accent);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;padding:2px 9px;border-radius:2px;margin-top:10px;letter-spacing:1.5px;text-transform:uppercase;}
 .nav{padding:12px 0;flex:1;overflow-y:auto;}
-.nav-section{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--soft);padding:14px 20px 5px;font-weight:600;}
-.nav-item{display:flex;align-items:center;gap:11px;padding:10px 20px;color:var(--mid);font-size:13px;font-weight:500;cursor:pointer;transition:all .16s;border-left:3px solid transparent;}
-.nav-item:hover{color:var(--text);background:rgba(255,107,43,.06);}
-.nav-item.active{color:#fff;background:var(--orange-glow);border-left-color:var(--orange);}
+.nav-section{font-family:'Barlow',sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--soft);padding:14px 20px 5px;font-weight:600;}
+.nav-item{display:flex;align-items:center;gap:11px;padding:11px 20px;color:var(--mid);font-size:13.5px;font-weight:400;font-family:'Barlow',sans-serif;cursor:pointer;transition:all .16s;border-left:3px solid transparent;}
+.nav-item:hover{color:var(--text);background:rgba(0,200,150,.06);}
+.nav-item.active{color:#fff;background:var(--teal-glow);border-left-color:var(--teal-accent);}
 .nav-icon{font-size:14px;width:18px;text-align:center;flex-shrink:0;}
 .sidebar-footer{padding:16px 20px;border-top:1px solid var(--border);}
 .user-block{display:flex;align-items:center;gap:10px;}
-.user-av{width:32px;height:32px;border-radius:3px;background:var(--orange);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:#fff;flex-shrink:0;}
+.user-av{width:32px;height:32px;border-radius:3px;background:var(--teal-accent);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:#fff;flex-shrink:0;}
 .user-name{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:#fff;letter-spacing:.5px;}
-.user-role{font-size:10px;color:var(--soft);}
+.user-role{font-family:'Barlow',sans-serif;font-size:11.5px;color:var(--soft);}
 /* MAIN */
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
 .topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 28px;height:54px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
 .page-title{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:#fff;letter-spacing:1px;text-transform:uppercase;}
 .topbar-right{display:flex;align-items:center;gap:12px;}
-.topbar-badge{background:var(--orange-glow);color:var(--orange);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;padding:4px 12px;border-radius:2px;border:1px solid rgba(255,107,43,.3);letter-spacing:.8px;text-transform:uppercase;}
+.topbar-badge{background:var(--teal-glow);color:var(--teal-accent);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;padding:4px 12px;border-radius:2px;border:1px solid rgba(0,200,150,.25);letter-spacing:.8px;text-transform:uppercase;}
 .content{flex:1;overflow-y:auto;padding:26px;}
 /* CARDS */
 .cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;}
 .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:18px 20px;position:relative;overflow:hidden;}
-.stat-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--orange);}
-.stat-num{font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:800;color:var(--orange);letter-spacing:-1px;}
-.stat-label{font-size:11px;color:var(--mid);margin-top:2px;text-transform:uppercase;letter-spacing:.5px;}
-.stat-delta{font-size:11px;margin-top:8px;font-weight:500;}
+.stat-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--teal-accent);}
+.stat-num{font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:800;color:var(--teal-accent);letter-spacing:-1px;}
+.stat-label{font-family:'Barlow',sans-serif;font-size:12.5px;color:var(--mid);margin-top:4px;}
+.stat-delta{font-size:12px;margin-top:8px;font-weight:400;}
 .up{color:var(--green);}
 .warn{color:var(--amber);}
 .urg{color:var(--red);}
@@ -57,16 +57,16 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);disp
 .table-header{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
 .table-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.5px;text-transform:uppercase;color:var(--text);}
 .btn{padding:8px 16px;border-radius:3px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .16s;border:none;letter-spacing:.8px;text-transform:uppercase;}
-.btn-primary{background:var(--orange);color:#fff;}
+.btn-primary{background:var(--teal-accent);color:#fff;}
 .btn-primary:hover{background:#e55a1f;}
-.btn-outline{background:transparent;color:var(--orange);border:1.5px solid var(--orange);}
-.btn-outline:hover{background:var(--orange-glow);}
+.btn-outline{background:transparent;color:var(--teal-accent);border:1.5px solid var(--teal-accent);}
+.btn-outline:hover{background:var(--teal-glow);}
 .btn-sm{padding:4px 11px;font-size:11px;}
 table{width:100%;border-collapse:collapse;}
 th{text-align:left;padding:10px 20px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--soft);background:var(--bg);border-bottom:1px solid var(--border);}
-td{padding:12px 20px;font-size:13px;border-bottom:1px solid var(--border);color:var(--text);}
+td{padding:13px 20px;font-size:13.5px;border-bottom:1px solid var(--border);color:var(--text);line-height:1.4;}
 tr:last-child td{border-bottom:none;}
-tr:hover td{background:rgba(255,107,43,.04);}
+tr:hover td{background:rgba(0,200,150,.04);}
 .pill{display:inline-block;padding:3px 9px;border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;}
 .p-green{background:var(--green-bg);color:var(--green);}
 .p-amber{background:var(--amber-bg);color:var(--amber);}
@@ -76,37 +76,37 @@ tr:hover td{background:rgba(255,107,43,.04);}
 .panel-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px;}
 .panel{background:var(--surface);border:1px solid var(--border);border-radius:4px;overflow:hidden;}
 .panel-head{padding:13px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
-.panel-icon{width:28px;height:28px;border-radius:3px;background:var(--orange-glow);color:var(--orange);display:flex;align-items:center;justify-content:center;font-size:13px;border:1px solid rgba(255,107,43,.3);}
-.panel-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:.5px;text-transform:uppercase;color:var(--text);}
+.panel-icon{width:28px;height:28px;border-radius:3px;background:var(--teal-glow);color:var(--teal-accent);display:flex;align-items:center;justify-content:center;font-size:13px;border:1px solid rgba(0,200,150,.25);}
+.panel-title{font-family:'Barlow',sans-serif;font-weight:600;font-size:14px;color:var(--text);}
 .panel-body{padding:18px;}
 /* FORMS */
 .report-type-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
 .rt-btn{padding:11px;border-radius:3px;border:1.5px solid var(--border);background:var(--bg2);cursor:pointer;text-align:left;transition:all .16s;}
-.rt-btn:hover,.rt-btn.sel{border-color:var(--orange);background:var(--orange-glow);}
-.rt-title{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:var(--text);}
-.rt-sub{font-size:10px;color:var(--soft);margin-top:2px;}
-.lbl{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;color:var(--mid);margin-bottom:5px;display:block;letter-spacing:1.5px;text-transform:uppercase;}
+.rt-btn:hover,.rt-btn.sel{border-color:var(--teal-accent);background:var(--teal-glow);}
+.rt-title{font-family:'Barlow',sans-serif;font-size:13px;font-weight:600;color:var(--text);}
+.rt-sub{font-size:11.5px;color:var(--mid);margin-top:3px;}
+.lbl{font-family:'Barlow',sans-serif;font-size:11.5px;font-weight:600;color:var(--mid);margin-bottom:5px;display:block;}
 .inp{width:100%;border:1.5px solid var(--border);border-radius:3px;padding:9px 11px;font-size:13px;font-family:'Barlow',sans-serif;color:var(--text);outline:none;transition:border-color .16s;background:var(--bg2);}
-.inp:focus{border-color:var(--orange);}
+.inp:focus{border-color:var(--teal-accent);}
 .inp option{background:var(--bg2);}
 .ta{resize:vertical;min-height:68px;}
 /* PROGRESS */
 .prog-wrap{background:var(--border);border-radius:1px;height:5px;overflow:hidden;margin:10px 0 5px;}
-.prog-bar{height:100%;border-radius:1px;background:linear-gradient(90deg,var(--orange-dim),var(--orange));transition:width .5s ease;}
+.prog-bar{height:100%;border-radius:1px;background:linear-gradient(90deg,var(--teal-dim),var(--teal-accent));transition:width .5s ease;}
 /* OUTPUT */
-.out-box{background:var(--bg);border-radius:3px;padding:13px;border:1px solid var(--border);font-size:12.5px;line-height:1.75;color:var(--mid);min-height:80px;}
+.out-box{background:var(--bg);border-radius:3px;padding:14px;border:1px solid var(--border);font-size:13.5px;line-height:1.8;color:var(--mid);min-height:80px;}
 /* DROP ZONE */
 .drop-zone{border:2px dashed var(--border2);border-radius:4px;padding:26px;text-align:center;cursor:pointer;transition:all .16s;margin-bottom:14px;}
-.drop-zone:hover{border-color:var(--orange);background:var(--orange-glow);}
+.drop-zone:hover{border-color:var(--teal-accent);background:var(--teal-glow);}
 /* EXCEL */
 .xls-preview{background:var(--bg);border:1px solid var(--border);border-radius:3px;overflow:hidden;margin-bottom:10px;}
 .xrow{display:grid;grid-template-columns:150px repeat(4,1fr);border-bottom:1px solid var(--border);font-size:11.5px;}
 .xrow:last-child{border-bottom:none;}
 .xcell{padding:7px 10px;border-right:1px solid var(--border);color:var(--text);}
 .xcell:last-child{border-right:none;}
-.xhead .xcell{background:var(--orange);color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:.5px;text-transform:uppercase;}
-.xai{background:var(--orange-soft);color:var(--orange);font-weight:600;}
-.ai-chip{display:inline-flex;align-items:center;gap:4px;font-family:'Barlow Condensed',sans-serif;font-size:10px;color:var(--orange);background:var(--orange-glow);padding:2px 8px;border-radius:2px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;border:1px solid rgba(255,107,43,.25);}
+.xhead .xcell{background:var(--teal-accent);color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:.5px;text-transform:uppercase;}
+.xai{background:var(--teal-soft);color:var(--teal-accent);font-weight:600;}
+.ai-chip{display:inline-flex;align-items:center;gap:4px;font-family:'Barlow',sans-serif;font-size:11.5px;color:var(--teal-accent);background:var(--teal-glow);padding:3px 10px;border-radius:2px;font-weight:600;border:1px solid rgba(0,200,150,.25);}
 /* BENG */
 .beng-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:13px;}
 .brow{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);}
@@ -116,8 +116,8 @@ tr:hover td{background:rgba(255,107,43,.04);}
 .norm-list{display:flex;flex-direction:column;gap:10px;}
 .norm-item{display:flex;gap:12px;padding:13px 16px;background:var(--surface);border-radius:4px;border:1px solid var(--border);border-left:3px solid var(--border);}
 .norm-date{font-family:'Barlow Condensed',sans-serif;font-size:10px;color:var(--soft);white-space:nowrap;min-width:44px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
-.ntitle{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:.3px;color:var(--text);}
-.nsub{font-size:11.5px;color:var(--mid);margin-top:3px;line-height:1.5;}
+.ntitle{font-family:'Barlow',sans-serif;font-size:14px;font-weight:600;color:var(--text);}
+.nsub{font-size:12.5px;color:var(--mid);margin-top:4px;line-height:1.6;}
 .ntag{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;padding:2px 7px;border-radius:2px;margin-top:5px;letter-spacing:.8px;text-transform:uppercase;}
 .t-bbl{background:var(--green-bg);color:var(--green);}
 .t-beng{background:var(--teal-bg);color:var(--teal);}
@@ -126,11 +126,11 @@ tr:hover td{background:rgba(255,107,43,.04);}
 /* KENNISBANK */
 .search-bar{display:flex;gap:8px;margin-bottom:14px;}
 .kb-item{padding:14px 16px;background:var(--surface);border-radius:4px;border:1px solid var(--border);cursor:pointer;margin-bottom:10px;transition:all .16s;}
-.kb-item:hover{border-color:var(--orange);}
+.kb-item:hover{border-color:var(--teal-accent);}
 .kb-title{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:.3px;color:var(--text);}
 .kb-meta{font-size:11px;color:var(--soft);margin-top:3px;}
 .kb-snip{font-size:12px;color:var(--mid);margin-top:6px;line-height:1.55;}
-.match{float:right;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;color:var(--orange);background:var(--orange-glow);padding:2px 8px;border-radius:2px;letter-spacing:.5px;border:1px solid rgba(255,107,43,.25);}
+.match{float:right;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;color:var(--teal-accent);background:var(--teal-glow);padding:2px 8px;border-radius:2px;letter-spacing:.5px;border:1px solid rgba(255,107,43,.25);}
 /* PAGE TRANSITIONS */
 .page{display:none;}
 .page.active{display:block;animation:fi .22s ease;}
@@ -261,19 +261,19 @@ tr:hover td{background:rgba(255,107,43,.04);}
           <div class="panel-head"><div class="panel-icon">⚡</div><div class="panel-title">Tijdsbesparing deze maand</div></div>
           <div class="panel-body">
             <div style="margin-bottom:13px;">
-              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span style="color:var(--mid)">Rapport generatie</span><span style="font-weight:700;color:var(--orange);font-family:'Barlow Condensed',sans-serif;font-size:14px;">16.5 uur</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span style="color:var(--mid)">Rapport generatie</span><span style="font-weight:700;color:var(--teal-accent);font-family:'Barlow Condensed',sans-serif;font-size:14px;">16.5 uur</span></div>
               <div class="prog-wrap"><div class="prog-bar" style="width:86%"></div></div>
             </div>
             <div style="margin-bottom:13px;">
-              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span style="color:var(--mid)">Excel berekeningen</span><span style="font-weight:700;color:var(--orange);font-family:'Barlow Condensed',sans-serif;font-size:14px;">12.3 uur</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span style="color:var(--mid)">Excel berekeningen</span><span style="font-weight:700;color:var(--teal-accent);font-family:'Barlow Condensed',sans-serif;font-size:14px;">12.3 uur</span></div>
               <div class="prog-wrap"><div class="prog-bar" style="width:64%"></div></div>
             </div>
             <div>
-              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span style="color:var(--mid)">Norm checks</span><span style="font-weight:700;color:var(--orange);font-family:'Barlow Condensed',sans-serif;font-size:14px;">9.2 uur</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span style="color:var(--mid)">Norm checks</span><span style="font-weight:700;color:var(--teal-accent);font-family:'Barlow Condensed',sans-serif;font-size:14px;">9.2 uur</span></div>
               <div class="prog-wrap"><div class="prog-bar" style="width:48%"></div></div>
             </div>
             <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-size:13px;">
-              <span style="font-family:'Barlow Condensed',sans-serif;color:var(--orange);font-size:22px;font-weight:800;">38 uur</span>
+              <span style="font-family:'Barlow Condensed',sans-serif;color:var(--teal-accent);font-size:22px;font-weight:800;">38 uur</span>
               <span style="color:var(--mid);font-size:12px;"> bespaard · €5.320 waarde</span>
             </div>
           </div>
@@ -282,7 +282,7 @@ tr:hover td{background:rgba(255,107,43,.04);}
           <div class="panel-head"><div class="panel-icon">🔔</div><div class="panel-title">Recente Meldingen</div></div>
           <div class="panel-body">
             <div style="display:flex;flex-direction:column;gap:11px;">
-              <div style="display:flex;gap:10px;"><div style="width:7px;height:7px;border-radius:1px;background:var(--orange);margin-top:5px;flex-shrink:0;"></div><div><div style="font-size:12.5px;font-weight:600;color:var(--text);">Exploitatieadvies klaar</div><div style="font-size:11px;color:var(--soft);">TivoliVredenburg · 5 min geleden</div></div></div>
+              <div style="display:flex;gap:10px;"><div style="width:7px;height:7px;border-radius:1px;background:var(--teal-accent);margin-top:5px;flex-shrink:0;"></div><div><div style="font-size:12.5px;font-weight:600;color:var(--text);">Exploitatieadvies klaar</div><div style="font-size:11px;color:var(--soft);">TivoliVredenburg · 5 min geleden</div></div></div>
               <div style="display:flex;gap:10px;"><div style="width:7px;height:7px;border-radius:1px;background:var(--amber);margin-top:5px;flex-shrink:0;"></div><div><div style="font-size:12.5px;font-weight:600;color:var(--text);">Norm update gedetecteerd</div><div style="font-size:11px;color:var(--soft);">NEN 1010:2026 — laagspanning nieuw</div></div></div>
               <div style="display:flex;gap:10px;"><div style="width:7px;height:7px;border-radius:1px;background:var(--green);margin-top:5px;flex-shrink:0;"></div><div><div style="font-size:12.5px;font-weight:600;color:var(--text);">Excel berekening verwerkt</div><div style="font-size:11px;color:var(--soft);">Sportcampus · energiebalans compleet</div></div></div>
               <div style="display:flex;gap:10px;"><div style="width:7px;height:7px;border-radius:1px;background:var(--red);margin-top:5px;flex-shrink:0;"></div><div><div style="font-size:12.5px;font-weight:600;color:var(--text);">Deadline morgen</div><div style="font-size:11px;color:var(--soft);">Hotel Figi · energieaudit inleveren</div></div></div>
@@ -512,7 +512,7 @@ function genRapport(){
       prog.style.display='none';
       acts.style.display='flex';
       acts.innerHTML='<button class="btn btn-primary btn-sm">⬇ Download .docx</button><button class="btn btn-outline btn-sm">✏ Bewerk</button>';
-      out.innerHTML=`<strong style="font-family:'Barlow Condensed',sans-serif;color:var(--orange);font-size:15px;letter-spacing:.5px;text-transform:uppercase;">Exploitatieadvies — TivoliVredenburg Utrecht</strong><br><br><strong style="color:var(--text);">Opdrachtgever:</strong> <span style="color:var(--mid)">TivoliVredenburg Stichting</span><br><strong style="color:var(--text);">Adviseur:</strong> <span style="color:var(--mid)">DIA Groep Zeist · 21 april 2026</span><br><br><strong style="color:var(--text);">1. Projectomschrijving</strong><br><span style="color:var(--mid)">TivoliVredenburg is een toonaangevend muziek- en evenementengebouw in het hart van Utrecht (BVO: 11.400 m², 5 zalen). Dit exploitatieadvies richt zich op reductie van energiekosten, verlenging van installatietechnische levensduur en aansluiting op Paris Proof 2030-doelstellingen.</span><br><br><strong style="color:var(--text);">2. Exploitatiebevindingen</strong><br><span style="color:var(--mid)">Huidig energieverbruik: 1.320 MWh/jr (116 kWh/m²/jr). Benchmark bijeenkomstfunctie: 90 kWh/m²/jr. Grootste verliezen: HVAC ongeplande stops (23%), verlichtingsbeheer (18%), koelinstallatie zaalklimaat (31%).</span><br><br><strong style="color:var(--text);">3. Aanbevelingen</strong><br><span style="color:var(--mid)">• BMS-upgrade met slimme zaaloccupatie koppeling <strong style="color:var(--green)">↓ 14%</strong><br>• LED-retrofit algemene ruimten + dimregeling <strong style="color:var(--green)">↓ 18%</strong><br>• WKO-voorstudie voor basiskoeling/-verwarming<br>• Exploitatieplan 5-jaar incl. onderhoudsmomenten</span><br><br><strong style="color:var(--text);">4. BENG Indicatoren (prognose)</strong><br><span style="color:var(--mid)">• BENG 1: <strong style="color:var(--green)">61 kWh/m²/jr ✓</strong> (eis bijeenkomst ≤75)<br>• BENG 2: <strong style="color:var(--green)">38 kWh/m²/jr ✓</strong> (eis ≤40)<br>• BENG 3: <strong style="color:var(--green)">54% ✓</strong> (eis ≥50%)</span><br><br><em style="color:var(--soft);font-size:11px;">Gegenereerd door DIA Groep Digitaal Platform · NEN 7120 + Paris Proof 2030 · Eerst denken, dan doen.</em>`;
+      out.innerHTML=`<strong style="font-family:'Barlow Condensed',sans-serif;color:var(--teal-accent);font-size:15px;letter-spacing:.5px;text-transform:uppercase;">Exploitatieadvies — TivoliVredenburg Utrecht</strong><br><br><strong style="color:var(--text);">Opdrachtgever:</strong> <span style="color:var(--mid)">TivoliVredenburg Stichting</span><br><strong style="color:var(--text);">Adviseur:</strong> <span style="color:var(--mid)">DIA Groep Zeist · 21 april 2026</span><br><br><strong style="color:var(--text);">1. Projectomschrijving</strong><br><span style="color:var(--mid)">TivoliVredenburg is een toonaangevend muziek- en evenementengebouw in het hart van Utrecht (BVO: 11.400 m², 5 zalen). Dit exploitatieadvies richt zich op reductie van energiekosten, verlenging van installatietechnische levensduur en aansluiting op Paris Proof 2030-doelstellingen.</span><br><br><strong style="color:var(--text);">2. Exploitatiebevindingen</strong><br><span style="color:var(--mid)">Huidig energieverbruik: 1.320 MWh/jr (116 kWh/m²/jr). Benchmark bijeenkomstfunctie: 90 kWh/m²/jr. Grootste verliezen: HVAC ongeplande stops (23%), verlichtingsbeheer (18%), koelinstallatie zaalklimaat (31%).</span><br><br><strong style="color:var(--text);">3. Aanbevelingen</strong><br><span style="color:var(--mid)">• BMS-upgrade met slimme zaaloccupatie koppeling <strong style="color:var(--green)">↓ 14%</strong><br>• LED-retrofit algemene ruimten + dimregeling <strong style="color:var(--green)">↓ 18%</strong><br>• WKO-voorstudie voor basiskoeling/-verwarming<br>• Exploitatieplan 5-jaar incl. onderhoudsmomenten</span><br><br><strong style="color:var(--text);">4. BENG Indicatoren (prognose)</strong><br><span style="color:var(--mid)">• BENG 1: <strong style="color:var(--green)">61 kWh/m²/jr ✓</strong> (eis bijeenkomst ≤75)<br>• BENG 2: <strong style="color:var(--green)">38 kWh/m²/jr ✓</strong> (eis ≤40)<br>• BENG 3: <strong style="color:var(--green)">54% ✓</strong> (eis ≥50%)</span><br><br><em style="color:var(--soft);font-size:11px;">Gegenereerd door DIA Groep Digitaal Platform · NEN 7120 + Paris Proof 2030 · Eerst denken, dan doen.</em>`;
     }
   };
   run();
@@ -554,7 +554,7 @@ function procXLS(){
           <div class="xrow"><div class="xcell">Overig</div><div class="xcell">269</div><div class="xcell xai">240 ✦</div><div class="xcell" style="color:var(--amber);">+12%</div><div class="xcell xai">€3.480 ✦</div></div>
           <div class="xrow" style="background:rgba(255,107,43,.08);font-weight:700;"><div class="xcell">TOTAAL</div><div class="xcell">1.320</div><div class="xcell xai">1.098 ✦</div><div class="xcell" style="color:var(--red);">+20%</div><div class="xcell xai">€26.640/jr ✦</div></div>
         </div>
-        <div style="background:var(--orange-glow);border:1px solid rgba(255,107,43,.25);border-radius:3px;padding:12px;font-size:12px;color:var(--orange);margin-top:8px;">
+        <div style="background:var(--teal-glow);border:1px solid rgba(255,107,43,.25);border-radius:3px;padding:12px;font-size:12px;color:var(--teal-accent);margin-top:8px;">
           <strong style="font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.5px;">Conclusie:</strong>
           <span style="color:var(--mid);"> Totale besparingspotentie: <strong style="color:var(--green);">€26.640/jr</strong> bij implementatie aanbevelingen. Terugverdientijd maatregelen: 2,8 jaar. <strong style="color:var(--green);">Voldoet aan Paris Proof 2030 na uitvoering.</strong></span>
         </div>
