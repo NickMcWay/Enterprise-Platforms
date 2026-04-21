@@ -1,48 +1,50 @@
-Onderwerp: Exploitatieadvies in een kwart van de tijd — demo voor DIA Groep
+Onderwerp: DIA Groep heeft 8 vacatures openstaan — wij zagen het staan
 
 Geachte heer/mevrouw,
 
-DIA Groep levert installatieadvies waar anderen afhaken — van TivoliVredenburg tot Windpark Zeewolde. Dat vraagt om scherpe ingenieurs én om tools die hun werk bijhouden.
+Op uw vacaturepagina staan momenteel acht openstaande functies: vier (Senior) Adviseurs Installatietechniek W verspreid over meerdere vestigingen, drie Werktuigbouwkundige Ontwerpers en een Projectleider Safety & Security. Dat is een aanzienlijke zoekopgave — zeker in een markt waar installatietechnisch talent schaars is en de concurrentie om dezelfde mensen groot.
 
-Wij hebben een werkend demo-platform gebouwd, specifiek ingericht voor DIA Groep. Het platform neemt de terugkerende, tijdrovende taken uit handen — zodat uw engineers zich kunnen richten op het advieswerk dat er echt toe doet.
+De krapte op de arbeidsmarkt voor installatieadviseurs is structureel. Tegelijkertijd legt de WKB (Wet Kwaliteitsborging voor het Bouwen) steeds meer documentatie- en rapportageverplichtingen op per project. De ingenieurs die u wél heeft, besteden een groeiend deel van hun tijd aan administratief werk in plaats van aan het inhoudelijke advies waarvoor u ze aanneemt.
 
-Wat het platform doet:
+Wij denken dat er naast werven ook een andere manier is om die capaciteitsdruk te verlichten.
+
+Daarom hebben wij voor DIA Groep een werkend demo-platform gebouwd.
+
+Het platform neemt de terugkerende, tijdrovende taken over:
 
 → Exploitatieadvies Assistent
-   Stel een volledig exploitatieadvies op voor een cultureel gebouw of sportcomplex in minuten.
-   Gebaseerd op de werkmethodiek en projecttypen van DIA Groep.
+   Stel een volledig exploitatieadvies op voor een cultureel gebouw, sportcomplex of
+   hotel in minuten — gebaseerd op de werkmethodiek en projecttypen van DIA Groep.
 
 → Excel Assistent
-   Laad een energieverbruikssheet van een bestaand gebouw.
-   Het platform analyseert de verbruikspatronen, vult referentiewaarden in via NEN-normen
-   en berekent besparingspotenties per installatie-onderdeel.
+   Laad een energieverbruikssheet van een bestaand gebouw. Het platform analyseert
+   verbruikspatronen, vult referentiewaarden in via NEN-normen en berekent
+   besparingspotenties per installatie-onderdeel automatisch.
 
 → BENG Checker
-   Voer snel een bijeenkomst- of logiesfunctie in en ontvang direct BENG 1/2/3 indicatoren —
-   inclusief advies als een indicator niet gehaald wordt.
+   Direct BENG 1/2/3 doorrekenen voor bijeenkomst- en logiesfuncties,
+   inclusief WKB-conforme documentatie-output.
 
 → Norm Monitor
    Wijzigingen in Bbl, NEN en Paris Proof worden automatisch bijgehouden,
    direct relevant gemaakt voor de actieve projecten van DIA.
 
 → Projectkennisbank
-   Uw projectarchief — van Kovelswade tot Sportcampus Leidsche Rijn — wordt doorzoekbaar
-   op gebouwtype, installatiesysteem en locatie.
+   Uw projectarchief — van TivoliVredenburg tot Sportcampus Leidsche Rijn —
+   wordt doorzoekbaar op gebouwtype, systeem en locatie.
 
 Uw data blijft intern. Altijd.
 
-Het platform draait op de eigen server van DIA Groep. Geen cloudabonnement waarbij projectgegevens naar externe partijen gaan. Geen training op uw vertrouwelijke opdrachtgeversdata. Alles versleuteld opgeslagen, uitsluitend toegankelijk voor uw eigen medewerkers.
+Het platform draait op de eigen server van DIA Groep. Geen cloudabonnement waarbij projectgegevens naar externe partijen gaan. Geen externe partij die toegang heeft tot uw opdrachtgeversdata of calculaties. Alles versleuteld, volledig onder uw eigen beheer. GDPR-conform.
 
-Eerst denken, dan doen — dat geldt ook voor dataveiligheid.
+Eerst denken, dan doen — ook als het gaat om dataveiligheid.
 
-De gemiddelde tijdsbesparing die wij zien bij adviesbureaus met vergelijkbare projectomvang: 30–40 uur per maand op rapportage, normcontroles en Excel-bewerkingen.
+De tijdsbesparing die wij in de praktijk zien bij bureaus van vergelijkbare omvang: 30–40 uur per maand op rapportage, normcontroles en rekenwerk. Genoeg om de druk op uw huidige team merkbaar te verlichten — en die acht openstaande posities minder urgent te maken.
 
-Kan ik u 20 minuten laten zien hoe dit er voor DIA Groep concreet uitziet?
+Kan ik u 20 minuten laten zien hoe dit er voor DIA Groep concreet uitziet? De demo is al volledig opgebouwd in uw uitstraling en bevat projecten die u zult herkennen.
 
 Met vriendelijke groet,
 
 [Uw naam]
 [Telefoonnummer]
 [E-mailadres]
-
-P.S. De demo is al volledig gestyled in de uitstraling van DIA Groep en bevat voorbeeldprojecten die u zult herkennen.

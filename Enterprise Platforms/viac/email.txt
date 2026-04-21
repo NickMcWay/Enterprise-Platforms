@@ -1,46 +1,47 @@
-Onderwerp: Wat als VIAC's 30 jaar projectervaring direct doorzoekbaar was?
+Onderwerp: VIAC zoekt een BIM-modelleur en bouwfysica-adviseur — wij zagen het staan
 
 Geachte heer/mevrouw,
 
-VIAC Adviseurs staat bekend om het aanpakken van complexe installatievraagstukken — "hoe complexer de vraag, hoe blijer wij worden." Precies die diepgang en opgebouwde expertise willen we u laten zien in actie.
+Op uw vacaturepagina staan momenteel vijf openstaande functies, waaronder een Adviseur Bouwfysica, een Projectmanager Gebouwgebonden Installaties en een BIM Modelleur. Dat viel ons op — niet omdat het uitzonderlijk is, maar omdat het precies het patroon is dat wij bij vrijwel elk goed adviesbureau in de regio zien. De vraag naar gekwalificeerde installatieadviseurs is groter dan het aanbod, en dat gat wordt de komende jaren niet kleiner.
 
-Wij hebben voor VIAC een werkend demo-platform gebouwd: een digitaal werkplatform dat uw rapporten opstelt, uw Excel-berekeningen afrondt en uw projectarchief doorzoekbaar maakt. Niet als generiek hulpmiddel, maar ingericht op de projecttypen, normen en werkmethoden van VIAC zelf.
+Tegelijkertijd is de werkdruk op bestaande medewerkers de afgelopen jaren flink gestegen. De invoering van de Wet Kwaliteitsborging voor het Bouwen (WKB) heeft de documentatieverplichtingen per project significant verzwaard — meer verslaglegging, meer normtoetsing, meer rapportage. Werk dat grotendeels op de schouders van uw huidige team terechtkomt.
 
-Wat het platform doet:
+Wij denken dat er een derde weg is naast "meer mensen aannemen" en "meer van hetzelfde vragen aan bestaande medewerkers."
+
+Daarom hebben wij voor VIAC een werkend demo-platform gebouwd.
+
+Het platform neemt de terugkerende, tijdrovende taken uit handen:
 
 → Rapport Schrijver
-   Stel een BENG-rapportage, installatieadvies of Paris Proof analyse op in minuten.
-   Gebaseerd op uw eigen templates en actuele NEN-normen.
+   BENG-rapportages, Paris Proof analyses en installatieadviezen in minuten opgesteld,
+   gebaseerd op VIAC-templates en actuele NEN-normen. WKB-documentatie inbegrepen.
 
 → Excel Assistent
-   Upload een warmteverliesberekening of installatiesheet.
-   Het platform vult ontbrekende waarden in via NEN-standaarden en berekent het totaal automatisch.
+   Laad een warmteverliesberekening of installatiesheet — het platform vult ontbrekende
+   waarden in via NEN-standaarden en berekent het totaal automatisch.
 
 → BENG Checker
-   Voer projectgegevens in, ontvang direct BENG 1/2/3 indicatoren met pass/fail.
+   Voer projectgegevens in, ontvang direct BENG 1/2/3 met pass/fail en
+   een concreet advies bij afwijkingen.
 
 → Norm Monitor
-   Wijzigingen in Bbl, NEN en Paris Proof-doelstellingen komen automatisch binnen,
+   Wijzigingen in Bbl, NEN en Paris Proof komen automatisch binnen,
    direct gekoppeld aan uw lopende projecten.
 
 → Kennisbank
-   Uw 30 jaar aan projectdossiers wordt doorzoekbaar — zoek op gebouwtype, techniek of locatie
-   en vind direct het meest relevante referentieproject.
+   Uw projectarchief wordt doorzoekbaar — het meest relevante referentieproject
+   is voortaan één zoekopdracht verwijderd.
 
 Volledig privé, volledig van u.
 
-Dit is géén cloudplatform waarbij uw projectdata naar externe servers gaat. Het systeem draait op uw eigen server — on-premise of in een privé-omgeving die uitsluitend door VIAC beheerd wordt. Uw opdrachtgeversgegevens, berekeningen en projectdossiers blijven volledig binnen uw eigen infrastructuur. Alles versleuteld. Niets gedeeld. GDPR-proof.
+Dit platform draait op uw eigen server — niet in een externe cloud. Uw opdrachtgeversgegevens, berekeningen en projectdossiers blijven volledig binnen uw eigen infrastructuur. Versleuteld opgeslagen. Niet gedeeld. Niet gebruikt voor iets anders. GDPR-conform.
 
-Uw 30 jaar aan opgebouwde kennis blijft van u — het platform maakt die kennis alleen sneller toegankelijk.
+De tijdsbesparing die wij in de praktijk zien: 25–35 uur per maand op rapportage, normcontroles en rekenwerk. Genoeg om die openstaande functies minder urgent te maken, en uw huidige team meer ruimte te geven voor het werk dat er echt toe doet.
 
-De tijdsbesparing die wij zien bij vergelijkbare adviesbureaus ligt gemiddeld op 25–35 uur per maand, puur op terugkerende taken als rapportopmaak en normcontroles.
-
-Zou u 20 minuten hebben voor een korte demo? Ik laat u het platform live zien, ingericht voor VIAC.
+Zou u 20 minuten hebben voor een korte demo? Het platform is al gestyled in de uitstraling van VIAC en bevat voorbeeldprojecten uit uw eigen vakgebied — u ziet direct hoe het er in de praktijk uitziet.
 
 Met vriendelijke groet,
 
 [Uw naam]
 [Telefoonnummer]
 [E-mailadres]
-
-P.S. De demo is volledig werkend en al gestyled in de huisstijl van VIAC — het laat zien hoe het platform er morgen uit zou kunnen zien.

@@ -1,30 +1,34 @@
-Onderwerp: Energielabels en DUMAVA-adviezen sneller dan ooit — demo voor DVTadvies
+Onderwerp: DVTadvies heeft 15 vacatures openstaan — wij zagen het staan
 
 Geachte heer/mevrouw,
 
-DVTadvies heeft een duidelijke missie: gebouwen verduurzamen en eigenaren begeleiden naar klimaatneutraal vastgoed. Dat werk vraagt veel van uw tijd — energielabel-assessments, DUMAVA-subsidietrajecten, CO₂-routekaarten. Telkens opnieuw, voor elk gebouw.
+Op uw werkenbij-pagina staan momenteel vijftien openstaande functies, waaronder een Adviseur Duurzaamheid, meerdere Projectmanagers/Adviseurs (B, E en W) op zowel junior als senior niveau, en een Bouwprojectmanager. Dat is een aanzienlijke groeiopgave — en tegelijk een signaal dat de vraag naar uw diensten de beschikbare capaciteit overtreft.
 
-Wij hebben een werkend demo-platform gebouwd dat precies dat werk versnelt, volledig ingericht op de aanpak en projecttypen van DVTadvies.
+Duurzaamheidsadviseurs zijn schaars. De combinatie van DUMAVA-subsidietrajecten, energielabel-assessments en Paris Proof-trajecten vraagt om mensen die zowel technisch als procesmatig sterk zijn — en die zijn moeilijk te vinden. Ondertussen legt de WKB (Wet Kwaliteitsborging voor het Bouwen) ook op duurzaamheidsprojecten meer documentatieverplichtingen op. Uw huidige medewerkers doen meer administratief werk per project dan een paar jaar geleden.
 
-Wat het platform doet:
+Wij denken dat slimme tooling een deel van die druk kan wegnemen — zodat uw huidige team meer projecten aankan en die vijftien vacatures minder urgent worden.
+
+Daarom hebben wij voor DVTadvies een werkend demo-platform gebouwd.
+
+Het platform neemt de terugkerende taken over:
 
 → Rapport Schrijver
    Stel een energielabelrapport, DUMAVA-subsidieadvies of CO₂-routekaart op in minuten.
-   Het platform werkt met de actuele NTA 8800-methode en de geldende DUMAVA-voorwaarden,
-   en past de output aan op de gebouwcategorie van het project.
+   Het platform werkt met de actuele NTA 8800-methode en geldende DUMAVA-voorwaarden,
+   en past de output automatisch aan op de gebouwcategorie.
 
 → Excel Assistent
-   Laad een energieprestatie-sheet van een bestaand gebouw.
-   Het platform herkent ontbrekende EP-waarden, vult ze in via NTA 8800-standaarden,
-   berekent het huidige energielabel én de prognose na verduurzamingsmaatregelen.
+   Laad een energieprestatie-sheet van een bestaand gebouw. Het platform vult
+   ontbrekende EP-waarden in via NTA 8800, berekent het huidige energielabel én
+   de prognose na verduurzamingsmaatregelen — inclusief DUMAVA-subsidiabiliteit.
 
-→ BENG / Energielabel Checker
-   Voer gebouwkenmerken in en ontvang direct: huidig label, verwacht label na maatregelen,
-   en een inschatting van de DUMAVA-subsidiabiliteit.
+→ Energielabel / BENG Checker
+   Direct inzicht in huidig label, verwacht label na maatregelen en een eerste
+   inschatting van de subsidie-aanspraak onder DUMAVA 2026.
 
 → Norm Monitor
    Wijzigingen in de DUMAVA-regeling, energielabelverplichting en Paris Proof-doelstellingen
-   worden automatisch bijgehouden — zodat uw adviezen altijd up-to-date zijn.
+   worden automatisch bijgehouden — zodat uw adviezen altijd actueel zijn.
 
 → Kennisbank
    Uw projectarchief wordt doorzoekbaar op gebouwtype, bouwjaar, label en locatie.
@@ -32,20 +36,16 @@ Wat het platform doet:
 
 Uw projectdata blijft volledig privé.
 
-DVTadvies werkt met gevoelige vastgoedgegevens van opdrachtgevers. Het is begrijpelijk dat u niet wilt dat die data op externe servers terechtkomt — of gebruikt wordt door een cloudplatform dat u niet zelf beheert.
+DVTadvies werkt met gevoelige vastgoedgegevens van opdrachtgevers. Dit platform draait op uw eigen server — niet in een externe cloud. Geen externe partij heeft toegang tot uw energiedata, labelberekeningen of opdrachtgeversgegevens. Alles versleuteld opgeslagen, volledig onder uw beheer. GDPR-conform.
 
-Dit platform draait op uw eigen server. On-premise, of in een privé-omgeving die uitsluitend door DVTadvies wordt beheerd. Alle gegevens worden versleuteld opgeslagen. Niets verlaat uw infrastructuur. Volledig GDPR-conform.
+Duurzaamheid begint bij uw eigen bedrijfsvoering — ook als het gaat om dataveiligheid.
 
-Duurzaamheid begint bij uw eigen bedrijfsvoering — ook als het gaat om databeveiliging.
+De tijdsbesparing die wij in de praktijk zien: 25–35 uur per maand op rapportage, labelberekeningen en subsidiedossiers. Genoeg om de druk op uw huidige team merkbaar te verlichten en meer opdrachten aan te nemen zonder evenredig meer mensen nodig te hebben.
 
-Bureaus van vergelijkbare omvang besparen gemiddeld 25–35 uur per maand op rapportage, labelberekeningen en subsidiedossiers. Tijd die direct terugvloeit naar advieswerk en nieuwe opdrachten.
-
-Heeft u 20 minuten voor een korte demo? Ik laat u het platform live zien, ingericht voor DVTadvies.
+Heeft u 20 minuten voor een korte demo? Het platform is al opgebouwd in de uitstraling van DVTadvies en bevat voorbeeldprojecten uit uw eigen werkveld.
 
 Met vriendelijke groet,
 
 [Uw naam]
 [Telefoonnummer]
 [E-mailadres]
-
-P.S. De demo is volledig werkend, gestyled in de uitstraling van DVTadvies en bevat voorbeeldprojecten uit uw eigen werkveld.

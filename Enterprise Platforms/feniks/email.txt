@@ -1,25 +1,30 @@
-Onderwerp: 40 jaar projectervaring — wat als die direct doorzoekbaar was?
+Onderwerp: Feniks zoekt twee engineers — wij zagen het staan
 
 Geachte heer Tromp,
 
-Feniks Installatie-adviseurs heeft in 40 jaar meer dan 350 projecten opgebouwd. Akoestisch advies, BIM-modellering, directievoering, storingsdiagnoses — een schat aan kennis die nu grotendeels in dossiers en in hoofden zit.
+Op uw website staan twee openstaande vacatures: een Engineer/Projectleider Elektrotechniek en een Installatietechnisch Engineer Werktuigbouwkunde. Voor een bureau van uw omvang is dat niet niks — elke openstaande plek voelt direct.
 
-Wij hebben een werkend demo-platform gebouwd, ingericht op de werkwijze en projecttypen van Feniks. Het idee: uw opgebouwde expertise wordt een instrument dat direct beschikbaar is, zonder dat u elke keer opnieuw het wiel uitvindt.
+Goed installatietechnisch personeel is schaars, en dat wordt de komende jaren niet beter. Tegelijkertijd legt de WKB (Wet Kwaliteitsborging voor het Bouwen) steeds meer documentatieverplichtingen op per project: meer rapportage, meer normtoetsing, meer verslaglegging. Werk dat bij een klein team als Feniks neerkomt op de mensen die u al heeft.
 
-Wat het platform doet:
+Wij geloven dat een slim platform een deel van die druk kan wegnemen — zodat uw huidige team meer doet, en die openstaande posities minder urgent worden.
+
+Daarom hebben wij voor Feniks een werkend demo-platform gebouwd.
+
+Het platform neemt de terugkerende taken uit handen:
 
 → Rapport Schrijver
    Stel een akoestisch rapport, directievoeringsverslag of installatieadvies op in minuten.
    Gebaseerd op uw eigen werkmethode, NEN-EN 12354 en actuele Bbl-eisen.
+   WKB-documentatie wordt automatisch meegenomen in de rapportstructuur.
 
 → Excel Assistent
-   Laad een geluidsisolatie- of installatieberekening.
-   Het platform herkent ontbrekende waarden, vult deze in via NEN-standaarden
-   en berekent het eindresultaat — inclusief toetsing aan de actuele norm.
+   Laad een geluidsisolatie- of installatieberekening. Het platform herkent
+   ontbrekende waarden, vult ze in via NEN-standaarden en toetst het resultaat
+   direct aan de geldende norm — inclusief de aangescherpte Bbl-eisen vanaf 2027.
 
 → BENG Checker
-   Snel BENG 1/2/3 doorrekenen voor een woning of renovatieproject,
-   met direct inzicht of de installatie voldoet aan de huidige én komende eisen.
+   Snel BENG 1/2/3 doorrekenen voor woningen en renovatieprojecten,
+   met direct inzicht in de huidige én komende eisen.
 
 → Norm Monitor
    Wijzigingen in geluidsnormen, Bbl en bouwfysica-eisen worden automatisch bijgehouden.
@@ -29,22 +34,18 @@ Wat het platform doet:
    Uw 350+ projecten worden doorzoekbaar op constructietype, locatie en techniek.
    Het meest relevante referentieproject is voortaan één zoekopdracht verwijderd.
 
-Uw data verlaat nooit uw kantoor.
+Uw 40 jaar aan kennis blijft van u.
 
-Een klein team als Feniks heeft er alles bij te winnen dat projectkennis goed bewaard blijft — en niets te winnen bij een cloudplatform dat uw vertrouwelijke opdrachtgeversdata op externe servers opslaat.
+Dit platform draait on-premise — op uw eigen server, beheerd door uzelf. Uw projectdossiers, berekeningen en klantengegevens blijven volledig binnen uw eigen infrastructuur. Versleuteld. Niet gedeeld. Niet gebruikt voor iets anders. GDPR-conform.
 
-Dit platform draait on-premise: op uw eigen server, beheerd door uzelf. Uw projectdossiers, berekeningen en klantengegevens blijven volledig binnen uw eigen infrastructuur. Versleuteld. Niet gedeeld. Niet gebruikt voor iets anders.
+Een klein team heeft er alles bij te winnen dat opgebouwde kennis goed bewaard en snel toegankelijk blijft. En niets te winnen bij een extern cloudplatform dat uw vertrouwelijke data beheert.
 
-40 jaar ervaring opgebouwd — het blijft van u.
+De tijdsbesparing die wij zien bij bureaus van vergelijkbare omvang: 20–30 uur per maand op rapportage, normcontroles en rekenwerk. Bij een team van drie mensen is dat merkbaar.
 
-De tijdsbesparing die we in de praktijk zien bij bureaus van vergelijkbare omvang: 20–30 uur per maand, puur op terugkerende taken als rapportopmaak, normcontroles en rekenwerk.
-
-Heeft u 20 minuten voor een korte demo? Ik laat u het platform zien zoals het er voor Feniks zou uitzien.
+Heeft u 20 minuten voor een korte demo? Ik laat u het platform zien zoals het er voor Feniks uit zou zien — inclusief voorbeeldprojecten uit uw eigen vakgebied.
 
 Met vriendelijke groet,
 
 [Uw naam]
 [Telefoonnummer]
 [E-mailadres]
-
-P.S. De demo is volledig werkend en al opgebouwd in de uitstraling van Feniks — inclusief voorbeeldprojecten uit uw vakgebied.
