@@ -109,7 +109,7 @@ function _userMsg(txt){
 }
 function _chips(arr){
   document.getElementById('chatChips').innerHTML=arr.map(function(c){
-    return '<button class="chip" onclick="_chip(''+c.replace(/'/g,"\'")+'')">'+ c +'</button>';
+    return '<button class="chip" onclick="_chip('+JSON.stringify(c)+')">'+ c +'</button>';
   }).join('');
 }
 function _clearChips(){document.getElementById('chatChips').innerHTML='';}
@@ -119,7 +119,7 @@ window.sendChat=function(){
   if(!v)return;_userMsg(v);i.value='';_clearChips();_process(v);
 };
 function _navTo(id,label){
-  var nav=document.querySelector('.nav-item[onclick*="''+id+''"]');
+  var nav=document.querySelector(".nav-item[onclick*=\"'"+id+"'\"]");
   show(id,nav);
   setTimeout(function(){
     _botMsg('U bent doorgestuurd naar <strong>'+label+'</strong>. Nog iets anders?');
@@ -129,7 +129,7 @@ function _navTo(id,label){
 function _process(t){
   var l=t.toLowerCase();
   if(l.includes('app')||l.includes('navigeer')||l.includes('naar een')){
-    setTimeout(function(){_botMsg('Naar welke app wilt u?');_chips(['📊 Dashboard','📝 Rapport Schrijver','⊞ Excel Assistent','⟁ BENG Checker','⚖ Norm Monitor','◎ Kennisbank']);}),500);
+    setTimeout(function(){_botMsg('Naar welke app wilt u?');_chips(['📊 Dashboard','📝 Rapport Schrijver','⊞ Excel Assistent','⟁ BENG Checker','⚖ Norm Monitor','◎ Kennisbank']);},500);
   }else if(l.includes('dashboard')){setTimeout(function(){_navTo('dashboard','Dashboard');},500);
   }else if(l.includes('rapport schrijver')||l.includes('rapport schrijv')){setTimeout(function(){_navTo('rapport','Rapport Schrijver');},500);
   }else if(l.includes('excel')){setTimeout(function(){_navTo('excel','Excel Assistent');},500);

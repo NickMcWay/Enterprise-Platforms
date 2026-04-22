@@ -143,7 +143,7 @@ const kbData=[
   {title:'DUMAVA subsidieaanvraag kantoor Leidsche Rijn',meta:'Kantoor · 2025 · 3.600 m² · Utrecht',snip:'Complete DUMAVA dossier: subsidiabele kosten €380.000, toegekend €87.400. Warmtepomp + PV + bouwkundige maatregelen. Paris Proof 2030 gehaald.',score:94,
    cmp:{type:'Kantoor',m2:'3.600',tech:'Warmtepomp + PV 48 kWp + WTW',beng2:'29 kWh/m²/jr',saving:'68%',reuse:'DUMAVA aanvraagstructuur volledig herbruikbaar'}},
   {title:'CO₂-routekaart wijk Hoograven Den Haag',meta:'Gemengd wonen · 2023 · 340 woningen · Den Haag',snip:'Wijkgerichte aanpak klimaatneutraliteit 2035. Warmtenet aansluiting, hybride warmtepomp, collectieve PV. CO₂-reductie 68% gerealiseerd.',score:89,
-   cmp:{type:'Woonwijk',m2:'28.900 (340 won.)',tech:'Warmtenet + hybride WP + collectieve PV',beng2:'31 kWh/m²/jr',saving:'68%',reuse:'Wijkmaatwerk aanpak en monitoring KPI's herbruikbaar'}},
+   cmp:{type:'Woonwijk',m2:'28.900 (340 won.)',tech:'Warmtenet + hybride WP + collectieve PV',beng2:'31 kWh/m²/jr',saving:'68%',reuse:'Wijkmaatwerk aanpak en monitoring KPI\'s herbruikbaar'}},
   {title:'Circulaire renovatie schoolgebouw Amersfoort',meta:'Onderwijs · 2024 · 2.800 m² · Amersfoort',snip:'Materiaalpasspoort opgesteld, 74% materiaalhergebruik, energielabel G naar A. Bbl circulaire sloopmelding toegepast. Frisse Scholen klasse B behaald.',score:85,
    cmp:{type:'School',m2:'2.800',tech:'HR++ glas + PV 32 kWp + WTW Frisse Scholen',beng2:'34 kWh/m²/jr',saving:'62%',reuse:'Materiaalpasspoort template + Frisse Scholen checklist herbruikbaar'}},
 ];
@@ -261,7 +261,7 @@ function _userMsg(txt){
 }
 function _chips(arr){
   document.getElementById('chatChips').innerHTML=arr.map(function(c){
-    return '<button class="chip" onclick="_chip(''+c.replace(/'/g,"\'")+'')">'+ c +'</button>';
+    return '<button class="chip" onclick="_chip('+JSON.stringify(c)+')">'+ c +'</button>';
   }).join('');
 }
 function _clearChips(){document.getElementById('chatChips').innerHTML='';}
@@ -271,7 +271,7 @@ window.sendChat=function(){
   if(!v)return;_userMsg(v);i.value='';_clearChips();_process(v);
 };
 function _navTo(id,label){
-  var nav=document.querySelector('.nav-item[onclick*="''+id+''"]');
+  var nav=document.querySelector(".nav-item[onclick*=\"'"+id+"'\"]");
   show(id,nav);
   setTimeout(function(){
     _botMsg('U bent doorgestuurd naar <strong>'+label+'</strong>. Nog iets anders?');
@@ -281,7 +281,7 @@ function _navTo(id,label){
 function _process(t){
   var l=t.toLowerCase();
   if(l.includes('app')||l.includes('navigeer')||l.includes('naar een')){
-    setTimeout(function(){_botMsg('Naar welke app wilt u?');_chips(['📊 Dashboard','📝 Rapport Schrijver','⊞ Excel Assistent','⟁ BENG Checker','⚖ Norm Monitor','◎ Kennisbank']);}),500);
+    setTimeout(function(){_botMsg('Naar welke app wilt u?');_chips(['📊 Dashboard','📝 Rapport Schrijver','⊞ Excel Assistent','⟁ BENG Checker','⚖ Norm Monitor','◎ Kennisbank']);},500);
   }else if(l.includes('dashboard')){setTimeout(function(){_navTo('dashboard','Dashboard');},500);
   }else if(l.includes('rapport schrijver')||l.includes('rapport schrijv')){setTimeout(function(){_navTo('rapport','Rapport Schrijver');},500);
   }else if(l.includes('excel')){setTimeout(function(){_navTo('excel','Excel Assistent');},500);
