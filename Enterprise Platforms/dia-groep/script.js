@@ -21,6 +21,22 @@ function selRT(el){
   el.classList.add('sel');
 }
 
+function exportRapportPdf(){
+  const out=document.getElementById('rp-out');
+  if(!out)return;
+  const logoMain=(document.querySelector('.logo-text')||{}).textContent||'MEP';
+  const logoSub=(document.querySelector('.logo-sub')||{}).textContent||'Digitaal Platform';
+  const reportType=((document.querySelector('.rt-btn.sel .rt-title')||{}).textContent||'Rapport').trim();
+  const projectField=document.querySelector('#page-rapport input.inp');
+  const projectName=projectField&&projectField.value?projectField.value.trim():'Project';
+  const today=new Date().toLocaleDateString('nl-NL',{day:'2-digit',month:'long',year:'numeric'});
+  const pdfWindow=window.open('','_blank');
+  if(!pdfWindow){alert('Sta pop-ups toe om PDF export te starten.');return;}
+  pdfWindow.document.write(`<!doctype html><html lang="nl"><head><meta charset="utf-8"><title>${reportType} - ${projectName}</title><link rel="stylesheet" href="styles.css"><style>body{font-family:inherit;background:#fff;margin:0;color:#1f2937}.pdf-shell{max-width:860px;margin:24px auto;border:1px solid var(--border,#d8dde5);border-radius:14px;overflow:hidden}.pdf-head{padding:24px 28px;background:var(--teal-light,var(--bg,#f4f7fb));border-bottom:1px solid var(--border,#d8dde5)}.pdf-brand{font-size:12px;color:var(--soft,#6b7280);text-transform:uppercase;letter-spacing:.08em}.pdf-title{font-size:26px;margin:8px 0 4px;font-weight:700;color:var(--text,#111827)}.pdf-meta{font-size:12px;color:var(--mid,#4b5563)}.pdf-body{padding:24px 28px;font-size:13px;line-height:1.7}.pdf-foot{padding:14px 28px;border-top:1px solid var(--border,#d8dde5);font-size:11px;color:var(--soft,#6b7280)}@media print{body{background:#fff}.pdf-shell{border:none;margin:0;max-width:none;border-radius:0}.pdf-body{font-size:12px}button{display:none}}</style></head><body><article class="pdf-shell"><header class="pdf-head"><div class="pdf-brand">${logoMain} ${logoSub ? '· '+logoSub : ''}</div><h1 class="pdf-title">${reportType} — ${projectName}</h1><div class="pdf-meta">Gegenereerd op ${today} via ${logoMain} Digitaal Platform</div></header><section class="pdf-body">${out.innerHTML}</section><footer class="pdf-foot">Dit rapport is automatisch gegenereerd op basis van de geselecteerde template en actuele projectgegevens.</footer></article></body></html>`);
+  pdfWindow.document.close();
+  pdfWindow.focus();
+  setTimeout(()=>pdfWindow.print(),280);
+}
 function genRapport(){
   const bar=document.getElementById('rpbar'),
         lbl=document.getElementById('rp-lbl'),
@@ -49,7 +65,7 @@ function genRapport(){
     } else {
       prog.style.display='none';
       acts.style.display='flex';
-      acts.innerHTML='<button class="btn btn-primary btn-sm">⬇ Download .docx</button><button class="btn btn-outline btn-sm">✏ Bewerk</button>';
+      acts.innerHTML='<button class="btn btn-primary btn-sm">⬇ Download .docx</button><button class="btn btn-outline btn-sm" onclick="exportRapportPdf()">⬇ Download PDF</button><button class="btn btn-outline btn-sm">✏ Bewerk</button>';
       out.innerHTML=`<strong style="font-family:'Barlow Condensed',sans-serif;color:var(--teal-accent);font-size:15px;letter-spacing:.5px;text-transform:uppercase;">Exploitatieadvies — TivoliVredenburg Utrecht</strong><br><br><strong style="color:var(--text);">Opdrachtgever:</strong> <span style="color:var(--mid)">TivoliVredenburg Stichting</span><br><strong style="color:var(--text);">Adviseur:</strong> <span style="color:var(--mid)">DIA Groep Zeist · 21 april 2026</span><br><br><strong style="color:var(--text);">1. Projectomschrijving</strong><br><span style="color:var(--mid)">TivoliVredenburg is een toonaangevend muziek- en evenementengebouw in het hart van Utrecht (BVO: 11.400 m², 5 zalen). Dit exploitatieadvies richt zich op reductie van energiekosten, verlenging van installatietechnische levensduur en aansluiting op Paris Proof 2030-doelstellingen.</span><br><br><strong style="color:var(--text);">2. Exploitatiebevindingen</strong><br><span style="color:var(--mid)">Huidig energieverbruik: 1.320 MWh/jr (116 kWh/m²/jr). Benchmark bijeenkomstfunctie: 90 kWh/m²/jr. Grootste verliezen: HVAC ongeplande stops (23%), verlichtingsbeheer (18%), koelinstallatie zaalklimaat (31%).</span><br><br><strong style="color:var(--text);">3. Aanbevelingen</strong><br><span style="color:var(--mid)">• BMS-upgrade met slimme zaaloccupatie koppeling <strong style="color:var(--green)">↓ 14%</strong><br>• LED-retrofit algemene ruimten + dimregeling <strong style="color:var(--green)">↓ 18%</strong><br>• WKO-voorstudie voor basiskoeling/-verwarming<br>• Exploitatieplan 5-jaar incl. onderhoudsmomenten</span><br><br><strong style="color:var(--text);">4. BENG Indicatoren (prognose)</strong><br><span style="color:var(--mid)">• BENG 1: <strong style="color:var(--green)">61 kWh/m²/jr ✓</strong> (eis bijeenkomst ≤75)<br>• BENG 2: <strong style="color:var(--green)">38 kWh/m²/jr ✓</strong> (eis ≤40)<br>• BENG 3: <strong style="color:var(--green)">54% ✓</strong> (eis ≥50%)</span><br><br><em style="color:var(--soft);font-size:11px;">Gegenereerd door DIA Groep Digitaal Platform · NEN 7120 + Paris Proof 2030 · Eerst denken, dan doen.</em><div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);"><button class="expl-btn" onclick="toggleExplain('ep-rapport')">▶ Waarom is dit correct?</button><div class="expl-pan" id="ep-rapport"><strong style="color:var(--text);">Gebaseerd op:</strong><br>• <strong>NEN 7120:2011</strong> — Energieprestatie van gebouwen (bepalingsmethode BENG)<br>• <strong>Bbl bijlage A</strong> — BENG-eisen bijeenkomstfunctie, eis BENG 2 ≤ 40 kWh/m²/jr (2027)<br>• <strong>Paris Proof 2030</strong> — DGBC doelstelling bijeenkomstfuncties: 60 kWh/m²/jr<br><br><strong style="color:var(--text);">Aannames exploitatiebenchmarks:</strong><br>• HVAC referentieverbruik: NEN-EN 15232 gebouwautomatisering klasse B<br>• Verlichtingsbenchmark: ISSO-77 publicatie kantoor/cultuur<br>• Besparingspotentie gebaseerd op DIA-referentieprojecten 2020–2025<br><div class="expl-src">📚 Bronnen: NEN 7120:2011, Bbl 2024 bijlage A, DGBC Paris Proof 2030, NEN-EN 15232, ISSO-77</div></div></div>`;
     }
   };
