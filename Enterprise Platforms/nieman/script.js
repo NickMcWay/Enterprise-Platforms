@@ -5,7 +5,9 @@ const titles={
   beng:'BENG Checker',
   normen:'Norm Monitor',
   kennis:'Kennisbank',
-  concept:'Concept Generator'
+  concept:'Concept Generator',
+  variant:'Variant Vergelijker',
+  wkb:'WKB Dossier Builder'
 };
 
 function show(id,el){
@@ -391,3 +393,63 @@ function _process(t){
   }
 }
 })();
+function variantAnalyse(){
+  const proj=document.getElementById('vc-proj').value;
+  const r=document.getElementById('vc-result');
+  r.innerHTML='<div class="panel"><div class="panel-body"><div class="prog-wrap"><div class="prog-bar" id="vcpbar" style="width:0%"></div></div><div style="font-size:11px;color:var(--mid);margin-top:4px;" id="vc-lbl">BENG indicatoren berekenen per variant...</div></div></div>';
+  const steps=[[20,'BENG 1 berekenen...'],[45,'BENG 2 fossiel energiegebruik...'],[65,'BENG 3 hernieuwbaar...'],[82,'GPR indicaties...'],[95,'DUMAVA subsidiecheck...'],[100,'Analyse gereed!']];
+  let i=0;const run=()=>{if(i<steps.length){const el=document.getElementById('vcpbar');const lb=document.getElementById('vc-lbl');if(el)el.style.width=steps[i][0]+'%';if(lb)lb.textContent=steps[i][1];i++;setTimeout(run,380);}else{
+    r.innerHTML=`<div class="panel"><div class="panel-head"><div class="panel-icon">✅</div><div class="panel-title">Vergelijkingsresultaten — ${proj}</div></div><div class="panel-body"><div class="vc-grid">
+      <div class="vc-card"><div class="vc-title">Variant A — WP COP 4,0</div>
+        <div class="vc-row"><span class="vc-lbl">BENG 1</span><span class="vc-ok">42 kWh/m²/jr ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 2</span><span class="vc-ok">28 kWh/m²/jr ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 3</span><span class="vc-ok">73% ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">GPR</span><span class="vc-v">7,9</span></div>
+        <div class="vc-row"><span class="vc-lbl">Meerkosten</span><span class="vc-v">€ 0</span></div>
+        <div class="vc-row"><span class="vc-lbl">DUMAVA</span><span style="font-weight:700;color:var(--red);">✗ Nee</span></div>
+        <div style="margin-top:8px;font-size:11px;color:var(--mid);">Voldoet aan normen maar beperkte marge op 2027 BENG 2 eis (≤25).</div>
+      </div>
+      <div class="vc-card winner"><div class="vc-badge">★ Aanbevolen</div>
+        <div class="vc-title">Variant B — WP upgrade COP 5,4</div>
+        <div class="vc-row"><span class="vc-lbl">BENG 1</span><span class="vc-ok">38 kWh/m²/jr ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 2</span><span class="vc-ok">21 kWh/m²/jr ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 3</span><span class="vc-ok">85% ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">GPR</span><span class="vc-v">8,7</span></div>
+        <div class="vc-row"><span class="vc-lbl">Meerkosten</span><span class="vc-v">€ 58.000</span></div>
+        <div class="vc-row"><span class="vc-lbl">DUMAVA</span><span class="vc-ok">✓ Subsidiabel</span></div>
+        <div style="margin-top:8px;font-size:11px;color:var(--mid);">Beste kosten-baten. DUMAVA ~69%. Netto ca. €18.000. BENG 2 ruim onder 2027 eis.</div>
+        <button class="btn btn-primary btn-sm" style="width:100%;margin-top:8px;">✓ Selecteer Variant B</button>
+      </div>
+      <div class="vc-card"><div class="vc-title">Variant C — WP COP 5,4 + PV 200 kWp</div>
+        <div class="vc-row"><span class="vc-lbl">BENG 1</span><span class="vc-ok">35 kWh/m²/jr ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 2</span><span class="vc-ok">17 kWh/m²/jr ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 3</span><span class="vc-ok">91% ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">GPR</span><span class="vc-v">9,2</span></div>
+        <div class="vc-row"><span class="vc-lbl">Meerkosten</span><span class="vc-v">€ 145.000</span></div>
+        <div class="vc-row"><span class="vc-lbl">DUMAVA</span><span style="font-weight:700;color:var(--red);">✗ Niet subsidiabel</span></div>
+        <div style="margin-top:8px;font-size:11px;color:var(--mid);">Maximale duurzaamheid. Hoge kosten zonder subsidie. Combineerbaar met B.</div>
+      </div>
+    </div>
+    <div style="background:var(--gold-pale);border-radius:8px;padding:12px;font-size:12px;color:var(--mid);border:1px solid var(--gold-soft);"><strong style="color:var(--gold-mid);">Advies:</strong> Variant B beste kosten-baten. BENG 2: 28 → 21. DUMAVA ~69%. Netto slechts €18.000. Paris Proof 2030 ruim gehaald.</div>
+    <div style="display:flex;gap:8px;margin-top:12px;"><button class="btn btn-primary btn-sm">📄 Exporteer vergelijking</button><button class="btn btn-outline btn-sm">✦ Naar Rapport Schrijver</button></div>
+    </div></div>`;}};run();
+}
+function wkbBuild(){
+  const b=document.getElementById('wkb-body');
+  b.innerHTML='<div class="prog-wrap"><div class="prog-bar" id="wkbpbar" style="width:0%"></div></div><div style="font-size:11px;color:var(--mid);margin-top:4px;">WKB vereisten ophalen voor GK2 kantoorfunctie...</div>';
+  let w=0;const iv=setInterval(()=>{w+=7;const el=document.getElementById('wkbpbar');if(el)el.style.width=w+'%';if(w>=100){clearInterval(iv);
+  b.innerHTML=`<div style="background:var(--gold-pale);border-radius:8px;padding:14px;margin-bottom:14px;border:1px solid var(--gold-soft);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><div style="font-size:12px;font-weight:600;color:var(--gold-mid);">Dossier compleetheid</div><div style="font-size:14px;font-weight:700;color:var(--green);">72%</div></div>
+    <div class="prog-wrap" style="margin:0 0 6px;"><div class="prog-bar" style="width:72%;background:var(--green);"></div></div>
+    <div style="font-size:11px;color:var(--mid);">6 items aanwezig · 2 incompleet · 1 ontbreekt</div></div>
+  <div class="wkb-item wkb-ok"><div class="wkb-ic">✓</div><div><div class="wkb-lbl">Borgingsplan ingediend</div><div class="wkb-sub">GK2 borgingsplan · ref. BP-2026-071</div></div></div>
+  <div class="wkb-item wkb-ok"><div class="wkb-ic">✓</div><div><div class="wkb-lbl">Kwaliteitsborger aangesteld</div><div class="wkb-sub">Nieman Kwaliteitsborging · WKB niveau 2</div></div></div>
+  <div class="wkb-item wkb-ok"><div class="wkb-ic">✓</div><div><div class="wkb-lbl">Voormelding Bevoegd Gezag</div><div class="wkb-sub">Gemeente · ontvangen 14 jan 2026</div></div></div>
+  <div class="wkb-item wkb-ok"><div class="wkb-ic">✓</div><div><div class="wkb-lbl">Constructieve veiligheid VO</div><div class="wkb-sub">Constructierapport goedgekeurd · Nieman Constructie</div></div></div>
+  <div class="wkb-item wkb-ok"><div class="wkb-ic">✓</div><div><div class="wkb-lbl">BENG berekening DO</div><div class="wkb-sub">NTA 8800 · BENG 1/2/3 conform eis · 19 apr 2026</div></div></div>
+  <div class="wkb-item wkb-ok"><div class="wkb-ic">✓</div><div><div class="wkb-lbl">Brandcompartimentering</div><div class="wkb-sub">WBDBO berekening (NEN 6068) goedgekeurd · Nieman Brandveiligheid</div></div></div>
+  <div class="wkb-item wkb-warn"><div class="wkb-ic">⚠</div><div><div class="wkb-lbl">Akoestisch rapport — incompleet</div><div class="wkb-sub">Stationsomgeving verkeersgeluid niet afgerond (Bbl afd. 3.1). Actie vóór 30 apr.</div></div></div>
+  <div class="wkb-item wkb-warn"><div class="wkb-ic">⚠</div><div><div class="wkb-lbl">Legionella risicoanalyse — incompleet</div><div class="wkb-sub">ISSO 55.1 analyse verwacht 26 apr 2026.</div></div></div>
+  <div class="wkb-item wkb-miss"><div class="wkb-ic">✗</div><div><div class="wkb-lbl">Dossier Bevoegd Gezag</div><div class="wkb-sub">Nog te compileren na afronding akoestiek en legionella.</div></div></div>
+  <div style="display:flex;gap:8px;margin-top:12px;"><button class="btn btn-primary btn-sm">⬇ Export WKB dossier PDF</button><button class="btn btn-outline btn-sm">📧 Stuur naar kwaliteitsborger</button></div>`;}},80);
+}

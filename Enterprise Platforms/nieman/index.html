@@ -29,6 +29,8 @@
     <div class="nav-item" onclick="show('normen',this)"><span class="nav-icon">⚖</span> Norm Monitor</div>
     <div class="nav-item" onclick="show('kennis',this)"><span class="nav-icon">◎</span> Kennisbank</div>
     <div class="nav-item" onclick="show('concept',this)"><span class="nav-icon">◐</span> Concept Generator</div>
+    <div class="nav-item" onclick="show('variant',this)"><span class="nav-icon">⇄</span> Variant Vergelijker</div>
+    <div class="nav-item" onclick="show('wkb',this)"><span class="nav-icon">⬡</span> WKB Dossier</div>
   </nav>
   <div class="sidebar-footer">
     <div class="firm-badge">Nieman Groep</div>
@@ -441,6 +443,70 @@
         <div class="panel">
           <div class="panel-head"><div class="panel-icon">💡</div><div class="panel-title">Systeem suggesties</div></div>
           <div class="panel-body" id="cg-out"><div style="color:var(--soft);font-size:13px;text-align:center;padding:24px 0;">Vul de parameters in en klik op genereren voor conceptuele systeemopties.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page" id="page-variant">
+      <div class="panel" style="margin-bottom:20px;">
+        <div class="panel-head"><div class="panel-icon">⇄</div><div class="panel-title">Project context</div></div>
+        <div class="panel-body">
+          <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:12px;align-items:end;">
+            <div><label class="lbl">Project</label><input class="inp" id="vc-proj" value="Stationsplein Kantoorgebouw" style="padding:8px 10px;"></div>
+            <div><label class="lbl">Huidig BENG 1</label><input class="inp" type="number" id="vc-b1" value="42" style="padding:8px 10px;"></div>
+            <div><label class="lbl">Huidig BENG 2</label><input class="inp" type="number" id="vc-b2" value="28" style="padding:8px 10px;"></div>
+            <div><label class="lbl">Huidig BENG 3</label><input class="inp" type="number" id="vc-b3" value="73" style="padding:8px 10px;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="panel" style="margin-bottom:20px;">
+        <div class="panel-head"><div class="panel-icon">+</div><div class="panel-title">Varianten configureren</div></div>
+        <div class="panel-body">
+          <div class="vc-grid">
+            <div class="vc-card"><div class="vc-title">Variant A</div>
+              <div style="margin-bottom:8px;"><label class="lbl">Maatregel</label><input class="inp" value="WP COP 4,0 (huidig)" style="padding:7px 10px;font-size:12px;"></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div><label class="lbl">Meerkosten</label><input class="inp" value="€ 0" style="padding:7px 10px;font-size:12px;"></div>
+                <div><label class="lbl">DUMAVA</label><select class="inp" style="padding:7px 10px;font-size:12px;"><option selected>Nee</option><option>Ja</option></select></div>
+              </div>
+            </div>
+            <div class="vc-card"><div class="vc-title">Variant B</div>
+              <div style="margin-bottom:8px;"><label class="lbl">Maatregel</label><input class="inp" value="WP upgrade COP 4,0 → 5,4" style="padding:7px 10px;font-size:12px;"></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div><label class="lbl">Meerkosten</label><input class="inp" value="€ 58.000" style="padding:7px 10px;font-size:12px;"></div>
+                <div><label class="lbl">DUMAVA</label><select class="inp" style="padding:7px 10px;font-size:12px;"><option>Nee</option><option selected>Ja</option></select></div>
+              </div>
+            </div>
+            <div class="vc-card"><div class="vc-title">Variant C</div>
+              <div style="margin-bottom:8px;"><label class="lbl">Maatregel</label><input class="inp" value="WP COP 5,4 + PV 200 kWp" style="padding:7px 10px;font-size:12px;"></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div><label class="lbl">Meerkosten</label><input class="inp" value="€ 145.000" style="padding:7px 10px;font-size:12px;"></div>
+                <div><label class="lbl">DUMAVA</label><select class="inp" style="padding:7px 10px;font-size:12px;"><option selected>Nee</option><option>Ja</option></select></div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="width:100%;" onclick="variantAnalyse()">⇄ Analyseer varianten</button>
+        </div>
+      </div>
+      <div id="vc-result"></div>
+    </div>
+
+    <div class="page" id="page-wkb">
+      <div class="panel-grid">
+        <div class="panel">
+          <div class="panel-head"><div class="panel-icon">⬡</div><div class="panel-title">Project configuratie</div></div>
+          <div class="panel-body">
+            <div style="margin-bottom:12px;"><label class="lbl">Projectnaam</label><input class="inp" value="WKB Stationsplein Kantoor" style="padding:8px 10px;"></div>
+            <div style="margin-bottom:12px;"><label class="lbl">Opdrachtgever</label><input class="inp" value="NS Stations BV" style="padding:8px 10px;"></div>
+            <div style="margin-bottom:12px;"><label class="lbl">Gevolgklasse</label><select class="inp" style="padding:8px 10px;"><option>Gevolgklasse 1 — Laag risico</option><option selected>Gevolgklasse 2 — Gemiddeld risico</option><option>Gevolgklasse 3 — Hoog risico</option></select></div>
+            <div style="margin-bottom:12px;"><label class="lbl">Gebruiksfunctie</label><select class="inp" style="padding:8px 10px;"><option>Woonfunctie</option><option selected>Kantoorfunctie</option><option>Gezondheidszorgfunctie</option></select></div>
+            <div style="margin-bottom:14px;"><label class="lbl">Bouwfase</label><select class="inp" style="padding:8px 10px;"><option>Initiatief / SO</option><option>Voorontwerp</option><option selected>Definitief Ontwerp</option><option>Bestek</option><option>Uitvoering</option><option>Oplevering</option></select></div>
+            <button class="btn btn-primary" style="width:100%;" onclick="wkbBuild()">⬡ Genereer WKB dossier</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="panel-icon">📋</div><div class="panel-title">WKB Checklist</div></div>
+          <div class="panel-body" id="wkb-body"><div style="color:var(--soft);font-size:13px;text-align:center;padding:20px 0;">Configureer het project en klik op genereren.</div></div>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-const titles={dashboard:'Dashboard',rapport:'Rapport Schrijver',excel:'Excel Assistent',beng:'BENG Checker',normen:'Norm Monitor',kennis:'Kennisbank',concept:'Concept Generator'};
+const titles={dashboard:'Dashboard',rapport:'Rapport Schrijver',excel:'Excel Assistent',beng:'BENG Checker',normen:'Norm Monitor',kennis:'Kennisbank',concept:'Concept Generator',variant:'Variant Vergelijker',wkb:'WKB Dossier Builder'};
 function show(id,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
@@ -144,3 +144,63 @@ function _process(t){
   }
 }
 })();
+function variantAnalyse(){
+  const proj=document.getElementById('vc-proj').value;
+  const r=document.getElementById('vc-result');
+  r.innerHTML='<div class="panel"><div class="panel-body"><div class="prog-wrap"><div class="prog-bar" id="vcpbar" style="width:0%"></div></div><div style="font-size:11px;color:var(--mid);margin-top:4px;" id="vc-lbl">BENG indicatoren berekenen per variant...</div></div></div>';
+  const steps=[[20,'BENG 1 berekenen...'],[45,'BENG 2 fossiel energiegebruik...'],[65,'BENG 3 hernieuwbaar...'],[82,'GPR indicaties...'],[95,'DUMAVA subsidiecheck...'],[100,'Analyse gereed!']];
+  let i=0;const run=()=>{if(i<steps.length){const el=document.getElementById('vcpbar');const lb=document.getElementById('vc-lbl');if(el)el.style.width=steps[i][0]+'%';if(lb)lb.textContent=steps[i][1];i++;setTimeout(run,380);}else{
+    r.innerHTML=`<div class="panel"><div class="panel-head"><div class="panel-icon">✅</div><div class="panel-title">Vergelijkingsresultaten — ${proj}</div></div><div class="panel-body"><div class="vc-grid">
+      <div class="vc-card"><div class="vc-title">Variant A — Referentie</div>
+        <div class="vc-row"><span class="vc-lbl">BENG 1</span><span class="vc-warn">82 kWh/m²/jr ✗</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 2</span><span class="vc-warn">58 kWh/m²/jr ✗</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 3</span><span class="vc-warn">32% ✗</span></div>
+        <div class="vc-row"><span class="vc-lbl">GPR</span><span class="vc-v">5,8</span></div>
+        <div class="vc-row"><span class="vc-lbl">Meerkosten</span><span class="vc-v">€ 0</span></div>
+        <div class="vc-row"><span class="vc-lbl">DUMAVA</span><span style="font-weight:700;color:var(--red);">✗ Nee</span></div>
+        <div style="margin-top:8px;font-size:11px;color:var(--mid);">Huidige staat voldoet niet aan BENG eisen. Renovatie noodzakelijk.</div>
+      </div>
+      <div class="vc-card winner"><div class="vc-badge">★ Aanbevolen</div>
+        <div class="vc-title">Variant B — Hybride WP + isolatie + PV</div>
+        <div class="vc-row"><span class="vc-lbl">BENG 1</span><span class="vc-ok">71 kWh/m²/jr ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 2</span><span class="vc-ok">32 kWh/m²/jr ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 3</span><span class="vc-ok">61% ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">GPR</span><span class="vc-v">8,2</span></div>
+        <div class="vc-row"><span class="vc-lbl">Meerkosten</span><span class="vc-v">€ 265.000</span></div>
+        <div class="vc-row"><span class="vc-lbl">DUMAVA</span><span class="vc-ok">✓ Subsidiabel</span></div>
+        <div style="margin-top:8px;font-size:11px;color:var(--mid);">Beste kosten-baten. DUMAVA dekt ~60% meerkosten. Netto ca. €106.000.</div>
+        <button class="btn btn-primary btn-sm" style="width:100%;margin-top:8px;">✓ Selecteer Variant B</button>
+      </div>
+      <div class="vc-card"><div class="vc-title">Variant C — Volledig NZEB</div>
+        <div class="vc-row"><span class="vc-lbl">BENG 1</span><span class="vc-ok">68 kWh/m²/jr ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 2</span><span class="vc-ok">28 kWh/m²/jr ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 3</span><span class="vc-ok">75% ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">GPR</span><span class="vc-v">8,8</span></div>
+        <div class="vc-row"><span class="vc-lbl">Meerkosten</span><span class="vc-v">€ 412.000</span></div>
+        <div class="vc-row"><span class="vc-lbl">DUMAVA</span><span class="vc-warn">~ Deels</span></div>
+        <div style="margin-top:8px;font-size:11px;color:var(--mid);">Maximale duurzaamheid. Paris Proof 2030 gegarandeerd. Hoge investering.</div>
+      </div>
+    </div>
+    <div style="background:var(--fire-light);border-radius:8px;padding:12px;font-size:12px;color:var(--mid);"><strong style="color:var(--fire);">Advies:</strong> Variant B beste kosten-baten. BENG 2: 58 → 32. DUMAVA dekt ~60% meerkosten.</div>
+    <div style="display:flex;gap:8px;margin-top:12px;"><button class="btn btn-primary btn-sm">📄 Exporteer vergelijking</button><button class="btn btn-outline btn-sm">✦ Naar Rapport Schrijver</button></div>
+    </div></div>`;}};run();
+}
+function wkbBuild(){
+  const b=document.getElementById('wkb-body');
+  b.innerHTML='<div class="prog-wrap"><div class="prog-bar" id="wkbpbar" style="width:0%"></div></div><div style="font-size:11px;color:var(--mid);margin-top:4px;">WKB vereisten ophalen voor GK1 woonfunctie...</div>';
+  let w=0;const iv=setInterval(()=>{w+=7;const el=document.getElementById('wkbpbar');if(el)el.style.width=w+'%';if(w>=100){clearInterval(iv);
+  b.innerHTML=`<div style="background:var(--fire-light);border-radius:8px;padding:14px;margin-bottom:14px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><div style="font-size:12px;font-weight:600;color:var(--fire);">Dossier compleetheid</div><div style="font-size:14px;font-weight:700;color:var(--amber);">66%</div></div>
+    <div class="prog-wrap" style="margin:0 0 6px;"><div class="prog-bar" style="width:66%;background:var(--amber);"></div></div>
+    <div style="font-size:11px;color:var(--mid);">5 items aanwezig · 2 incompleet · 2 ontbreekt</div></div>
+  <div class="wkb-item wkb-ok"><div class="wkb-ic">✓</div><div><div class="wkb-lbl">Borgingsplan ingediend</div><div class="wkb-sub">GK1 borgingsplan · ref. BP-2026-051</div></div></div>
+  <div class="wkb-item wkb-ok"><div class="wkb-ic">✓</div><div><div class="wkb-lbl">Kwaliteitsborger aangesteld</div><div class="wkb-sub">Feniks Kwaliteitsborging · WKB niveau 1</div></div></div>
+  <div class="wkb-item wkb-ok"><div class="wkb-ic">✓</div><div><div class="wkb-lbl">Voormelding Bevoegd Gezag</div><div class="wkb-sub">Gemeente Rotterdam · ontvangen 15 feb 2026</div></div></div>
+  <div class="wkb-item wkb-ok"><div class="wkb-ic">✓</div><div><div class="wkb-lbl">Constructieve veiligheid VO</div><div class="wkb-sub">Constructierapport goedgekeurd · Adviesburo Blok</div></div></div>
+  <div class="wkb-item wkb-ok"><div class="wkb-ic">✓</div><div><div class="wkb-lbl">BENG berekening renovatie</div><div class="wkb-sub">NTA 8800 · variant B conform eis · 18 apr 2026</div></div></div>
+  <div class="wkb-item wkb-warn"><div class="wkb-ic">⚠</div><div><div class="wkb-lbl">Akoestisch rapport — incompleet</div><div class="wkb-sub">Rw-berekening woningscheidingen ontbreekt (Bbl ≥52 dB). Actie vóór 5 mei.</div></div></div>
+  <div class="wkb-item wkb-warn"><div class="wkb-ic">⚠</div><div><div class="wkb-lbl">Thermische isolatie detail — incompleet</div><div class="wkb-sub">Koudebrugberekening aansluitdetails gevel/dak nog niet aangeleverd.</div></div></div>
+  <div class="wkb-item wkb-miss"><div class="wkb-ic">✗</div><div><div class="wkb-lbl">Dossier Bevoegd Gezag</div><div class="wkb-sub">Nog te compileren na afronding akoestiek en isolatiedetails.</div></div></div>
+  <div class="wkb-item wkb-miss"><div class="wkb-ic">✗</div><div><div class="wkb-lbl">Opleverdossier bewoners</div><div class="wkb-sub">Fase: VO. Wordt aangemaakt bij oplevering.</div></div></div>
+  <div style="display:flex;gap:8px;margin-top:12px;"><button class="btn btn-primary btn-sm">⬇ Export WKB dossier PDF</button><button class="btn btn-outline btn-sm">📧 Stuur naar kwaliteitsborger</button></div>`;}},80);
+}

@@ -1,4 +1,4 @@
-const titles={dashboard:'Dashboard',rapport:'Rapport Schrijver',excel:'Excel Assistent',beng:'BENG Checker',normen:'Norm Monitor',kennis:'Kennisbank',concept:'Concept Generator'};
+const titles={dashboard:'Dashboard',rapport:'Rapport Schrijver',excel:'Excel Assistent',beng:'BENG Checker',normen:'Norm Monitor',kennis:'Kennisbank',concept:'Concept Generator',variant:'Variant Vergelijker',wkb:'WKB Dossier Builder'};
 
 function show(id,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -262,3 +262,63 @@ function _process(t){
   }
 }
 })();
+function variantAnalyse(){
+  const proj=document.getElementById('vc-proj').value;
+  const r=document.getElementById('vc-result');
+  r.innerHTML='<div class="panel"><div class="panel-body"><div class="prog-wrap"><div class="prog-bar" id="vcpbar" style="width:0%"></div></div><div style="font-size:11px;color:var(--mid);margin-top:4px;" id="vc-lbl">BENG indicatoren berekenen per variant...</div></div></div>';
+  const steps=[[20,'BENG 1 berekenen...'],[45,'BENG 2 fossiel energiegebruik...'],[65,'BENG 3 hernieuwbaar...'],[82,'GPR indicaties...'],[95,'DUMAVA subsidiecheck...'],[100,'Analyse gereed!']];
+  let i=0;const run=()=>{if(i<steps.length){const el=document.getElementById('vcpbar');const lb=document.getElementById('vc-lbl');if(el)el.style.width=steps[i][0]+'%';if(lb)lb.textContent=steps[i][1];i++;setTimeout(run,380);}else{
+    r.innerHTML=`<div class="panel"><div class="panel-head"><div class="panel-icon">✅</div><div class="panel-title">Vergelijkingsresultaten — ${proj}</div></div><div class="panel-body"><div class="vc-grid">
+      <div class="vc-card"><div class="vc-title">Variant A — Referentie</div>
+        <div class="vc-row"><span class="vc-lbl">BENG 1</span><span class="vc-ok">50 kWh/m²/jr ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 2</span><span class="vc-warn">48 kWh/m²/jr ✗</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 3</span><span class="vc-ok">55% ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">GPR</span><span class="vc-v">7,2</span></div>
+        <div class="vc-row"><span class="vc-lbl">Meerkosten</span><span class="vc-v">€ 0</span></div>
+        <div class="vc-row"><span class="vc-lbl">DUMAVA</span><span style="font-weight:700;color:var(--red);">✗ Nee</span></div>
+        <div style="margin-top:8px;font-size:11px;color:var(--mid);">BENG 2 voldoet niet aan 2027 norm. Actie vereist.</div>
+      </div>
+      <div class="vc-card winner"><div class="vc-badge">★ Aanbevolen</div>
+        <div class="vc-title">Variant B — WP + WTW ventilatie</div>
+        <div class="vc-row"><span class="vc-lbl">BENG 1</span><span class="vc-ok">47 kWh/m²/jr ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 2</span><span class="vc-ok">31 kWh/m²/jr ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 3</span><span class="vc-ok">68% ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">GPR</span><span class="vc-v">8,4</span></div>
+        <div class="vc-row"><span class="vc-lbl">Meerkosten</span><span class="vc-v">€ 82.000</span></div>
+        <div class="vc-row"><span class="vc-lbl">DUMAVA</span><span class="vc-ok">✓ Subsidiabel</span></div>
+        <div style="margin-top:8px;font-size:11px;color:var(--mid);">Beste kosten-baten. DUMAVA ~73%. Netto ca. €22.000. BENG 2 conform 2027.</div>
+        <button class="btn btn-primary btn-sm" style="width:100%;margin-top:8px;">✓ Selecteer Variant B</button>
+      </div>
+      <div class="vc-card"><div class="vc-title">Variant C — Volledig elektrisch + PV</div>
+        <div class="vc-row"><span class="vc-lbl">BENG 1</span><span class="vc-ok">45 kWh/m²/jr ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 2</span><span class="vc-ok">29 kWh/m²/jr ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 3</span><span class="vc-ok">72% ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">GPR</span><span class="vc-v">8,1</span></div>
+        <div class="vc-row"><span class="vc-lbl">Meerkosten</span><span class="vc-v">€ 134.000</span></div>
+        <div class="vc-row"><span class="vc-lbl">DUMAVA</span><span style="font-weight:700;color:var(--red);">✗ Niet subsidiabel</span></div>
+        <div style="margin-top:8px;font-size:11px;color:var(--mid);">Maximale elektrificatie. Hoge kosten zonder subsidie.</div>
+      </div>
+    </div>
+    <div style="background:rgba(0,200,150,.07);border-radius:4px;padding:12px;font-size:12px;color:var(--mid);border:1px solid rgba(0,200,150,.2);"><strong style="color:var(--teal-accent);">Advies:</strong> Variant B beste kosten-baten. BENG 2: 48 → 31. DUMAVA ~73% meerkosten. Netto slechts €22.000.</div>
+    <div style="display:flex;gap:8px;margin-top:12px;"><button class="btn btn-primary btn-sm">📄 Exporteer vergelijking</button><button class="btn btn-outline btn-sm">✦ Naar Rapport Schrijver</button></div>
+    </div></div>`;}};run();
+}
+function wkbBuild(){
+  const b=document.getElementById('wkb-body');
+  b.innerHTML='<div class="prog-wrap"><div class="prog-bar" id="wkbpbar" style="width:0%"></div></div><div style="font-size:11px;color:var(--mid);margin-top:4px;">WKB vereisten ophalen voor GK2 kantoorfunctie...</div>';
+  let w=0;const iv=setInterval(()=>{w+=7;const el=document.getElementById('wkbpbar');if(el)el.style.width=w+'%';if(w>=100){clearInterval(iv);
+  b.innerHTML=`<div style="background:rgba(0,200,150,.07);border-radius:4px;padding:14px;margin-bottom:14px;border:1px solid rgba(0,200,150,.2);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><div style="font-size:12px;font-weight:600;color:var(--teal-accent);">Dossier compleetheid</div><div style="font-size:14px;font-weight:700;color:var(--amber);">56%</div></div>
+    <div class="prog-wrap" style="margin:0 0 6px;"><div class="prog-bar" style="width:56%;background:var(--amber);"></div></div>
+    <div style="font-size:11px;color:var(--mid);">4 items aanwezig · 3 incompleet · 2 ontbreekt</div></div>
+  <div class="wkb-item wkb-ok"><div class="wkb-ic">✓</div><div><div class="wkb-lbl">Borgingsplan ingediend</div><div class="wkb-sub">GK2 borgingsplan · ref. BP-2026-062</div></div></div>
+  <div class="wkb-item wkb-ok"><div class="wkb-ic">✓</div><div><div class="wkb-lbl">Kwaliteitsborger aangesteld</div><div class="wkb-sub">Bouwend Nederland KB · WKB niveau 2</div></div></div>
+  <div class="wkb-item wkb-ok"><div class="wkb-ic">✓</div><div><div class="wkb-lbl">Voormelding Bevoegd Gezag</div><div class="wkb-sub">Gemeente Rotterdam · ontvangen 18 jan 2026</div></div></div>
+  <div class="wkb-item wkb-ok"><div class="wkb-ic">✓</div><div><div class="wkb-lbl">Constructieve veiligheid VO</div><div class="wkb-sub">Constructierapport goedgekeurd · IBB Ingenieurs</div></div></div>
+  <div class="wkb-item wkb-warn"><div class="wkb-ic">⚠</div><div><div class="wkb-lbl">BENG berekening — incompleet</div><div class="wkb-sub">Definitieve NTA 8800 berekening ontbreekt na WP-upgrade. Actie vóór 1 mei.</div></div></div>
+  <div class="wkb-item wkb-warn"><div class="wkb-ic">⚠</div><div><div class="wkb-lbl">Brandcompartimentering — incompleet</div><div class="wkb-sub">WBDBO berekening (NEN 6068) niet aangeleverd. Vereist voor GK2 kantoor.</div></div></div>
+  <div class="wkb-item wkb-warn"><div class="wkb-ic">⚠</div><div><div class="wkb-lbl">Akoestisch rapport — incompleet</div><div class="wkb-sub">Verkeersgeluid Weena nog niet berekend (Bbl afd. 3.1).</div></div></div>
+  <div class="wkb-item wkb-miss"><div class="wkb-ic">✗</div><div><div class="wkb-lbl">Dossier Bevoegd Gezag</div><div class="wkb-sub">Nog te compileren na afronding BENG, brand en akoestiek.</div></div></div>
+  <div class="wkb-item wkb-miss"><div class="wkb-ic">✗</div><div><div class="wkb-lbl">Opleverdossier</div><div class="wkb-sub">Fase: DO. Wordt aangemaakt bij oplevering.</div></div></div>
+  <div style="display:flex;gap:8px;margin-top:12px;"><button class="btn btn-primary btn-sm">⬇ Export WKB dossier PDF</button><button class="btn btn-outline btn-sm">📧 Stuur naar kwaliteitsborger</button></div>`;}},80);
+}
