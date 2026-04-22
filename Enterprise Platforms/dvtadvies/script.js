@@ -296,6 +296,25 @@ function _process(t){
   }
 }
 })();
+function normImpact(n,btn){
+  const el=document.getElementById('ni-'+n);if(!el)return;
+  if(el.innerHTML){el.innerHTML='';btn.textContent=n===0?'Bekijk impact voor mijn projecten':'Check mijn kantorenportefeuille';return;}
+  const data=[
+    {title:'DUMAVA 2026 — Impact projecten DVTadvies',items:[
+      {p:'DUMAVA subsidie kantoor Leidsche Rijn',i:'Uitbreiding subsidie tot €7,5 mln — hogere claim mogelijk, herbereken aanvraagbedrag',lvl:'ok'},
+      {p:'Klimaatneutrale renovatie Overvecht',i:'Nieuwe categorie warmtenetten van toepassing — DUMAVA aanvraag uitbreiden met warmtenet component',lvl:'ok'},
+      {p:'Duurzaamheidsscan Papendorp-Noord',i:'Circulaire sloopcomponent subsidiabel onder nieuwe regeling — meenemen in advies',lvl:'warn'}
+    ]},
+    {title:'Energielabel C kantoren 2027 — Impact kantorenportefeuille',items:[
+      {p:'DUMAVA subsidie kantoor Leidsche Rijn',i:'Kantoorgebouw ≥100 m² — label C vereist per 1 jan 2027. Huidige status controleren.',lvl:'warn'},
+      {p:'Duurzaamheidsscan Papendorp-Noord',i:'Papendorp kantoorzone: label C audit inplannen. Amvest verwacht label B — voldoet ruim.',lvl:'ok'},
+      {p:'Circulaire sloopmelding Transwijk',i:'Sloopbestemming — energielabelverplichting niet van toepassing op te slopen gebouwen',lvl:'ok'}
+    ]}
+  ];
+  const d=data[n];
+  btn.textContent='▲ Verberg impact';
+  el.innerHTML=`<div style="margin-top:10px;background:var(--forest-light);border-radius:8px;padding:14px;animation:fi .22s ease;"><div style="font-size:12px;font-weight:700;color:var(--forest);margin-bottom:8px;">${d.title}</div>${d.items.map(i=>`<div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;align-items:flex-start;"><div style="width:8px;height:8px;border-radius:50%;background:${i.lvl==='ok'?'var(--green)':i.lvl==='warn'?'var(--amber)':'var(--red)'};margin-top:4px;flex-shrink:0;"></div><div><strong>${i.p}</strong><br><span style="color:var(--mid)">${i.i}</span></div></div>`).join('')}</div>`;
+}
 function variantAnalyse(){
   const proj=document.getElementById('vc-proj').value;
   const r=document.getElementById('vc-result');

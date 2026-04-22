@@ -262,6 +262,25 @@ function _process(t){
   }
 }
 })();
+function normImpact(n,btn){
+  const el=document.getElementById('ni-'+n);if(!el)return;
+  if(el.innerHTML){el.innerHTML='';btn.textContent=n===0?'▸ Analyseer impact voor mijn projecten':'▸ Analyseer impact voor mijn projecten';return;}
+  const data=[
+    {title:'NEN 1010:2026 — Impact projecten DIA Groep',items:[
+      {p:'TivoliVredenburg Utrecht',i:'Cultureel gebouw: NEN 1010 afd. 7-710 van toepassing op podiuminstallaties — review vereist per 1 jul 2026',lvl:'warn'},
+      {p:'Sportcampus Leidsche Rijn',i:'Sportzaal: groepsverdeling en differentiaalbeveiliging herzien conform nieuwe norm',lvl:'warn'},
+      {p:'Kovelswade Rijksmonument',i:'Monument: installatietechnisch adviseur vereist — NEN 1010 bijlage A monumenten van toepassing',lvl:'miss'}
+    ]},
+    {title:'Bbl 2026 brandveiligheid monumenten — Impact projecten DIA Groep',items:[
+      {p:'Kovelswade Rijksmonument',i:'Rijksmonument >500 m²: sprinklerplicht en nieuwe ontsnappingsroutes — omgevingsvergunning aanpassen',lvl:'miss'},
+      {p:'TivoliVredenburg Utrecht',i:'Publiek gebouw: brandcompartimentering reviewen — nieuwe Bbl eisen per 15 apr 2026',lvl:'warn'},
+      {p:'Hotel Figi Zeist — Renovatie',i:'Geen Rijksmonument — huidige Bbl eisen van toepassing',lvl:'ok'}
+    ]}
+  ];
+  const d=data[n];
+  btn.textContent='▲ Verberg impact';
+  el.innerHTML=`<div style="margin-top:10px;background:rgba(0,200,150,.07);border-radius:4px;padding:14px;border:1px solid rgba(0,200,150,.2);animation:fi .22s ease;"><div style="font-size:12px;font-weight:700;color:var(--teal-accent);margin-bottom:8px;">${d.title}</div>${d.items.map(i=>`<div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;align-items:flex-start;"><div style="width:8px;height:8px;border-radius:50%;background:${i.lvl==='ok'?'var(--green)':i.lvl==='warn'?'var(--amber)':'var(--red)'};margin-top:4px;flex-shrink:0;"></div><div><strong style="color:var(--text)">${i.p}</strong><br><span style="color:var(--mid)">${i.i}</span></div></div>`).join('')}</div>`;
+}
 function variantAnalyse(){
   const proj=document.getElementById('vc-proj').value;
   const r=document.getElementById('vc-result');

@@ -144,6 +144,25 @@ function _process(t){
   }
 }
 })();
+function normImpact(n,btn){
+  const el=document.getElementById('ni-'+n);if(!el)return;
+  if(el.innerHTML){el.innerHTML='';btn.textContent=n===0?'Bekijk impact voor mijn projecten':'Check lopende renovatieprojecten';return;}
+  const data=[
+    {title:'NEN-EN ISO 16283-1:2026 — Impact renovatieprojecten Feniks',items:[
+      {p:'Woongebouw Feniks Blok A renovatie',i:'Veldmeting akoestiek verplicht per sep 2026 — NEN ISO 16283-1 toepassen in meetrapport',lvl:'warn'},
+      {p:'Appartementen Lombok Utrecht',i:'Renovatieproject: luchtgeluidsmeting conform nieuwe bepalingsmethode vereist bij oplevering',lvl:'warn'},
+      {p:'Geluidsadvies Leidsche Rijn',i:'Nieuwbouw: NEN-EN ISO 16283-1 niet van toepassing op nieuwbouwberekeningen',lvl:'ok'}
+    ]},
+    {title:'Bbl geluidsisolatie 2027 — Impact woningprojecten Feniks',items:[
+      {p:'Woongebouw Feniks Blok A renovatie',i:'Scheidingsconstructies controleren: DnT,A,k ≥ 55 dB vereist bij aanvraag na 1 jan 2027',lvl:'warn'},
+      {p:'Appartementen Lombok Utrecht',i:'Aanvraag ingediend vóór 1 jan 2027 — huidige eis 52 dB van toepassing ✓',lvl:'ok'},
+      {p:'Directievoering Nieuwbouw Overvecht',i:'Aanvraag verwacht 2027 — nieuwe eis 55 dB verwerken in bestek',lvl:'miss'}
+    ]}
+  ];
+  const d=data[n];
+  btn.textContent='▲ Verberg impact';
+  el.innerHTML=`<div style="margin-top:10px;background:var(--fire-light);border-radius:8px;padding:14px;animation:fi .22s ease;"><div style="font-size:12px;font-weight:700;color:var(--fire);margin-bottom:8px;">${d.title}</div>${d.items.map(i=>`<div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;align-items:flex-start;"><div style="width:8px;height:8px;border-radius:50%;background:${i.lvl==='ok'?'var(--green)':i.lvl==='warn'?'var(--amber)':'var(--red)'};margin-top:4px;flex-shrink:0;"></div><div><strong>${i.p}</strong><br><span style="color:var(--mid)">${i.i}</span></div></div>`).join('')}</div>`;
+}
 function variantAnalyse(){
   const proj=document.getElementById('vc-proj').value;
   const r=document.getElementById('vc-result');
