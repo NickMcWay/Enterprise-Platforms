@@ -1,64 +1,6 @@
 function mobToggle(){var s=document.querySelector('.sidebar'),o=document.getElementById('mobOv');s.classList.toggle('mob-open');o.classList.toggle('mob-open');}
 function mobClose(){var s=document.querySelector('.sidebar'),o=document.getElementById('mobOv');if(s)s.classList.remove('mob-open');if(o)o.classList.remove('mob-open');}
-function checkPin(){var v=document.getElementById('lock-pin').value;if(v==='1234'){document.getElementById('lock-err').textContent='';document.getElementById('lock-step1').classList.add('lock-fade');document.getElementById('lock-step2').classList.remove('lock-fade');setTimeout
-const onboardingSteps=[
-  {page:'dashboard',title:'Welkom op uw dashboard',body:'Hier ziet u direct de belangrijkste KPI’s, deadlines en meldingen. Start elke werkdag in dit overzicht.'},
-  {page:'rapport',title:'1. Rapport Schrijver',body:'Vul projectcontext in en laat automatisch een eerste rapportversie genereren. Ideaal als start voor intern review.'},
-  {page:'excel',title:'2. Excel Assistent',body:'Upload of plak een berekening. Het platform detecteert ontbrekende waarden en stelt direct een compleet resultaat voor.'},
-  {page:'beng',title:'3. BENG Checker',body:'Controleer binnen enkele seconden of het ontwerp voldoet aan BENG 1, 2 en 3 en zie waar nog ruimte voor optimalisatie zit.'},
-  {page:'kennis',title:'4. Kennisbank',body:'Zoek in eerdere projecten en hergebruik beproefde oplossingen. Zo werkt u sneller en consistenter over teams heen.'}
-];
-let onboardingIndex=0;
-function onboardingStorageKey(){return 'platform_intro_seen_'+location.pathname;}
-function openOnboarding(force){
-  const seen=localStorage.getItem(onboardingStorageKey())==='1';
-  if(!force&&seen)return;
-  onboardingIndex=0;
-  renderOnboardingStep();
-  document.getElementById('introOv').classList.add('show');
-  document.getElementById('introOv').setAttribute('aria-hidden','false');
-}
-function closeOnboarding(markSeen){
-  const ov=document.getElementById('introOv');
-  if(!ov)return;
-  ov.classList.remove('show');
-  ov.setAttribute('aria-hidden','true');
-  if(markSeen)localStorage.setItem(onboardingStorageKey(),'1');
-}
-function onboardingPrev(){if(onboardingIndex>0){onboardingIndex--;renderOnboardingStep();}}
-function onboardingNext(){
-  if(onboardingIndex>=onboardingSteps.length-1){closeOnboarding(true);return;}
-  onboardingIndex++;
-  renderOnboardingStep();
-}
-function renderOnboardingStep(){
-  const step=onboardingSteps[onboardingIndex];
-  const title=document.getElementById('introTitle');
-  const body=document.getElementById('introBody');
-  const stepLabel=document.getElementById('introStepLabel');
-  const prev=document.getElementById('introPrev');
-  const next=document.getElementById('introNext');
-  const dots=document.getElementById('introDots');
-  const bar=document.getElementById('introProgressBar');
-  if(!title||!body)return;
-  title.textContent=step.title;
-  body.textContent=step.body;
-  stepLabel.textContent='Stap '+(onboardingIndex+1)+' van '+onboardingSteps.length;
-  prev.disabled=onboardingIndex===0;
-  prev.style.opacity=onboardingIndex===0?'.45':'1';
-  next.textContent=onboardingIndex===onboardingSteps.length-1?'Afronden ✓':'Volgende →';
-  bar.style.width=((onboardingIndex+1)/onboardingSteps.length*100)+'%';
-  dots.innerHTML=onboardingSteps.map((_,i)=>'<span class="intro-dot '+(i===onboardingIndex?'active':'')+'"></span>').join('');
-  const nav=document.querySelector(`.nav-item[onclick*="'${step.page}'"]`);
-  show(step.page,nav);
-}
-window.addEventListener('DOMContentLoaded',function(){
-  const ov=document.getElementById('introOv');
-  if(ov){ov.addEventListener('click',function(e){if(e.target===ov)closeOnboarding(false);});}
-  setTimeout(function(){openOnboarding(false);},550);
-});
-
-(function(){document.getElementById('lock-otp').focus();},100);}else{document.getElementById('lock-err').textContent='Onjuiste code. Probeer opnieuw.';document.getElementById('lock-pin').value='';}}
+function checkPin(){var v=document.getElementById('lock-pin').value;if(v==='1234'){document.getElementById('lock-err').textContent='';document.getElementById('lock-step1').classList.add('lock-fade');document.getElementById('lock-step2').classList.remove('lock-fade');setTimeout(function(){document.getElementById('lock-otp').focus();},100);}else{document.getElementById('lock-err').textContent='Onjuiste code. Probeer opnieuw.';document.getElementById('lock-pin').value='';}}
 function checkOtp(){var v=document.getElementById('lock-otp').value.replace(/\D/g,'');if(v.length>=6){var e=document.getElementById('lock-otp-err');e.style.color='#2A9D5C';e.textContent='Verificatie geslaagd...';setTimeout(function(){var ls=document.getElementById('lockScreen');ls.classList.add('ls-out');setTimeout(function(){ls.style.display='none';},420);},900);}else{document.getElementById('lock-otp-err').textContent='Voer 6 cijfers in.';}}
 var _demoTimer;function demoNotice(){var t=document.getElementById('demoToast');t.classList.add('dt-show');clearTimeout(_demoTimer);_demoTimer=setTimeout(function(){t.classList.remove('dt-show');},3500);}
 document.addEventListener('click',function(e){var b=e.target.closest('button');if(b&&!b.getAttribute('onclick')&&!b.closest('.lock-card')&&!b.classList.contains('mob-toggle')){demoNotice();}});
@@ -73,21 +15,46 @@ function show(id,el){
   if(id==='kennis')searchKB();
 }
 function selRT(el){document.querySelectorAll('.rt-btn').forEach(b=>b.classList.remove('sel'));el.classList.add('sel');}
-function exportRapportPdf(){
-  const out=document.getElementById('rp-out');
-  if(!out)return;
+function exportRapportPdf(options={}){
+  const outHtml=options.bodyHtml||((document.getElementById('rp-out')||{}).innerHTML||'');
+  if(!outHtml)return;
   const logoMain=(document.querySelector('.logo-text')||{}).textContent||'MEP';
   const logoSub=(document.querySelector('.logo-sub')||{}).textContent||'Digitaal Platform';
-  const reportType=((document.querySelector('.rt-btn.sel .rt-title')||{}).textContent||'Rapport').trim();
+  const reportType=(options.reportType||((document.querySelector('.rt-btn.sel .rt-title')||{}).textContent||'Rapport')).trim();
   const projectField=document.querySelector('#page-rapport input.inp');
-  const projectName=projectField&&projectField.value?projectField.value.trim():'Project';
+  const projectName=(options.projectName||(projectField&&projectField.value?projectField.value.trim():'Project')).trim();
   const today=new Date().toLocaleDateString('nl-NL',{day:'2-digit',month:'long',year:'numeric'});
   const pdfWindow=window.open('','_blank');
   if(!pdfWindow){alert('Sta pop-ups toe om PDF export te starten.');return;}
-  pdfWindow.document.write(`<!doctype html><html lang="nl"><head><meta charset="utf-8"><title>${reportType} - ${projectName}</title><link rel="stylesheet" href="styles.css"><style>body{font-family:inherit;background:#fff;margin:0;color:#1f2937}.pdf-shell{max-width:860px;margin:24px auto;border:1px solid var(--border,#d8dde5);border-radius:14px;overflow:hidden}.pdf-head{padding:24px 28px;background:var(--teal-light,var(--bg,#f4f7fb));border-bottom:1px solid var(--border,#d8dde5)}.pdf-brand{font-size:12px;color:var(--soft,#6b7280);text-transform:uppercase;letter-spacing:.08em}.pdf-title{font-size:26px;margin:8px 0 4px;font-weight:700;color:var(--text,#111827)}.pdf-meta{font-size:12px;color:var(--mid,#4b5563)}.pdf-body{padding:24px 28px;font-size:13px;line-height:1.7}.pdf-foot{padding:14px 28px;border-top:1px solid var(--border,#d8dde5);font-size:11px;color:var(--soft,#6b7280)}@media print{body{background:#fff}.pdf-shell{border:none;margin:0;max-width:none;border-radius:0}.pdf-body{font-size:12px}button{display:none}}</style></head><body><article class="pdf-shell"><header class="pdf-head"><div class="pdf-brand">${logoMain} ${logoSub ? '· '+logoSub : ''}</div><h1 class="pdf-title">${reportType} — ${projectName}</h1><div class="pdf-meta">Gegenereerd op ${today} via ${logoMain} Digitaal Platform</div></header><section class="pdf-body">${out.innerHTML}</section><footer class="pdf-foot">Dit rapport is automatisch gegenereerd op basis van de geselecteerde template en actuele projectgegevens.</footer></article></body></html>`);
+  pdfWindow.document.write(`<!doctype html><html lang="nl"><head><meta charset="utf-8"><title>${reportType} - ${projectName}</title><link rel="stylesheet" href="styles.css"><style>body{font-family:inherit;background:#fff;margin:0;color:#1f2937}.pdf-shell{max-width:860px;margin:24px auto;border:1px solid var(--border,#d8dde5);border-radius:14px;overflow:hidden}.pdf-head{padding:24px 28px;background:var(--teal-light,var(--bg,#f4f7fb));border-bottom:1px solid var(--border,#d8dde5)}.pdf-brand{font-size:12px;color:var(--soft,#6b7280);text-transform:uppercase;letter-spacing:.08em}.pdf-title{font-size:26px;margin:8px 0 4px;font-weight:700;color:var(--text,#111827)}.pdf-meta{font-size:12px;color:var(--mid,#4b5563)}.pdf-body{padding:24px 28px;font-size:13px;line-height:1.7}.pdf-foot{padding:14px 28px;border-top:1px solid var(--border,#d8dde5);font-size:11px;color:var(--soft,#6b7280)}@media print{body{background:#fff}.pdf-shell{border:none;margin:0;max-width:none;border-radius:0}.pdf-body{font-size:12px}button{display:none}}</style></head><body><article class="pdf-shell"><header class="pdf-head"><div class="pdf-brand">${logoMain} ${logoSub ? '· '+logoSub : ''}</div><h1 class="pdf-title">${reportType} — ${projectName}</h1><div class="pdf-meta">Gegenereerd op ${today} via ${logoMain} Digitaal Platform</div></header><section class="pdf-body">${outHtml}</section><footer class="pdf-foot">Dit rapport is automatisch gegenereerd op basis van de geselecteerde template en actuele projectgegevens.</footer></article></body></html>`);
   pdfWindow.document.close();
   pdfWindow.focus();
   setTimeout(()=>pdfWindow.print(),280);
+}
+function exportSectionPdf(sectionId,title,projectName){
+  const section=document.getElementById(sectionId);
+  if(!section)return;
+  exportRapportPdf({
+    bodyHtml:section.innerHTML,
+    reportType:title||'Rapport',
+    projectName:projectName||((document.querySelector('#page-rapport input.inp')||{}).value||'Project')
+  });
+}
+
+function sendToRapportFromSection(sectionId,reportType){
+  const section=document.getElementById(sectionId);
+  const out=document.getElementById('rp-out');
+  const acts=document.getElementById('rp-acts');
+  if(!section||!out||!acts)return;
+  out.innerHTML=section.innerHTML;
+  acts.style.display='flex';
+  acts.innerHTML='<button class="btn btn-primary btn-sm">⬇ Download .docx</button><button class="btn btn-outline btn-sm" onclick="exportRapportPdf()">⬇ Download PDF</button><button class="btn btn-outline btn-sm">✏ Bewerk</button>';
+  const nav=document.querySelector(".nav-item[onclick*='rapport']");
+  if(typeof show==='function')show('rapport',nav);
+  if(reportType){
+    const selected=document.querySelector('.rt-btn.sel .rt-title');
+    if(selected)selected.textContent=reportType;
+  }
 }
 function genRapport(){
   const bar=document.getElementById('rpbar'),lbl=document.getElementById('rp-lbl'),prog=document.getElementById('rp-prog'),out=document.getElementById('rp-out'),acts=document.getElementById('rp-acts');
@@ -104,7 +71,7 @@ function procXLS(){
 }
 function checkBENG(){
   const b=document.getElementById('beng-body');b.innerHTML='<div class="prog-wrap"><div class="prog-bar" id="bpbar" style="width:0%"></div></div>';
-  let w=0;const iv=setInterval(()=>{w+=10;document.getElementById('bpbar').style.width=w+'%';if(w>=100){clearInterval(iv);b.innerHTML=`<div class="brc"><div class="brow"><div style="font-size:12px;color:var(--mid)">BENG 1 — Energiebehoefte</div><div style="font-size:13px;font-weight:700;color:var(--green)">68 kWh/m²/jr ✓</div></div><div class="brow"><div style="font-size:11px;color:var(--soft)">Eis (woning, renovatie)</div><div style="font-size:11px;color:var(--mid)">≤ 75 kWh/m²/jr</div></div></div><div class="brc"><div class="brow"><div style="font-size:12px;color:var(--mid)">BENG 2 — Primair fossiel</div><div style="font-size:13px;font-weight:700;color:var(--amber)">28 kWh/m²/jr ⚠</div></div><div class="brow"><div style="font-size:11px;color:var(--soft)">Eis huidig / eis 2026</div><div style="font-size:11px;color:var(--mid)">≤30 / ≤25 per 1 jul 2026</div></div></div><div class="brc"><div class="brow"><div style="font-size:12px;color:var(--mid)">BENG 3 — Hernieuwbaar</div><div style="font-size:13px;font-weight:700;color:var(--green)">61% ✓</div></div><div class="brow"><div style="font-size:11px;color:var(--soft)">Eis woning</div><div style="font-size:11px;color:var(--mid)">≥ 50%</div></div></div><div style="background:rgba(229,166,35,.12);border:1px solid rgba(229,166,35,.25);border-radius:8px;padding:12px;margin-top:8px;"><div style="font-size:13px;font-weight:700;color:var(--amber);">⚠ Let op: BENG 2 krappe marge</div><div style="font-size:11px;color:var(--mid);margin-top:4px;">Huidig ontwerp voldoet aan huidige eis (≤30). Maar per 1 juli 2026 geldt eis ≤25 kWh/m²/jr. Aanbeveling: extra PV of COP verbeteren van 3,8 naar 4,2.</div></div><div style="margin-top:10px;display:flex;gap:8px;"><button class="btn btn-primary btn-sm">📄 Genereer BENG rapport</button><button class="btn btn-outline btn-sm">⬇ PDF</button></div><button class="expl-btn" onclick="toggleExplain('ep-beng')">▶ Waarom is dit correct?</button><div class="expl-pan" id="ep-beng"><strong style="color:var(--text);">Berekeningswijze BENG (woning renovatie):</strong><br>• <strong>BENG 1</strong>: Energiebehoefte na renovatie berekend met verbetering bouwschil naar label B<br>• <strong>BENG 2</strong>: Primair fossiel — COP 3,8 warmtepomp + PV 48 kWp. Krappe marge t.o.v. 2026-eis<br>• <strong>BENG 3</strong>: 61% hernieuwbaar — PV en WTW samen voldoende boven eis<br><br><strong style="color:var(--text);">Aandachtspunt:</strong><br>BENG 2 eis per 1 jul 2026 wordt ≤25 kWh/m²/jr. Huidig ontwerp: 28 — niet voldoende na deadline<br><div class="expl-src">📚 Bronnen: NEN 7120:2011, Bbl 2024 bijlage A, ISSO-75.1, BRL-9500-01</div></div>`;}},100);
+  let w=0;const iv=setInterval(()=>{w+=10;document.getElementById('bpbar').style.width=w+'%';if(w>=100){clearInterval(iv);b.innerHTML=`<div class="brc"><div class="brow"><div style="font-size:12px;color:var(--mid)">BENG 1 — Energiebehoefte</div><div style="font-size:13px;font-weight:700;color:var(--green)">68 kWh/m²/jr ✓</div></div><div class="brow"><div style="font-size:11px;color:var(--soft)">Eis (woning, renovatie)</div><div style="font-size:11px;color:var(--mid)">≤ 75 kWh/m²/jr</div></div></div><div class="brc"><div class="brow"><div style="font-size:12px;color:var(--mid)">BENG 2 — Primair fossiel</div><div style="font-size:13px;font-weight:700;color:var(--amber)">28 kWh/m²/jr ⚠</div></div><div class="brow"><div style="font-size:11px;color:var(--soft)">Eis huidig / eis 2026</div><div style="font-size:11px;color:var(--mid)">≤30 / ≤25 per 1 jul 2026</div></div></div><div class="brc"><div class="brow"><div style="font-size:12px;color:var(--mid)">BENG 3 — Hernieuwbaar</div><div style="font-size:13px;font-weight:700;color:var(--green)">61% ✓</div></div><div class="brow"><div style="font-size:11px;color:var(--soft)">Eis woning</div><div style="font-size:11px;color:var(--mid)">≥ 50%</div></div></div><div style="background:rgba(229,166,35,.12);border:1px solid rgba(229,166,35,.25);border-radius:8px;padding:12px;margin-top:8px;"><div style="font-size:13px;font-weight:700;color:var(--amber);">⚠ Let op: BENG 2 krappe marge</div><div style="font-size:11px;color:var(--mid);margin-top:4px;">Huidig ontwerp voldoet aan huidige eis (≤30). Maar per 1 juli 2026 geldt eis ≤25 kWh/m²/jr. Aanbeveling: extra PV of COP verbeteren van 3,8 naar 4,2.</div></div><div style="margin-top:10px;display:flex;gap:8px;"><button class="btn btn-primary btn-sm" onclick="sendToRapportFromSection('beng-body','BENG Rapportage')">📄 Genereer BENG rapport</button><button class="btn btn-outline btn-sm" onclick="exportSectionPdf('beng-body','BENG Rapport')">⬇ PDF</button></div><button class="expl-btn" onclick="toggleExplain('ep-beng')">▶ Waarom is dit correct?</button><div class="expl-pan" id="ep-beng"><strong style="color:var(--text);">Berekeningswijze BENG (woning renovatie):</strong><br>• <strong>BENG 1</strong>: Energiebehoefte na renovatie berekend met verbetering bouwschil naar label B<br>• <strong>BENG 2</strong>: Primair fossiel — COP 3,8 warmtepomp + PV 48 kWp. Krappe marge t.o.v. 2026-eis<br>• <strong>BENG 3</strong>: 61% hernieuwbaar — PV en WTW samen voldoende boven eis<br><br><strong style="color:var(--text);">Aandachtspunt:</strong><br>BENG 2 eis per 1 jul 2026 wordt ≤25 kWh/m²/jr. Huidig ontwerp: 28 — niet voldoende na deadline<br><div class="expl-src">📚 Bronnen: NEN 7120:2011, Bbl 2024 bijlage A, ISSO-75.1, BRL-9500-01</div></div>`;}},100);
 }
 const kbData=[
   {title:'Geluidsisolatie renovatie Transwijk-flats Utrecht',meta:'Akoestiek · 2022 · 72 appartementen · Utrecht',snip:'Volledige akoestische renovatie woningscheidende vloeren en wanden. DnT,A,k verbeterd van 44 naar 58 dB. NEN-EN 12354 conform.',score:98,
@@ -302,5 +269,5 @@ function wkbBuild(){
   <div class="wkb-item wkb-warn"><div class="wkb-ic">⚠</div><div><div class="wkb-lbl">Thermische isolatie detail — incompleet</div><div class="wkb-sub">Koudebrugberekening aansluitdetails gevel/dak nog niet aangeleverd.</div></div></div>
   <div class="wkb-item wkb-miss"><div class="wkb-ic">✗</div><div><div class="wkb-lbl">Dossier Bevoegd Gezag</div><div class="wkb-sub">Nog te compileren na afronding akoestiek en isolatiedetails.</div></div></div>
   <div class="wkb-item wkb-miss"><div class="wkb-ic">✗</div><div><div class="wkb-lbl">Opleverdossier bewoners</div><div class="wkb-sub">Fase: VO. Wordt aangemaakt bij oplevering.</div></div></div>
-  <div style="display:flex;gap:8px;margin-top:12px;"><button class="btn btn-primary btn-sm">⬇ Export WKB dossier PDF</button><button class="btn btn-outline btn-sm">📧 Stuur naar kwaliteitsborger</button></div>`;}},80);
+  <div style="display:flex;gap:8px;margin-top:12px;"><button class="btn btn-primary btn-sm" onclick="exportSectionPdf('wkb-body','WKB Dossier')">⬇ Export WKB dossier PDF</button><button class="btn btn-outline btn-sm">📧 Stuur naar kwaliteitsborger</button></div>`;}},80);
 }

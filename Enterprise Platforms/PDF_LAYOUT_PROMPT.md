@@ -95,3 +95,15 @@ Sluit af met:
 ---
 
 Tip: vervang eerst alle `{{...}}` placeholders met echte projectdata voordat je de prompt uitvoert.
+
+
+## Header/Footer blueprint (praktisch)
+Laat ChatGPT in de output ook dit opnemen:
+- **Header varianten**: cover-header, sectie-header, content-header (compact).
+- **Footer varianten**: standaard footer, compliance footer (normen/bronnen), vertrouwelijkheidsfooter.
+- **Visuele assets (aanbevolen, niet verplicht)**:
+  - Merklogo (SVG, licht + donker)
+  - Subtiele achtergrondvormen/patronen (SVG)
+  - Icoonset (lijniconen voor energie, risico, planning, kosten)
+  - 2–3 eenvoudige datavisual stijlen (lijn, staaf, matrix) als herbruikbare component
+- **Zonder visuals kan het ook**, maar met bovenstaande assets oogt het rapport duidelijk professioneler en consistenter.
