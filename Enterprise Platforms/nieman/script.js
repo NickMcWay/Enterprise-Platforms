@@ -31,6 +31,47 @@ function selRT(el){
   el.classList.add('sel');
 }
 
+function exportRapportPdf(options={}){
+  const outHtml=options.bodyHtml||((document.getElementById('rp-out')||{}).innerHTML||'');
+  if(!outHtml)return;
+  const logoMain=(document.querySelector('.logo-text')||{}).textContent||'MEP';
+  const logoSub=(document.querySelector('.logo-sub')||{}).textContent||'Digitaal Platform';
+  const reportType=(options.reportType||((document.querySelector('.rt-btn.sel .rt-title')||{}).textContent||'Rapport')).trim();
+  const projectField=document.querySelector('#page-rapport input.inp');
+  const projectName=(options.projectName||(projectField&&projectField.value?projectField.value.trim():'Project')).trim();
+  const today=new Date().toLocaleDateString('nl-NL',{day:'2-digit',month:'long',year:'numeric'});
+  const pdfWindow=window.open('','_blank');
+  if(!pdfWindow){alert('Sta pop-ups toe om PDF export te starten.');return;}
+  pdfWindow.document.write(`<!doctype html><html lang="nl"><head><meta charset="utf-8"><title>${reportType} - ${projectName}</title><link rel="stylesheet" href="styles.css"><style>body{font-family:inherit;background:#fff;margin:0;color:#1f2937}.pdf-shell{max-width:860px;margin:24px auto;border:1px solid var(--border,#d8dde5);border-radius:14px;overflow:hidden}.pdf-head{padding:24px 28px;background:var(--teal-light,var(--bg,#f4f7fb));border-bottom:1px solid var(--border,#d8dde5)}.pdf-brand{font-size:12px;color:var(--soft,#6b7280);text-transform:uppercase;letter-spacing:.08em}.pdf-title{font-size:26px;margin:8px 0 4px;font-weight:700;color:var(--text,#111827)}.pdf-meta{font-size:12px;color:var(--mid,#4b5563)}.pdf-body{padding:24px 28px;font-size:13px;line-height:1.7}.pdf-foot{padding:14px 28px;border-top:1px solid var(--border,#d8dde5);font-size:11px;color:var(--soft,#6b7280)}@media print{body{background:#fff}.pdf-shell{border:none;margin:0;max-width:none;border-radius:0}.pdf-body{font-size:12px}button{display:none}}</style></head><body><article class="pdf-shell"><header class="pdf-head"><div class="pdf-brand">${logoMain} ${logoSub ? '· '+logoSub : ''}</div><h1 class="pdf-title">${reportType} — ${projectName}</h1><div class="pdf-meta">Gegenereerd op ${today} via ${logoMain} Digitaal Platform</div></header><section class="pdf-body">${outHtml}</section><footer class="pdf-foot">Dit rapport is automatisch gegenereerd op basis van de geselecteerde template en actuele projectgegevens.</footer></article></body></html>`);
+  pdfWindow.document.close();
+  pdfWindow.focus();
+  setTimeout(()=>pdfWindow.print(),280);
+}
+function exportSectionPdf(sectionId,title,projectName){
+  const section=document.getElementById(sectionId);
+  if(!section)return;
+  exportRapportPdf({
+    bodyHtml:section.innerHTML,
+    reportType:title||'Rapport',
+    projectName:projectName||((document.querySelector('#page-rapport input.inp')||{}).value||'Project')
+  });
+}
+
+function sendToRapportFromSection(sectionId,reportType){
+  const section=document.getElementById(sectionId);
+  const out=document.getElementById('rp-out');
+  const acts=document.getElementById('rp-acts');
+  if(!section||!out||!acts)return;
+  out.innerHTML=section.innerHTML;
+  acts.style.display='flex';
+  acts.innerHTML='<button class="btn btn-primary btn-sm">⬇ Download .docx</button><button class="btn btn-outline btn-sm" onclick="exportRapportPdf()">⬇ Download PDF</button><button class="btn btn-outline btn-sm">✏ Bewerk</button>';
+  const nav=document.querySelector(".nav-item[onclick*='rapport']");
+  if(typeof show==='function')show('rapport',nav);
+  if(reportType){
+    const selected=document.querySelector('.rt-btn.sel .rt-title');
+    if(selected)selected.textContent=reportType;
+  }
+}
 function genRapport(){
   const bar=document.getElementById('rpbar');
   const lbl=document.getElementById('rp-lbl');
@@ -60,7 +101,7 @@ function genRapport(){
     } else {
       prog.style.display='none';
       acts.style.display='flex';
-      acts.innerHTML='<button class="btn btn-primary btn-sm" onclick="alert(\'Rapport wordt geëxporteerd als .docx...\')">⬇ Download .docx</button><button class="btn btn-outline btn-sm" onclick="alert(\'Rapport openen in editor...\')">✏ Bewerk in editor</button><button class="btn btn-outline btn-sm" onclick="alert(\'Rapport gedeeld via e-mail...\')">✉ Verstuur aan opdrachtgever</button>';
+      acts.innerHTML='<button class="btn btn-primary btn-sm" onclick="alert(\'Rapport wordt geëxporteerd als .docx...\')">⬇ Download .docx</button><button class="btn btn-outline btn-sm" onclick="exportRapportPdf()">⬇ Download PDF</button><button class="btn btn-outline btn-sm" onclick="alert(\'Rapport openen in editor...\')">✏ Bewerk in editor</button><button class="btn btn-outline btn-sm" onclick="alert(\'Rapport gedeeld via e-mail...\')">✉ Verstuur aan opdrachtgever</button>';
       out.innerHTML=`<strong style="color:var(--navy);font-family:'Cormorant Garamond',serif;font-size:15px;">Brandveiligheidsrapport — Ziekenhuis Isala Nieuwbouw west</strong><br><br>
 <strong>Opdrachtgever:</strong> Isala Klinieken, Zwolle<br>
 <strong>Adviseur:</strong> Nieman Raadgevende Ingenieurs BV · Utrecht<br>
@@ -173,8 +214,8 @@ function checkBENG(){
   <div style="font-size:11.5px;color:var(--mid);margin-top:5px;line-height:1.55;">Project kwalificeert voor WKB kwaliteitsverklaring. BENG 2 heeft 15% marge boven de aankomende 2027-eis. Conform Bbl 2024 bijlage A. Aanvraag omgevingsvergunning kan worden ingediend.</div>
 </div>
 <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
-  <button class="btn btn-primary btn-sm" onclick="alert('BENG rapport genereren...')">📄 Genereer BENG rapport</button>
-  <button class="btn btn-outline btn-sm" onclick="alert('PDF exporteren...')">⬇ Exporteer PDF</button>
+  <button class="btn btn-primary btn-sm" onclick="sendToRapportFromSection('beng-body','BENG Rapportage')">📄 Genereer BENG rapport</button>
+  <button class="btn btn-outline btn-sm" onclick="exportSectionPdf('beng-body','BENG Rapport')">⬇ Exporteer PDF</button>
   <button class="btn btn-outline btn-sm" onclick="alert('Naar WKB dossier...')">📋 Voeg toe aan WKB dossier</button>
 </div>
 <button class="expl-btn" onclick="toggleExplain('ep-beng')">▶ Waarom is dit correct?</button>
@@ -446,5 +487,5 @@ function wkbBuild(){
   <div class="wkb-item wkb-warn"><div class="wkb-ic">⚠</div><div><div class="wkb-lbl">Akoestisch rapport — incompleet</div><div class="wkb-sub">Stationsomgeving verkeersgeluid niet afgerond (Bbl afd. 3.1). Actie vóór 30 apr.</div></div></div>
   <div class="wkb-item wkb-warn"><div class="wkb-ic">⚠</div><div><div class="wkb-lbl">Legionella risicoanalyse — incompleet</div><div class="wkb-sub">ISSO 55.1 analyse verwacht 26 apr 2026.</div></div></div>
   <div class="wkb-item wkb-miss"><div class="wkb-ic">✗</div><div><div class="wkb-lbl">Dossier Bevoegd Gezag</div><div class="wkb-sub">Nog te compileren na afronding akoestiek en legionella.</div></div></div>
-  <div style="display:flex;gap:8px;margin-top:12px;"><button class="btn btn-primary btn-sm">⬇ Export WKB dossier PDF</button><button class="btn btn-outline btn-sm">📧 Stuur naar kwaliteitsborger</button></div>`;}},80);
+  <div style="display:flex;gap:8px;margin-top:12px;"><button class="btn btn-primary btn-sm" onclick="exportSectionPdf('wkb-body','WKB Dossier')">⬇ Export WKB dossier PDF</button><button class="btn btn-outline btn-sm">📧 Stuur naar kwaliteitsborger</button></div>`;}},80);
 }

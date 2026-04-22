@@ -21,6 +21,47 @@ function selRT(el){
   el.classList.add('sel');
 }
 
+function exportRapportPdf(options={}){
+  const outHtml=options.bodyHtml||((document.getElementById('rp-out')||{}).innerHTML||'');
+  if(!outHtml)return;
+  const logoMain=(document.querySelector('.logo-text')||{}).textContent||'MEP';
+  const logoSub=(document.querySelector('.logo-sub')||{}).textContent||'Digitaal Platform';
+  const reportType=(options.reportType||((document.querySelector('.rt-btn.sel .rt-title')||{}).textContent||'Rapport')).trim();
+  const projectField=document.querySelector('#page-rapport input.inp');
+  const projectName=(options.projectName||(projectField&&projectField.value?projectField.value.trim():'Project')).trim();
+  const today=new Date().toLocaleDateString('nl-NL',{day:'2-digit',month:'long',year:'numeric'});
+  const pdfWindow=window.open('','_blank');
+  if(!pdfWindow){alert('Sta pop-ups toe om PDF export te starten.');return;}
+  pdfWindow.document.write(`<!doctype html><html lang="nl"><head><meta charset="utf-8"><title>${reportType} - ${projectName}</title><link rel="stylesheet" href="styles.css"><style>body{font-family:inherit;background:#fff;margin:0;color:#1f2937}.pdf-shell{max-width:860px;margin:24px auto;border:1px solid var(--border,#d8dde5);border-radius:14px;overflow:hidden}.pdf-head{padding:24px 28px;background:var(--teal-light,var(--bg,#f4f7fb));border-bottom:1px solid var(--border,#d8dde5)}.pdf-brand{font-size:12px;color:var(--soft,#6b7280);text-transform:uppercase;letter-spacing:.08em}.pdf-title{font-size:26px;margin:8px 0 4px;font-weight:700;color:var(--text,#111827)}.pdf-meta{font-size:12px;color:var(--mid,#4b5563)}.pdf-body{padding:24px 28px;font-size:13px;line-height:1.7}.pdf-foot{padding:14px 28px;border-top:1px solid var(--border,#d8dde5);font-size:11px;color:var(--soft,#6b7280)}@media print{body{background:#fff}.pdf-shell{border:none;margin:0;max-width:none;border-radius:0}.pdf-body{font-size:12px}button{display:none}}</style></head><body><article class="pdf-shell"><header class="pdf-head"><div class="pdf-brand">${logoMain} ${logoSub ? '· '+logoSub : ''}</div><h1 class="pdf-title">${reportType} — ${projectName}</h1><div class="pdf-meta">Gegenereerd op ${today} via ${logoMain} Digitaal Platform</div></header><section class="pdf-body">${outHtml}</section><footer class="pdf-foot">Dit rapport is automatisch gegenereerd op basis van de geselecteerde template en actuele projectgegevens.</footer></article></body></html>`);
+  pdfWindow.document.close();
+  pdfWindow.focus();
+  setTimeout(()=>pdfWindow.print(),280);
+}
+function exportSectionPdf(sectionId,title,projectName){
+  const section=document.getElementById(sectionId);
+  if(!section)return;
+  exportRapportPdf({
+    bodyHtml:section.innerHTML,
+    reportType:title||'Rapport',
+    projectName:projectName||((document.querySelector('#page-rapport input.inp')||{}).value||'Project')
+  });
+}
+
+function sendToRapportFromSection(sectionId,reportType){
+  const section=document.getElementById(sectionId);
+  const out=document.getElementById('rp-out');
+  const acts=document.getElementById('rp-acts');
+  if(!section||!out||!acts)return;
+  out.innerHTML=section.innerHTML;
+  acts.style.display='flex';
+  acts.innerHTML='<button class="btn btn-primary btn-sm">⬇ Download .docx</button><button class="btn btn-outline btn-sm" onclick="exportRapportPdf()">⬇ Download PDF</button><button class="btn btn-outline btn-sm">✏ Bewerk</button>';
+  const nav=document.querySelector(".nav-item[onclick*='rapport']");
+  if(typeof show==='function')show('rapport',nav);
+  if(reportType){
+    const selected=document.querySelector('.rt-btn.sel .rt-title');
+    if(selected)selected.textContent=reportType;
+  }
+}
 function genRapport(){
   const bar=document.getElementById('rpbar'),lbl=document.getElementById('rp-lbl'),prog=document.getElementById('rp-prog'),out=document.getElementById('rp-out'),acts=document.getElementById('rp-acts');
   prog.style.display='block';acts.style.display='none';
@@ -44,7 +85,7 @@ function genRapport(){
     } else {
       prog.style.display='none';
       acts.style.display='flex';
-      acts.innerHTML='<button class="btn btn-primary btn-sm">⬇ Download .docx</button><button class="btn btn-outline btn-sm">✏ Bewerk</button><button class="btn btn-outline btn-sm">📤 Verstuur naar klant</button>';
+      acts.innerHTML='<button class="btn btn-primary btn-sm">⬇ Download .docx</button><button class="btn btn-outline btn-sm" onclick="exportRapportPdf()">⬇ Download PDF</button><button class="btn btn-outline btn-sm">✏ Bewerk</button><button class="btn btn-outline btn-sm">📤 Verstuur naar klant</button>';
       out.innerHTML=`<strong style="color:var(--forest);font-family:'Raleway',sans-serif;font-size:14px;">Duurzaamheidsscan — Papendorp-Noord</strong><br><br><strong>Opdrachtgever:</strong> Amvest Vastgoed BV<br><strong>Adviseur:</strong> D. van Tienen · DVTadvies · 21 april 2026<br><br><strong>1. Gebouwomschrijving</strong><br>Kantoorcomplex Papendorp-Noord, bouwjaar 1997, 4.200 m² BVO verdeeld over 3 bouwlagen. Huidig energielabel C. Gasgestookte HR-ketels, geen hernieuwbare energie aanwezig.<br><br><strong>2. Energieprestatie nulmeting</strong><br>Huidig primair energiegebruik: <strong>187 kWh/m²/jr</strong>. CO₂-emissie gebouwgebonden: 38,4 ton/jr. Paris Proof target 2030: 55 kWh/m²/jr — <span style="color:var(--red)">niet gehaald</span>.<br><br><strong>3. Maatregelplan naar label A</strong><br>• Lucht-water warmtepomp (COP 3,9) — vervanging gasketels<br>• PV installatie 64 kWp dakoppervlak<br>• Gevelisolatie Rc 4,5 m²K/W<br>• WTW ventilatie η=88%<br><br><strong>4. CO₂-reductie &amp; financieel</strong><br>Verwachte CO₂-reductie: <strong style="color:var(--green)">74%</strong> · van 38,4 t naar 10,1 t/jr.<br>Energielabel na maatregelen: <strong style="color:var(--green)">A+</strong><br>Investeringskosten: ca. €485.000 · Terugverdientijd: 7,2 jaar.<br><br><strong>5. DUMAVA subsidie</strong><br>Geschatte DUMAVA subsidie: <strong style="color:var(--green)">€112.000</strong> (23% van subsidiabele kosten).<br><br><em style="color:var(--soft);font-size:11px;">Gegenereerd door DVTadvies Digitaal Platform · NTA 8800:2026 · DUMAVA 2026 · Paris Proof 2030</em>
 <button class="expl-btn" onclick="toggleExplain('ep-rapport')">▶ Waarom is dit correct?</button>
 <div class="expl-pan" id="ep-rapport"><strong>Normen &amp; bronnen:</strong><br>• <strong>NTA 8800:2026</strong> — Bepalingsmethode energieprestatie gebouwen, bijlage C: standaardwaarden installaties<br>• <strong>DUMAVA 2026</strong> — Subsidieregeling verduurzaming utiliteitsbouw, art. 4.1: subsidiabele maatregelen en percentages<br>• <strong>Paris Proof 2030</strong> (DGBC) — Sectorale doelstelling kantoren 55 kWh/m²/jr<br>• <strong>Bbl art. 5.2</strong> — Energieprestatie-eis bij renovatie, formule Rc ≥ 3,5 m²K/W<br><br><strong>Formule EP-reductie:</strong> EP_nieuw = EP_huidig × (1 − η_wp × f_wp) − E_pv/A<br><strong>Aannames:</strong> COP warmtepomp 3,9 conform fabrieksspec, PV-opbrengst 900 kWh/kWp/jr Utrecht, η WTW = 88%.</div>`;
@@ -128,8 +169,8 @@ function checkBENG(){
         <div style="font-size:11px;color:var(--mid);margin-top:4px;">Verwacht energielabel na maatregelen: <strong style="color:var(--green)">A+</strong>. DUMAVA subsidiabel. Kwalificeert voor Paris Proof 2030 traject.</div>
       </div>
       <div style="margin-top:10px;display:flex;gap:8px;">
-        <button class="btn btn-primary btn-sm">📄 Genereer Energielabel Rapport</button>
-        <button class="btn btn-outline btn-sm">⬇ PDF</button>
+        <button class="btn btn-primary btn-sm" onclick="sendToRapportFromSection('beng-body','Energielabel Rapport')">📄 Genereer Energielabel Rapport</button>
+        <button class="btn btn-outline btn-sm" onclick="exportSectionPdf('beng-body','BENG Rapport')">⬇ PDF</button>
       </div>
       <button class="expl-btn" onclick="toggleExplain('ep-beng')">▶ Waarom is dit correct?</button>
       <div class="expl-pan" id="ep-beng"><strong>Normen &amp; bronnen:</strong><br>• <strong>BENG 1</strong> — Energiebehoefte: NTA 8800:2026 §6.3, eis bestaande kantoren ≤ 50 kWh/m²/jr (Bbl bijlage I)<br>• <strong>BENG 2</strong> — Primair fossiel energiegebruik: NTA 8800 §6.4, eis kantoren 2027 ≤ 30 kWh/m²/jr<br>• <strong>BENG 3</strong> — Hernieuwbaar aandeel: berekend als E_hernieuwbaar / E_totaal_primair × 100%, eis ≥ 50%<br><br><strong>Formule BENG 1:</strong> Q_netto = (Q_trans + Q_vent − Q_intern − Q_zon) × f_gc conform NEN-EN ISO 13790<br><strong>Aanname:</strong> WP COP 3,9 jaargemiddeld, PV-opbrengst 875 kWh/kWp/jr, η WTW = 88% conform NTA 8800 tabel B.12.</div>`;
@@ -380,5 +421,5 @@ function wkbBuild(){
   <div class="wkb-item wkb-warn"><div class="wkb-ic">⚠</div><div><div class="wkb-lbl">EPC-berekening eindcontrole — incompleet</div><div class="wkb-sub">Definitieve EPC na PV-installatie nog niet aangeleverd.</div></div></div>
   <div class="wkb-item wkb-miss"><div class="wkb-ic">✗</div><div><div class="wkb-lbl">Dossier Bevoegd Gezag</div><div class="wkb-sub">Nog te compileren na afronding ventilatie en EPC.</div></div></div>
   <div class="wkb-item wkb-miss"><div class="wkb-ic">✗</div><div><div class="wkb-lbl">Opleverdossier bewoners</div><div class="wkb-sub">Fase: DO. Wordt aangemaakt bij oplevering.</div></div></div>
-  <div style="display:flex;gap:8px;margin-top:12px;"><button class="btn btn-primary btn-sm">⬇ Export WKB dossier PDF</button><button class="btn btn-outline btn-sm">📧 Stuur naar kwaliteitsborger</button></div>`;}},80);
+  <div style="display:flex;gap:8px;margin-top:12px;"><button class="btn btn-primary btn-sm" onclick="exportSectionPdf('wkb-body','WKB Dossier')">⬇ Export WKB dossier PDF</button><button class="btn btn-outline btn-sm">📧 Stuur naar kwaliteitsborger</button></div>`;}},80);
 }
