@@ -1,6 +1,64 @@
 function mobToggle(){var s=document.querySelector('.sidebar'),o=document.getElementById('mobOv');s.classList.toggle('mob-open');o.classList.toggle('mob-open');}
 function mobClose(){var s=document.querySelector('.sidebar'),o=document.getElementById('mobOv');if(s)s.classList.remove('mob-open');if(o)o.classList.remove('mob-open');}
-function checkPin(){var v=document.getElementById('lock-pin').value;if(v==='1234'){document.getElementById('lock-err').textContent='';document.getElementById('lock-step1').classList.add('lock-fade');document.getElementById('lock-step2').classList.remove('lock-fade');setTimeout(function(){document.getElementById('lock-otp').focus();},100);}else{document.getElementById('lock-err').textContent='Onjuiste code. Probeer opnieuw.';document.getElementById('lock-pin').value='';}}
+function checkPin(){var v=document.getElementById('lock-pin').value;if(v==='1234'){document.getElementById('lock-err').textContent='';document.getElementById('lock-step1').classList.add('lock-fade');document.getElementById('lock-step2').classList.remove('lock-fade');setTimeout
+const onboardingSteps=[
+  {page:'dashboard',title:'Welkom op uw dashboard',body:'Hier ziet u direct de belangrijkste KPI’s, deadlines en meldingen. Start elke werkdag in dit overzicht.'},
+  {page:'rapport',title:'1. Rapport Schrijver',body:'Vul projectcontext in en laat automatisch een eerste rapportversie genereren. Ideaal als start voor intern review.'},
+  {page:'excel',title:'2. Excel Assistent',body:'Upload of plak een berekening. Het platform detecteert ontbrekende waarden en stelt direct een compleet resultaat voor.'},
+  {page:'beng',title:'3. BENG Checker',body:'Controleer binnen enkele seconden of het ontwerp voldoet aan BENG 1, 2 en 3 en zie waar nog ruimte voor optimalisatie zit.'},
+  {page:'kennis',title:'4. Kennisbank',body:'Zoek in eerdere projecten en hergebruik beproefde oplossingen. Zo werkt u sneller en consistenter over teams heen.'}
+];
+let onboardingIndex=0;
+function onboardingStorageKey(){return 'platform_intro_seen_'+location.pathname;}
+function openOnboarding(force){
+  const seen=localStorage.getItem(onboardingStorageKey())==='1';
+  if(!force&&seen)return;
+  onboardingIndex=0;
+  renderOnboardingStep();
+  document.getElementById('introOv').classList.add('show');
+  document.getElementById('introOv').setAttribute('aria-hidden','false');
+}
+function closeOnboarding(markSeen){
+  const ov=document.getElementById('introOv');
+  if(!ov)return;
+  ov.classList.remove('show');
+  ov.setAttribute('aria-hidden','true');
+  if(markSeen)localStorage.setItem(onboardingStorageKey(),'1');
+}
+function onboardingPrev(){if(onboardingIndex>0){onboardingIndex--;renderOnboardingStep();}}
+function onboardingNext(){
+  if(onboardingIndex>=onboardingSteps.length-1){closeOnboarding(true);return;}
+  onboardingIndex++;
+  renderOnboardingStep();
+}
+function renderOnboardingStep(){
+  const step=onboardingSteps[onboardingIndex];
+  const title=document.getElementById('introTitle');
+  const body=document.getElementById('introBody');
+  const stepLabel=document.getElementById('introStepLabel');
+  const prev=document.getElementById('introPrev');
+  const next=document.getElementById('introNext');
+  const dots=document.getElementById('introDots');
+  const bar=document.getElementById('introProgressBar');
+  if(!title||!body)return;
+  title.textContent=step.title;
+  body.textContent=step.body;
+  stepLabel.textContent='Stap '+(onboardingIndex+1)+' van '+onboardingSteps.length;
+  prev.disabled=onboardingIndex===0;
+  prev.style.opacity=onboardingIndex===0?'.45':'1';
+  next.textContent=onboardingIndex===onboardingSteps.length-1?'Afronden ✓':'Volgende →';
+  bar.style.width=((onboardingIndex+1)/onboardingSteps.length*100)+'%';
+  dots.innerHTML=onboardingSteps.map((_,i)=>'<span class="intro-dot '+(i===onboardingIndex?'active':'')+'"></span>').join('');
+  const nav=document.querySelector(`.nav-item[onclick*="'${step.page}'"]`);
+  show(step.page,nav);
+}
+window.addEventListener('DOMContentLoaded',function(){
+  const ov=document.getElementById('introOv');
+  if(ov){ov.addEventListener('click',function(e){if(e.target===ov)closeOnboarding(false);});}
+  setTimeout(function(){openOnboarding(false);},550);
+});
+
+(function(){document.getElementById('lock-otp').focus();},100);}else{document.getElementById('lock-err').textContent='Onjuiste code. Probeer opnieuw.';document.getElementById('lock-pin').value='';}}
 function checkOtp(){var v=document.getElementById('lock-otp').value.replace(/\D/g,'');if(v.length>=6){var e=document.getElementById('lock-otp-err');e.style.color='#2A9D5C';e.textContent='Verificatie geslaagd...';setTimeout(function(){var ls=document.getElementById('lockScreen');ls.classList.add('ls-out');setTimeout(function(){ls.style.display='none';},420);},900);}else{document.getElementById('lock-otp-err').textContent='Voer 6 cijfers in.';}}
 var _demoTimer;function demoNotice(){var t=document.getElementById('demoToast');t.classList.add('dt-show');clearTimeout(_demoTimer);_demoTimer=setTimeout(function(){t.classList.remove('dt-show');},3500);}
 document.addEventListener('click',function(e){var b=e.target.closest('button');if(b&&!b.getAttribute('onclick')&&!b.closest('.lock-card')&&!b.classList.contains('mob-toggle')){demoNotice();}});
