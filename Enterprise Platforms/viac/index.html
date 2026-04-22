@@ -151,6 +151,26 @@ tr:hover td{background:#F0F8FA;}
 .pc-lbl.pro{color:var(--green);}
 .pc-lbl.con{color:var(--red);}
 .pc-li{font-size:11.5px;color:var(--mid);line-height:1.6;}
+/* variant comparator */
+.vc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:0 0 20px;}
+.vc-card{background:var(--cream);border:2px solid var(--border);border-radius:10px;padding:16px;position:relative;transition:all .2s;}
+.vc-card.winner{border-color:var(--green);background:#F0FBF5;}
+.vc-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap;text-transform:uppercase;letter-spacing:.5px;background:#E3F5EC;color:var(--green);}
+.vc-title{font-size:13px;font-weight:700;margin-bottom:10px;padding-top:6px;}
+.vc-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.vc-row:last-of-type{border-bottom:none;}
+.vc-lbl{color:var(--mid);}
+.vc-ok{font-weight:700;color:var(--green);}
+.vc-warn{font-weight:700;color:var(--amber);}
+.vc-v{font-weight:600;}
+/* wkb dossier */
+.wkb-item{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;border-radius:7px;margin-bottom:6px;border:1px solid var(--border);}
+.wkb-ok{background:#F0FBF5;border-color:#B7E4C7;}
+.wkb-warn{background:#FEF3E2;border-color:#F6D860;}
+.wkb-miss{background:#FDECEA;border-color:#F5C0BC;}
+.wkb-ic{font-size:15px;flex-shrink:0;margin-top:1px;}
+.wkb-lbl{font-size:12.5px;font-weight:600;}
+.wkb-sub{font-size:11px;color:var(--mid);margin-top:1px;}
 </style>
 </head>
 <body>
@@ -170,6 +190,8 @@ tr:hover td{background:#F0F8FA;}
     <div class="nav-item" onclick="show('normen',this)"><span class="nav-icon">⚖</span> Norm Monitor</div>
     <div class="nav-item" onclick="show('kennis',this)"><span class="nav-icon">◎</span> Kennisbank</div>
     <div class="nav-item" onclick="show('concept',this)"><span class="nav-icon">◐</span> Concept Generator</div>
+    <div class="nav-item" onclick="show('variant',this)"><span class="nav-icon">⇄</span> Variant Vergelijker</div>
+    <div class="nav-item" onclick="show('wkb',this)"><span class="nav-icon">⬡</span> WKB Dossier</div>
   </nav>
   <div class="sidebar-footer">
     <div class="user-block">
@@ -315,11 +337,11 @@ tr:hover td{background:#F0F8FA;}
       <div class="norm-list">
         <div class="norm-item" style="border-left:3px solid var(--red);">
           <div class="norm-date">21 apr<br>2026</div>
-          <div><div class="ntitle">NEN 1010:2026 gepubliceerd</div><div class="nsub">Veiligheidsbepalingen laagspanningsinstallaties — van kracht per 1 juli 2026</div><span class="ntag t-nen">NEN</span><div style="margin-top:8px;"><button class="btn btn-primary btn-sm">Bekijk impact voor mijn projecten</button></div></div>
+          <div><div class="ntitle">NEN 1010:2026 gepubliceerd</div><div class="nsub">Veiligheidsbepalingen laagspanningsinstallaties — van kracht per 1 juli 2026</div><span class="ntag t-nen">NEN</span><div style="margin-top:8px;"><button class="btn btn-primary btn-sm" onclick="normImpact(0,this)">Bekijk impact voor mijn projecten</button></div><div id="ni-0"></div></div>
         </div>
         <div class="norm-item" style="border-left:3px solid var(--amber);">
           <div class="norm-date">14 apr<br>2026</div>
-          <div><div class="ntitle">BENG-eisen aangescherpt voor kantoren</div><div class="nsub">Primair fossiel max 30 kWh/m²/jr — was 55. Geldt voor aanvragen vanaf 1 jan 2027.</div><span class="ntag t-beng">BENG</span><div style="margin-top:8px;"><button class="btn btn-outline btn-sm">Check mijn lopende projecten</button></div></div>
+          <div><div class="ntitle">BENG-eisen aangescherpt voor kantoren</div><div class="nsub">Primair fossiel max 30 kWh/m²/jr — was 55. Geldt voor aanvragen vanaf 1 jan 2027.</div><span class="ntag t-beng">BENG</span><div style="margin-top:8px;"><button class="btn btn-outline btn-sm" onclick="normImpact(1,this)">Check mijn lopende projecten</button></div><div id="ni-1"></div></div>
         </div>
         <div class="norm-item" style="border-left:3px solid var(--teal);">
           <div class="norm-date">8 apr<br>2026</div>
@@ -381,11 +403,100 @@ tr:hover td{background:#F0F8FA;}
       </div>
     </div>
 
+    <div class="page" id="page-variant">
+      <div class="panel" style="margin-bottom:20px;">
+        <div class="panel-head"><div class="panel-icon">⇄</div><div class="panel-title">Project context</div></div>
+        <div class="panel-body">
+          <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:12px;align-items:end;">
+            <div><label class="lbl">Project</label><input class="inp" id="vc-proj" value="Kantoor Papendorp fase 2" style="padding:8px 10px;"></div>
+            <div><label class="lbl">Huidig BENG 1</label><input class="inp" type="number" id="vc-b1" value="42" style="padding:8px 10px;"></div>
+            <div><label class="lbl">Huidig BENG 2</label><input class="inp" type="number" id="vc-b2" value="27" style="padding:8px 10px;"></div>
+            <div><label class="lbl">Huidig BENG 3</label><input class="inp" type="number" id="vc-b3" value="68" style="padding:8px 10px;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="panel" style="margin-bottom:20px;">
+        <div class="panel-head"><div class="panel-icon">+</div><div class="panel-title">Varianten configureren</div></div>
+        <div class="panel-body">
+          <div class="vc-grid">
+            <div class="vc-card">
+              <div class="vc-title">Variant A</div>
+              <div style="margin-bottom:8px;"><label class="lbl">Maatregel</label><input class="inp" value="Extra dakisolatie Rc 6,0 → 9,0" style="padding:7px 10px;font-size:12px;"></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div><label class="lbl">Meerkosten</label><input class="inp" value="€ 22.000" style="padding:7px 10px;font-size:12px;"></div>
+                <div><label class="lbl">DUMAVA</label><select class="inp" style="padding:7px 10px;font-size:12px;"><option selected>Nee</option><option>Ja</option></select></div>
+              </div>
+            </div>
+            <div class="vc-card">
+              <div class="vc-title">Variant B</div>
+              <div style="margin-bottom:8px;"><label class="lbl">Maatregel</label><input class="inp" value="Warmtepomp upgrade COP 4,2 → 5,2" style="padding:7px 10px;font-size:12px;"></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div><label class="lbl">Meerkosten</label><input class="inp" value="€ 35.000" style="padding:7px 10px;font-size:12px;"></div>
+                <div><label class="lbl">DUMAVA</label><select class="inp" style="padding:7px 10px;font-size:12px;"><option>Nee</option><option selected>Ja</option></select></div>
+              </div>
+            </div>
+            <div class="vc-card">
+              <div class="vc-title">Variant C</div>
+              <div style="margin-bottom:8px;"><label class="lbl">Maatregel</label><input class="inp" value="PV uitbreiding 72 → 120 kWp" style="padding:7px 10px;font-size:12px;"></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div><label class="lbl">Meerkosten</label><input class="inp" value="€ 48.000" style="padding:7px 10px;font-size:12px;"></div>
+                <div><label class="lbl">DUMAVA</label><select class="inp" style="padding:7px 10px;font-size:12px;"><option>Nee</option><option selected>Ja</option></select></div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="width:100%;" onclick="variantAnalyse()">⇄ Analyseer varianten</button>
+        </div>
+      </div>
+      <div id="vc-result"></div>
+    </div>
+
+    <div class="page" id="page-wkb">
+      <div class="panel-grid">
+        <div class="panel">
+          <div class="panel-head"><div class="panel-icon">⬡</div><div class="panel-title">Project configuratie</div></div>
+          <div class="panel-body">
+            <div style="margin-bottom:12px;"><label class="lbl">Projectnaam</label><input class="inp" value="Renovatie UMCU Vleugel B" style="padding:8px 10px;"></div>
+            <div style="margin-bottom:12px;"><label class="lbl">Opdrachtgever</label><input class="inp" value="UMC Utrecht" style="padding:8px 10px;"></div>
+            <div style="margin-bottom:12px;"><label class="lbl">Gevolgklasse</label>
+              <select class="inp" style="padding:8px 10px;">
+                <option>Gevolgklasse 1 — Laag risico</option>
+                <option selected>Gevolgklasse 2 — Gemiddeld risico</option>
+                <option>Gevolgklasse 3 — Hoog risico</option>
+              </select>
+            </div>
+            <div style="margin-bottom:12px;"><label class="lbl">Gebruiksfunctie</label>
+              <select class="inp" style="padding:8px 10px;">
+                <option>Woonfunctie</option>
+                <option>Kantoorfunctie</option>
+                <option selected>Gezondheidszorgfunctie</option>
+                <option>Onderwijsfunctie</option>
+              </select>
+            </div>
+            <div style="margin-bottom:14px;"><label class="lbl">Bouwfase</label>
+              <select class="inp" style="padding:8px 10px;">
+                <option>Initiatief / SO</option>
+                <option>Voorontwerp</option>
+                <option selected>Definitief Ontwerp</option>
+                <option>Bestek</option>
+                <option>Uitvoering</option>
+                <option>Oplevering</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" style="width:100%;" onclick="wkbBuild()">⬡ Genereer WKB dossier</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="panel-icon">📋</div><div class="panel-title">WKB Checklist</div></div>
+          <div class="panel-body" id="wkb-body"><div style="color:var(--soft);font-size:13px;text-align:center;padding:20px 0;">Configureer het project en klik op genereren.</div></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <script>
-const titles={dashboard:'Dashboard',rapport:'Rapport Schrijver',excel:'Excel Assistent',beng:'BENG Checker',normen:'Norm Monitor',kennis:'Kennisbank',concept:'Concept Generator'};
+const titles={dashboard:'Dashboard',rapport:'Rapport Schrijver',excel:'Excel Assistent',beng:'BENG Checker',normen:'Norm Monitor',kennis:'Kennisbank',concept:'Concept Generator',variant:'Variant Vergelijker',wkb:'WKB Dossier Builder'};
 function show(id,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
@@ -441,6 +552,88 @@ function toggleExplain(id){
   if(btn&&btn.classList.contains('expl-btn'))btn.innerHTML=el.classList.contains('show')?'▲ Verberg uitleg':'▶ Waarom is dit correct?';
 }
 function showCompare(idx){const el=document.getElementById('cmp-'+idx);if(el)el.classList.toggle('show');}
+function normImpact(n,btn){
+  const el=document.getElementById('ni-'+n);if(!el)return;
+  if(el.innerHTML){el.innerHTML='';btn.textContent=n===0?'Bekijk impact voor mijn projecten':'Check mijn lopende projecten';return;}
+  const data=[
+    {title:'NEN 1010:2026 — Impact op lopende projecten',items:[
+      {p:'Wooncomplex Leidsche Rijn',i:'Groepsverdeling en differentiaalbeveiliging reviewen — nieuwe eisen per 1 juli 2026',lvl:'warn'},
+      {p:'Renovatie UMCU Vleugel B',i:'Medische locatie: NEN 1010 afd. 7-710 van toepassing — elektrotechnisch adviseur actie vereist',lvl:'miss'},
+      {p:'Frisse School De Meern',i:'FELV-systemen en noodverlichting reviewen conform nieuwe norm',lvl:'warn'}
+    ]},
+    {title:'BENG kantoren 2027 — Impact op lopende projecten',items:[
+      {p:'Kantoor Papendorp fase 2',i:'Huidig BENG 2: 27 kWh/m²/jr — voldoet ruim aan nieuwe eis ≤30 ✓',lvl:'ok'},
+      {p:'Monument Oudegracht 88',i:'Kantoorcomponent: herbereken BENG 2 bij definitieve aanvraag na 1 jan 2027',lvl:'warn'},
+      {p:'Wooncomplex Leidsche Rijn',i:'Niet van toepassing — woonfunctie, andere BENG-grenswaarden',lvl:'ok'}
+    ]}
+  ];
+  const d=data[n];
+  btn.textContent='▲ Verberg impact';
+  el.innerHTML=`<div style="margin-top:10px;background:var(--teal-light);border-radius:8px;padding:14px;animation:fi .22s ease;"><div style="font-size:12px;font-weight:700;color:var(--teal);margin-bottom:8px;">${d.title}</div>${d.items.map(i=>`<div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;align-items:flex-start;"><div style="width:8px;height:8px;border-radius:50%;background:${i.lvl==='ok'?'var(--green)':i.lvl==='warn'?'var(--amber)':'var(--red)'};margin-top:4px;flex-shrink:0;"></div><div><strong>${i.p}</strong><br><span style="color:var(--mid)">${i.i}</span></div></div>`).join('')}</div>`;
+}
+function variantAnalyse(){
+  const proj=document.getElementById('vc-proj').value;
+  const r=document.getElementById('vc-result');
+  r.innerHTML='<div class="panel"><div class="panel-body"><div class="prog-wrap"><div class="prog-bar" id="vcpbar" style="width:0%"></div></div><div style="font-size:11px;color:var(--mid);margin-top:4px;" id="vc-lbl">BENG indicatoren berekenen per variant...</div></div></div>';
+  const steps=[[20,'BENG 1 berekenen per variant...'],[45,'BENG 2 fossiel energiegebruik...'],[65,'BENG 3 hernieuwbaar bepalen...'],[82,'GPR indicaties ophalen...'],[95,'DUMAVA subsidiecheck...'],[100,'Analyse gereed!']];
+  let i=0;const run=()=>{if(i<steps.length){const el=document.getElementById('vcpbar');const lb=document.getElementById('vc-lbl');if(el)el.style.width=steps[i][0]+'%';if(lb)lb.textContent=steps[i][1];i++;setTimeout(run,380);}else{
+    r.innerHTML=`<div class="panel"><div class="panel-head"><div class="panel-icon">✅</div><div class="panel-title">Vergelijkingsresultaten — ${proj}</div></div><div class="panel-body">
+    <div class="vc-grid">
+      <div class="vc-card"><div class="vc-title">Variant A — Extra dakisolatie</div>
+        <div class="vc-row"><span class="vc-lbl">BENG 1</span><span class="vc-ok">39 kWh/m²/jr ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 2</span><span class="vc-ok">26 kWh/m²/jr ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 3</span><span class="vc-ok">68% ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">GPR indicatie</span><span class="vc-v">7,1</span></div>
+        <div class="vc-row"><span class="vc-lbl">Meerkosten</span><span class="vc-v">€ 22.000</span></div>
+        <div class="vc-row"><span class="vc-lbl">DUMAVA</span><span style="font-weight:700;color:var(--red);">✗ Niet subsidiabel</span></div>
+        <div style="margin-top:10px;font-size:11px;color:var(--mid);">Beperkte BENG 2 verbetering. Laagste kosten maar geen subsidie.</div>
+      </div>
+      <div class="vc-card winner"><div class="vc-badge">★ Aanbevolen</div>
+        <div class="vc-title">Variant B — Warmtepomp upgrade</div>
+        <div class="vc-row"><span class="vc-lbl">BENG 1</span><span class="vc-ok">42 kWh/m²/jr ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 2</span><span class="vc-ok">22 kWh/m²/jr ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 3</span><span class="vc-ok">72% ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">GPR indicatie</span><span class="vc-v">7,6</span></div>
+        <div class="vc-row"><span class="vc-lbl">Meerkosten</span><span class="vc-v">€ 35.000</span></div>
+        <div class="vc-row"><span class="vc-lbl">DUMAVA</span><span class="vc-ok">✓ Subsidiabel</span></div>
+        <div style="margin-top:10px;font-size:11px;color:var(--mid);">Beste kosten-baten. DUMAVA dekt ~77% meerkosten. Netto investering ca. €8.000.</div>
+        <button class="btn btn-primary btn-sm" style="width:100%;margin-top:10px;">✓ Selecteer Variant B</button>
+      </div>
+      <div class="vc-card"><div class="vc-title">Variant C — PV uitbreiding</div>
+        <div class="vc-row"><span class="vc-lbl">BENG 1</span><span class="vc-ok">42 kWh/m²/jr ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 2</span><span class="vc-ok">20 kWh/m²/jr ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">BENG 3</span><span class="vc-ok">81% ✓</span></div>
+        <div class="vc-row"><span class="vc-lbl">GPR indicatie</span><span class="vc-v">7,4</span></div>
+        <div class="vc-row"><span class="vc-lbl">Meerkosten</span><span class="vc-v">€ 48.000</span></div>
+        <div class="vc-row"><span class="vc-lbl">DUMAVA</span><span class="vc-ok">✓ Subsidiabel</span></div>
+        <div style="margin-top:10px;font-size:11px;color:var(--mid);">Hoogste BENG 3 score. Maximale hernieuwbare energie. Combineerbaar met B.</div>
+      </div>
+    </div>
+    <div style="background:var(--teal-light);border-radius:8px;padding:12px;font-size:12px;color:var(--mid);"><strong style="color:var(--teal);">Advies:</strong> Variant B heeft de beste kosten-baten verhouding. BENG 2 daalt van 27 → 22 kWh/m²/jr. DUMAVA subsidie dekt ~77% van meerkosten. Combinatie B+C haalt Paris Proof 2030 target van 55 kWh/m²/jr ruim.</div>
+    <div style="display:flex;gap:8px;margin-top:12px;"><button class="btn btn-primary btn-sm">📄 Exporteer vergelijking</button><button class="btn btn-outline btn-sm">✦ Stuur naar Rapport Schrijver</button></div>
+    </div></div>`;}};run();
+}
+function wkbBuild(){
+  const b=document.getElementById('wkb-body');
+  b.innerHTML='<div class="prog-wrap"><div class="prog-bar" id="wkbpbar" style="width:0%"></div></div><div style="font-size:11px;color:var(--mid);margin-top:4px;">WKB vereisten ophalen voor GK2 zorgfunctie...</div>';
+  let w=0;const iv=setInterval(()=>{w+=7;const el=document.getElementById('wkbpbar');if(el)el.style.width=w+'%';if(w>=100){clearInterval(iv);
+  b.innerHTML=`<div style="background:var(--teal-light);border-radius:8px;padding:14px;margin-bottom:14px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><div style="font-size:12px;font-weight:600;color:var(--teal);">Dossier compleetheid</div><div style="font-size:14px;font-weight:700;color:var(--amber);">62%</div></div>
+    <div class="prog-wrap" style="margin:0 0 6px;"><div class="prog-bar" style="width:62%;background:var(--amber);"></div></div>
+    <div style="font-size:11px;color:var(--mid);">5 items aanwezig · 3 incompleet · 2 ontbreekt</div>
+  </div>
+  <div class="wkb-item wkb-ok"><div class="wkb-ic">✓</div><div><div class="wkb-lbl">Borgingsplan ingediend</div><div class="wkb-sub">GK2 borgingsplan · ingediend 3 mrt 2026 · ref. BP-2026-044</div></div></div>
+  <div class="wkb-item wkb-ok"><div class="wkb-ic">✓</div><div><div class="wkb-lbl">Kwaliteitsborger aangesteld</div><div class="wkb-sub">Van Rossum Kwaliteitsborging B.V. · WKB gecertificeerd</div></div></div>
+  <div class="wkb-item wkb-ok"><div class="wkb-ic">✓</div><div><div class="wkb-lbl">Voormelding Bevoegd Gezag</div><div class="wkb-sub">Gemeente Utrecht · ontvangen 10 feb 2026</div></div></div>
+  <div class="wkb-item wkb-ok"><div class="wkb-ic">✓</div><div><div class="wkb-lbl">Constructieve veiligheid VO-fase</div><div class="wkb-sub">Constructierapport goedgekeurd · D3BN Ingenieurs</div></div></div>
+  <div class="wkb-item wkb-ok"><div class="wkb-ic">✓</div><div><div class="wkb-lbl">BENG berekening DO</div><div class="wkb-sub">NTA 8800 · BENG 1/2/3 conform eis · VIAC rapport 21 apr 2026</div></div></div>
+  <div class="wkb-item wkb-warn"><div class="wkb-ic">⚠</div><div><div class="wkb-lbl">Brandveiligheidsplan — incompleet</div><div class="wkb-sub">WBDBO berekening (NEN 6068) ontbreekt. Vereist voor GK2 zorg. Actie vóór 28 apr.</div></div></div>
+  <div class="wkb-item wkb-warn"><div class="wkb-ic">⚠</div><div><div class="wkb-lbl">Akoestisch rapport — incompleet</div><div class="wkb-sub">Rw-berekening scheiding verblijfsruimten ontbreekt (Bbl afd. 3.1 ≥55 dB).</div></div></div>
+  <div class="wkb-item wkb-warn"><div class="wkb-ic">⚠</div><div><div class="wkb-lbl">Legionella risicoanalyse — incompleet</div><div class="wkb-sub">ISSO 55.1 analyse nog niet aangeleverd door installateur.</div></div></div>
+  <div class="wkb-item wkb-miss"><div class="wkb-ic">✗</div><div><div class="wkb-lbl">Dossier Bevoegd Gezag</div><div class="wkb-sub">Nog te compileren na afronding brandveiligheid en akoestiek.</div></div></div>
+  <div class="wkb-item wkb-miss"><div class="wkb-ic">✗</div><div><div class="wkb-lbl">Opleverdossier</div><div class="wkb-sub">Fase: DO. Wordt aangemaakt bij oplevering. Niet van toepassing.</div></div></div>
+  <div style="display:flex;gap:8px;margin-top:12px;"><button class="btn btn-primary btn-sm">⬇ Export WKB dossier PDF</button><button class="btn btn-outline btn-sm">📧 Stuur naar kwaliteitsborger</button></div>`;}},80);
+}
 const cgConcepts={
   'Kantoor':[{name:'Lucht-water warmtepomp + PV',desc:'Eenvoudig en betrouwbaar voor kantoren tot 5.000 m². Gasvrij, BENG 2 haalbaar binnen 30 kWh/m²/jr.',pros:['Lage investeringskosten','Breed toepasbaar','Snel installeerbaar'],cons:['Hogere elektriciteitsvraag bij koude piek','Buitenruimte nodig voor units']},{name:'WKO-systeem + warmtepomp',desc:'Optimaal voor grotere kantoren. Laagste energiekosten op lange termijn. Paris Proof 2030 haalbaar.',pros:['BENG 2 ruim onder 20 kWh/m²/jr','Gratis koeling in zomer','Lage operationele kosten'],cons:['Hoge initiële investering','Bodemonderzoek vereist','Vergunning grondwater nodig']}],
   'Woning (appartementen)':[{name:'Lucht-water WP per appartement',desc:'Individuele installatie per woning. Geschikt voor nieuwbouw en grote renovaties.',pros:['Bewoner individueel verantwoordelijk','BENG 2 ≤ 20 kWh/m²/jr haalbaar','Eenvoudige service'],cons:['Ruimtebehoefte per unit','Geluidsisolatie buitenunit nodig']},{name:'Collectief WKO + afleverset',desc:'Collectieve warmtelevering. Ideaal voor gebouwen > 30 appartementen.',pros:['Laagste energiekosten VvE','Hoge bewonerstevredenheid','Paris Proof haalbaar'],cons:['Complexere aansturing','Hogere projectkosten','VvE-besluit vereist']}],
