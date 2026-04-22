@@ -309,6 +309,29 @@
   </div>
 </div>
 
+<div id="lockScreen">
+  <div class="lock-card">
+    <div class="lock-title">Feniks</div>
+    <div class="lock-sub">Beveiligd Platform · Demo Omgeving</div>
+    <div id="lock-step1" class="lock-step">
+      <div class="lock-label">Voer uw toegangscode in</div>
+      <input class="lock-inp" id="lock-pin" type="password" maxlength="4" placeholder="••••" oninput="if(this.value.length===4)checkPin()">
+      <div class="lock-err" id="lock-err"></div>
+      <button class="lock-btn" onclick="checkPin()">Volgende →</button>
+      <div class="lock-hint">Demo: gebruik code 1234</div>
+    </div>
+    <div id="lock-step2" class="lock-step lock-fade">
+      <div style="font-size:28px;margin-bottom:12px;">📱</div>
+      <div class="lock-label">Twee-factor authenticatie</div>
+      <div style="font-size:12px;color:#999;margin-bottom:16px;">Voer de 6-cijferige code in<br>uit uw authenticator-app</div>
+      <input class="lock-inp" id="lock-otp" type="text" maxlength="6" placeholder="000000" oninput="if(this.value.replace(/\D/g,'').length>=6)checkOtp()" style="letter-spacing:4px;">
+      <div class="lock-err" id="lock-otp-err"></div>
+      <button class="lock-btn" onclick="checkOtp()">Verifiëren</button>
+      <div class="lock-hint">Demo: gebruik willekeurige 6 cijfers</div>
+    </div>
+  </div>
+</div>
+<div id="demoToast">✨ Deze functie is binnenkort beschikbaar in de volledige versie van het platform.</div>
 <div class="mob-overlay" id="mobOv" onclick="mobClose()"></div>
 <!-- QA OVERLAY -->
 <div class="qa-ov" id="qaOv" onclick="if(event.target===this)closeQA()">

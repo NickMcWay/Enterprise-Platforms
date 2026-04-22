@@ -1,5 +1,9 @@
 function mobToggle(){var s=document.querySelector('.sidebar'),o=document.getElementById('mobOv');s.classList.toggle('mob-open');o.classList.toggle('mob-open');}
 function mobClose(){var s=document.querySelector('.sidebar'),o=document.getElementById('mobOv');if(s)s.classList.remove('mob-open');if(o)o.classList.remove('mob-open');}
+function checkPin(){var v=document.getElementById('lock-pin').value;if(v==='1234'){document.getElementById('lock-err').textContent='';document.getElementById('lock-step1').classList.add('lock-fade');document.getElementById('lock-step2').classList.remove('lock-fade');setTimeout(function(){document.getElementById('lock-otp').focus();},100);}else{document.getElementById('lock-err').textContent='Onjuiste code. Probeer opnieuw.';document.getElementById('lock-pin').value='';}}
+function checkOtp(){var v=document.getElementById('lock-otp').value.replace(/\D/g,'');if(v.length>=6){var e=document.getElementById('lock-otp-err');e.style.color='#2A9D5C';e.textContent='Verificatie geslaagd...';setTimeout(function(){var ls=document.getElementById('lockScreen');ls.classList.add('ls-out');setTimeout(function(){ls.style.display='none';},420);},900);}else{document.getElementById('lock-otp-err').textContent='Voer 6 cijfers in.';}}
+var _demoTimer;function demoNotice(){var t=document.getElementById('demoToast');t.classList.add('dt-show');clearTimeout(_demoTimer);_demoTimer=setTimeout(function(){t.classList.remove('dt-show');},3500);}
+document.addEventListener('click',function(e){var b=e.target.closest('button');if(b&&!b.getAttribute('onclick')&&!b.closest('.lock-card')&&!b.classList.contains('mob-toggle')){demoNotice();}});
 const titles={
   dashboard:'Dashboard',
   rapport:'Rapport Schrijver',
@@ -299,24 +303,12 @@ function genConcept(){
   document.getElementById('cg-out').innerHTML=`<div style="font-size:12px;color:var(--soft);margin-bottom:12px;">Concepten voor <strong style="color:var(--navy)">${type}</strong> · ${m2} m² · ${state}</div><div class="cg-grid">${opts.map(o=>`<div class="cg-card"><div class="cg-name">✦ ${o.name}</div><div class="cg-desc">${o.desc}</div><div class="pc-box"><div class="cg-pros"><strong>+ Voordelen</strong><br>${o.pros.map(p=>'• '+p).join('<br>')}</div><div class="cg-cons" style="margin-top:8px;"><strong>− Aandachtspunten</strong><br>${o.cons.map(c=>'• '+c).join('<br>')}</div></div></div>`).join('')}</div>`;
 }
 
-function filterProjects(){
-  alert('Filteropties: discipline, vestiging, status, deadline, opdrachtgever. Functionaliteit beschikbaar in enterprise versie.');
-}
-function exportTable(){
-  alert('Projectoverzicht exporteren als .xlsx of .pdf...');
-}
-function newProject(){
-  alert('Nieuw project aanmaken — koppeling met Nieman projectadministratie (TOPdesk)...');
-}
-function openProject(name){
-  alert('Project "'+name+'" openen in projectdossier...');
-}
-function normAction(norm){
-  alert('Impact van "'+norm+'" controleren op alle lopende Nieman projecten...');
-}
-function refreshNorms(){
-  alert('Norm Monitor wordt bijgewerkt via NEN Connect en officielebekendmakingen.nl...');
-}
+function filterProjects(){demoNotice();}
+function exportTable(){demoNotice();}
+function newProject(){demoNotice();}
+function openProject(name){demoNotice();}
+function normAction(norm){demoNotice();}
+function refreshNorms(){demoNotice();}
 
 (function(){
 var _open=false,_init=false;
