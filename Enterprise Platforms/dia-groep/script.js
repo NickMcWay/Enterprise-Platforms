@@ -389,3 +389,185 @@ function wkbBuild(){
   <div class="wkb-item wkb-miss"><div class="wkb-ic">✗</div><div><div class="wkb-lbl">Opleverdossier</div><div class="wkb-sub">Fase: DO. Wordt aangemaakt bij oplevering.</div></div></div>
   <div style="display:flex;gap:8px;margin-top:12px;"><button class="btn btn-primary btn-sm" onclick="exportSectionPdf('wkb-body','WKB Dossier')">⬇ Export WKB dossier PDF</button><button class="btn btn-outline btn-sm">📧 Stuur naar kwaliteitsborger</button></div>`;}},80);
 }
+
+/* Intro onboarding + app selectie + dashboard grid navigatie */
+(function(){
+  const APP_LABEL_TO_ID={
+    'Rapport Schrijver':'rapport',
+    'Excel Assistent':'excel',
+    'BENG Checker':'beng',
+    'Norm Monitor':'normen',
+    'Kennisbank':'kennis',
+    'WKB Dossier':'wkb'
+  };
+  const APP_IDS=Object.values(APP_LABEL_TO_ID);
+  const STORAGE_SELECTION_KEY='demoAppSelection';
+  const STORAGE_INTRO_KEY='demoIntroSeen';
+  let introStep=0;
+  const introSteps=[
+    {
+      title:'Welkom in het demo platform',
+      body:'In 1 minuut laten we zien hoe je door de apps navigeert en welke onderdelen je in deze demo wilt tonen.'
+    },
+    {
+      title:'Kies apps voor deze demo',
+      body:'<div id="introAppSelector"></div>'
+    },
+    {
+      title:'Navigeren',
+      body:'Gebruik de zijbalk of de app-grid op het dashboard om direct naar een app te gaan. Je selectie wordt bewaard op dit apparaat.'
+    }
+  ];
+
+  function getStoredSelection(){
+    try{
+      const raw=localStorage.getItem(STORAGE_SELECTION_KEY);
+      if(!raw)return null;
+      const parsed=JSON.parse(raw);
+      return Array.isArray(parsed)?parsed.filter(id=>APP_IDS.includes(id)):null;
+    }catch(_e){return null;}
+  }
+
+  function saveSelection(ids){
+    try{localStorage.setItem(STORAGE_SELECTION_KEY,JSON.stringify(ids));}catch(_e){}
+  }
+
+  function appTileTarget(btn){
+    const label=(btn.querySelector('.app-name')||{}).textContent||'';
+    return APP_LABEL_TO_ID[label.trim()]||null;
+  }
+
+  function bindGridButtons(){
+    document.querySelectorAll('.app-tile').forEach(btn=>{
+      if(btn.dataset.gridBound==='1')return;
+      btn.dataset.gridBound='1';
+      btn.addEventListener('click',function(){
+        const id=appTileTarget(btn);
+        if(!id||typeof show!=='function')return;
+        const nav=document.querySelector('.nav-item[onclick*="\''+id+'\'"]');
+        show(id,nav||null);
+      });
+    });
+  }
+
+  function applySelection(selectedIds){
+    const selectedSet=new Set(selectedIds||APP_IDS);
+    document.querySelectorAll('.nav-item').forEach(nav=>{
+      const raw=nav.getAttribute('onclick')||'';
+      const m=raw.match(/show\('([^']+)'/);
+      if(!m)return;
+      const id=m[1];
+      if(!APP_IDS.includes(id))return;
+      nav.style.display=selectedSet.has(id)?'':'none';
+    });
+
+    document.querySelectorAll('.app-tile').forEach(tile=>{
+      const id=appTileTarget(tile);
+      if(!id)return;
+      tile.style.display=selectedSet.has(id)?'':'none';
+    });
+
+    const active=document.querySelector('.nav-item.active');
+    if(active&&active.style.display==='none'&&typeof show==='function'){
+      const dashboardNav=document.querySelector('.nav-item[onclick*="\'dashboard\'"]');
+      show('dashboard',dashboardNav||null);
+    }
+  }
+
+  function selectedFromCheckboxes(){
+    return Array.from(document.querySelectorAll('[data-demo-app-checkbox]'))
+      .filter(el=>el.checked)
+      .map(el=>el.value)
+      .filter(id=>APP_IDS.includes(id));
+  }
+
+  function renderSelector(){
+    const holder=document.getElementById('introAppSelector');
+    if(!holder)return;
+    const preselected=getStoredSelection()||APP_IDS;
+    holder.innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">'+
+      Object.entries(APP_LABEL_TO_ID).map(([label,id])=>{
+        const checked=preselected.includes(id)?'checked':'';
+        return '<label style="display:flex;align-items:center;gap:8px;padding:8px;border:1px solid var(--border);border-radius:8px;font-size:12px;">'+
+          '<input type="checkbox" data-demo-app-checkbox value="'+id+'" '+checked+'> '+label+'</label>';
+      }).join('')+
+      '</div><div style="font-size:11px;color:var(--soft);margin-top:8px;">Tip: je kunt later opnieuw aanpassen via Introductie.</div>';
+  }
+
+  function renderIntro(){
+    const ov=document.getElementById('introOv');
+    if(!ov)return;
+    const step=introSteps[introStep];
+    const title=document.getElementById('introTitle');
+    const body=document.getElementById('introBody');
+    const prev=document.getElementById('introPrev');
+    const next=document.getElementById('introNext');
+    const dots=document.getElementById('introDots');
+    const bar=document.getElementById('introProgressBar');
+    const lbl=document.getElementById('introStepLabel');
+    if(title)title.textContent=step.title;
+    if(body){body.innerHTML=step.body; if(introStep===1)renderSelector();}
+    if(prev)prev.style.visibility=introStep===0?'hidden':'visible';
+    if(next)next.textContent=introStep===introSteps.length-1?'Afronden':'Volgende →';
+    if(dots)dots.innerHTML=introSteps.map((_,i)=>'<span class="intro-dot'+(i===introStep?' active':'')+'"></span>').join('');
+    if(bar)bar.style.width=Math.round(((introStep+1)/introSteps.length)*100)+'%';
+    if(lbl)lbl.textContent='Stap '+(introStep+1)+' van '+introSteps.length;
+  }
+
+  window.openOnboarding=function(){
+    const ov=document.getElementById('introOv');
+    if(!ov)return;
+    introStep=0;
+    ov.classList.add('show');
+    ov.setAttribute('aria-hidden','false');
+    renderIntro();
+  };
+
+  window.closeOnboarding=function(markSeen){
+    const ov=document.getElementById('introOv');
+    if(!ov)return;
+    ov.classList.remove('show');
+    ov.setAttribute('aria-hidden','true');
+    if(markSeen){
+      try{localStorage.setItem(STORAGE_INTRO_KEY,'1');}catch(_e){}
+    }
+  };
+
+  window.onboardingPrev=function(){
+    if(introStep>0){introStep--;renderIntro();}
+  };
+
+  window.onboardingNext=function(){
+    if(introStep===1){
+      const selected=selectedFromCheckboxes();
+      saveSelection(selected.length?selected:APP_IDS);
+      applySelection(selected.length?selected:APP_IDS);
+    }
+    if(introStep<introSteps.length-1){
+      introStep++;
+      renderIntro();
+      return;
+    }
+    closeOnboarding(true);
+  };
+
+  document.addEventListener('DOMContentLoaded',function(){
+    bindGridButtons();
+    const selected=getStoredSelection()||APP_IDS;
+    applySelection(selected);
+    let seen='1';
+    try{seen=localStorage.getItem(STORAGE_INTRO_KEY);}catch(_e){}
+    if(!seen){
+      var lock=document.getElementById('lockScreen');
+      var launch=function(){setTimeout(function(){openOnboarding();},250);};
+      if(lock&&lock.style.display!=='none'){
+        var tries=0;
+        var iv=setInterval(function(){
+          tries++;
+          if(lock.style.display==='none'||tries>60){clearInterval(iv);launch();}
+        },200);
+      }else{launch();}
+    }
+  });
+})();
+
