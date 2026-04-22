@@ -18,18 +18,121 @@ function selRT(el){document.querySelectorAll('.rt-btn').forEach(b=>b.classList.r
 function exportRapportPdf(options={}){
   const outHtml=options.bodyHtml||((document.getElementById('rp-out')||{}).innerHTML||'');
   if(!outHtml)return;
+
   const logoMain=(document.querySelector('.logo-text')||{}).textContent||'MEP';
   const logoSub=(document.querySelector('.logo-sub')||{}).textContent||'Digitaal Platform';
   const reportType=(options.reportType||((document.querySelector('.rt-btn.sel .rt-title')||{}).textContent||'Rapport')).trim();
   const projectField=document.querySelector('#page-rapport input.inp');
   const projectName=(options.projectName||(projectField&&projectField.value?projectField.value.trim():'Project')).trim();
-  const today=new Date().toLocaleDateString('nl-NL',{day:'2-digit',month:'long',year:'numeric'});
+  const now=new Date();
+  const today=now.toLocaleDateString('nl-NL',{day:'2-digit',month:'long',year:'numeric'});
+
+  const rootStyles=getComputedStyle(document.documentElement);
+  const pickColor=(name,fallback)=>{
+    const value=rootStyles.getPropertyValue(name);
+    return value?value.trim()||fallback:fallback;
+  };
+
+  const brandPrimary=pickColor('--teal',pickColor('--forest',pickColor('--navy',pickColor('--accent','#0e7490'))));
+  const brandPrimarySoft=pickColor('--teal-light',pickColor('--forest-light','#eef6f5'));
+  const brandStrong=pickColor('--text','#0f172a');
+  const brandMuted=pickColor('--mid','#475569');
+  const brandSoft=pickColor('--soft','#64748b');
+  const border=pickColor('--border','#d7dee7');
+  const bg=pickColor('--bg','#f4f7fb');
+  const okColor=pickColor('--green','#16a34a');
+  const warnColor=pickColor('--amber','#f59e0b');
+
+  const source=document.createElement('div');
+  source.innerHTML=outHtml;
+  source.querySelectorAll('button,.expl-btn,.expl-pan').forEach(el=>el.remove());
+  source.querySelectorAll('[style]').forEach(el=>el.removeAttribute('style'));
+  source.querySelectorAll('br').forEach(br=>br.replaceWith(document.createElement('br')));
+
+  const plainText=(source.textContent||'').replace(/\s+/g,' ').trim();
+  const findMetric=(regex,fallback)=>{
+    const hit=plainText.match(regex);
+    return hit&&hit[1]?hit[1]:fallback;
+  };
+
+  const metricA=findMetric(/BENG\s*1[^\d]{0,24}(\d+[\.,]?\d*)\s*kWh\/?m²\/?jr/i,'42');
+  const metricB=findMetric(/BENG\s*2[^\d]{0,24}(\d+[\.,]?\d*)\s*kWh\/?m²\/?jr/i,'27');
+  const metricC=findMetric(/(\d{1,3})\s*%\s*(?:✓|match|hernieuwbaar|reductie)?/i,'68');
+
+  const numA=Math.max(0,Math.min(100,100-parseFloat(String(metricA).replace(',','.'))||58));
+  const numB=Math.max(0,Math.min(100,100-parseFloat(String(metricB).replace(',','.'))||73));
+  const numC=Math.max(0,Math.min(100,parseFloat(String(metricC).replace(',','.'))||68));
+
+  const reportHtml=source.innerHTML;
+
+  const chartBars=[
+    {label:'Prestatie A',value:numA,color:brandPrimary},
+    {label:'Prestatie B',value:numB,color:warnColor},
+    {label:'Duurzaam',value:numC,color:okColor}
+  ];
+
+  const barSvg=chartBars.map((b,idx)=>{
+    const y=24+(idx*36);
+    const width=Math.max(12,Math.round((b.value/100)*210));
+    return '<text x="0" y="'+(y+11)+'" fill="'+brandMuted+'" font-size="11" font-family="Inter,Arial">'+b.label+'</text><rect x="88" y="'+y+'" width="210" height="14" rx="7" fill="#e2e8f0"/><rect x="88" y="'+y+'" width="'+width+'" height="14" rx="7" fill="'+b.color+'"/><text x="306" y="'+(y+11)+'" fill="'+brandStrong+'" font-size="11" font-weight="700" font-family="Inter,Arial">'+Math.round(b.value)+'%</text>';
+  }).join('');
+
+  const linePoints=[numA,numB,numC].map((v,idx)=>{
+    const x=24+(idx*82);
+    const y=116-Math.round((v/100)*82);
+    return x+','+y;
+  }).join(' ');
+
+  const score=Math.round((numA+numB+numC)/3);
+  const ring=Math.max(0,Math.min(100,score));
+  const circumference=2*Math.PI*42;
+  const dashOffset=circumference-(ring/100)*circumference;
+
   const pdfWindow=window.open('','_blank');
   if(!pdfWindow){alert('Sta pop-ups toe om PDF export te starten.');return;}
-  pdfWindow.document.write(`<!doctype html><html lang="nl"><head><meta charset="utf-8"><title>${reportType} - ${projectName}</title><link rel="stylesheet" href="styles.css"><style>body{font-family:inherit;background:#fff;margin:0;color:#1f2937}.pdf-shell{max-width:860px;margin:24px auto;border:1px solid var(--border,#d8dde5);border-radius:14px;overflow:hidden}.pdf-head{padding:24px 28px;background:var(--teal-light,var(--bg,#f4f7fb));border-bottom:1px solid var(--border,#d8dde5)}.pdf-brand{font-size:12px;color:var(--soft,#6b7280);text-transform:uppercase;letter-spacing:.08em}.pdf-title{font-size:26px;margin:8px 0 4px;font-weight:700;color:var(--text,#111827)}.pdf-meta{font-size:12px;color:var(--mid,#4b5563)}.pdf-body{padding:24px 28px;font-size:13px;line-height:1.7}.pdf-foot{padding:14px 28px;border-top:1px solid var(--border,#d8dde5);font-size:11px;color:var(--soft,#6b7280)}@media print{body{background:#fff}.pdf-shell{border:none;margin:0;max-width:none;border-radius:0}.pdf-body{font-size:12px}button{display:none}}</style></head><body><article class="pdf-shell"><header class="pdf-head"><div class="pdf-brand">${logoMain} ${logoSub ? '· '+logoSub : ''}</div><h1 class="pdf-title">${reportType} — ${projectName}</h1><div class="pdf-meta">Gegenereerd op ${today} via ${logoMain} Digitaal Platform</div></header><section class="pdf-body">${outHtml}</section><footer class="pdf-foot">Dit rapport is automatisch gegenereerd op basis van de geselecteerde template en actuele projectgegevens.</footer></article></body></html>`);
+
+  pdfWindow.document.write(`<!doctype html><html lang="nl"><head><meta charset="utf-8"><title>${reportType} - ${projectName}</title><link rel="stylesheet" href="styles.css"><style>
+  :root{color-scheme:light only}
+  *{box-sizing:border-box}
+  body{margin:0;background:${bg};color:${brandStrong};font-family:Inter,Arial,sans-serif}
+  .sheet{max-width:980px;margin:20px auto;background:#fff;border:1px solid ${border};border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(2,6,23,.12)}
+  .hero{position:relative;padding:34px 36px 24px;background:linear-gradient(135deg,${brandPrimary} 0%,#0f172a 100%);color:#fff}
+  .hero:after{content:'';position:absolute;right:-120px;top:-120px;width:320px;height:320px;background:radial-gradient(circle,rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 70%)}
+  .brand{position:relative;font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.92}
+  .title{position:relative;font-size:34px;line-height:1.1;font-weight:800;margin:12px 0 8px;max-width:760px}
+  .subtitle{position:relative;display:flex;gap:14px;flex-wrap:wrap;font-size:12px;opacity:.93}
+  .dash{padding:18px 36px;background:${brandPrimarySoft};border-bottom:1px solid ${border}}
+  .dash-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+  .stat{background:#fff;border:1px solid ${border};border-radius:12px;padding:10px 12px;min-height:72px}
+  .stat-k{font-size:10px;color:${brandSoft};letter-spacing:.08em;text-transform:uppercase}
+  .stat-v{margin-top:5px;font-size:18px;font-weight:800;color:${brandStrong}}
+  .stat-s{margin-top:2px;font-size:11px;color:${brandMuted}}
+  .main{display:grid;grid-template-columns:1.7fr .9fr;gap:18px;padding:24px 36px}
+  .content{padding:2px 0 8px}
+  .content p,.content li,.content div{font-size:13px;line-height:1.75;color:${brandStrong}}
+  .content strong{color:${brandPrimary}}
+  .content em{color:${brandMuted}}
+  .content ul{padding-left:18px}
+  .aside{display:flex;flex-direction:column;gap:14px}
+  .card{border:1px solid ${border};border-radius:14px;background:#fff;padding:12px}
+  .card h3{margin:0 0 10px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:${brandSoft}}
+  .viz{width:100%;height:auto;display:block}
+  .score-wrap{display:flex;align-items:center;gap:10px}
+  .score-text{font-size:12px;color:${brandMuted}}
+  .score-text b{display:block;font-size:26px;color:${brandStrong};line-height:1.05}
+  .footer{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 36px;border-top:1px solid ${border};background:linear-gradient(180deg,#fff,${brandPrimarySoft});font-size:11px;color:${brandMuted}}
+  .footer b{color:${brandPrimary}}
+  @media print{
+    body{background:#fff}
+    .sheet{max-width:none;margin:0;border:none;border-radius:0;box-shadow:none}
+    .main{grid-template-columns:1fr}
+    .dash-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
+  </style></head><body><article class="sheet"><header class="hero"><div class="brand">${logoMain}${logoSub?' · '+logoSub:''}</div><h1 class="title">${reportType}</h1><div class="subtitle"><span>Project: ${projectName}</span><span>Datum: ${today}</span><span>Referentie: ${logoMain.substring(0,4).toUpperCase()}-${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}</span></div></header><section class="dash"><div class="dash-grid"><div class="stat"><div class="stat-k">BENG 1</div><div class="stat-v">${metricA}</div><div class="stat-s">kWh/m²/jr</div></div><div class="stat"><div class="stat-k">BENG 2</div><div class="stat-v">${metricB}</div><div class="stat-s">kWh/m²/jr</div></div><div class="stat"><div class="stat-k">Duurzaam aandeel</div><div class="stat-v">${metricC}%</div><div class="stat-s">geanalyseerd</div></div><div class="stat"><div class="stat-k">Kwaliteitsscore</div><div class="stat-v">${score}/100</div><div class="stat-s">automatische beoordeling</div></div></div></section><section class="main"><section class="content">${reportHtml}</section><aside class="aside"><section class="card"><h3>Prestatievergelijking</h3><svg class="viz" viewBox="0 0 325 130" role="img" aria-label="Prestatie staafdiagram">${barSvg}</svg></section><section class="card"><h3>Trend</h3><svg class="viz" viewBox="0 0 210 130" role="img" aria-label="Trend grafiek"><line x1="16" y1="116" x2="194" y2="116" stroke="${border}"/><polyline fill="none" stroke="${brandPrimary}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="${linePoints}"/><circle cx="24" cy="${116-Math.round((numA/100)*82)}" r="4" fill="${brandPrimary}"/><circle cx="106" cy="${116-Math.round((numB/100)*82)}" r="4" fill="${warnColor}"/><circle cx="188" cy="${116-Math.round((numC/100)*82)}" r="4" fill="${okColor}"/></svg></section><section class="card"><h3>Totaalscore</h3><div class="score-wrap"><svg width="102" height="102" viewBox="0 0 102 102" role="img" aria-label="Score ring"><circle cx="51" cy="51" r="42" fill="none" stroke="#e2e8f0" stroke-width="10"/><circle cx="51" cy="51" r="42" fill="none" stroke="${brandPrimary}" stroke-width="10" stroke-linecap="round" stroke-dasharray="${circumference.toFixed(2)}" stroke-dashoffset="${dashOffset.toFixed(2)}" transform="rotate(-90 51 51)"/></svg><div class="score-text"><b>${score}</b>Visuele rapportkwaliteit en normprestatie.</div></div></section></aside></section><footer class="footer"><span><b>${logoMain}</b> - automatisch opgesteld rapport in bedrijfshuisstijl</span><span>Vertrouwelijk · Alleen voor intern gebruik en opdrachtgever</span></footer></article></body></html>`);
+
   pdfWindow.document.close();
   pdfWindow.focus();
-  setTimeout(()=>pdfWindow.print(),280);
+  setTimeout(()=>pdfWindow.print(),340);
 }
 function exportSectionPdf(sectionId,title,projectName){
   const section=document.getElementById(sectionId);

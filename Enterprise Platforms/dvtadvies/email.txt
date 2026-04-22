@@ -1,53 +1,26 @@
-Onderwerp: DVTadvies heeft 15 vacatures openstaan — wij zagen het staan
+Onderwerp: 15 vacatures → minder handwerk per adviseur?
 
 Geachte heer/mevrouw,
 
-Waarom deze e-mail: wij hebben uw openstaande vacatures en positionering bekeken, omdat wij adviesbureaus helpen om capaciteitstekorten op te vangen met AI-ondersteunde automatisering. Op basis van die observatie hebben we een korte, relevante demo voor uw organisatie voorbereid.
+Ik zag dat DVTadvies momenteel 15 vacatures open heeft staan. Dat wijst meestal op groei, maar ook op druk op het huidige team.
 
-Op uw werkenbij-pagina staan momenteel vijftien openstaande functies, waaronder een Adviseur Duurzaamheid, meerdere Projectmanagers/Adviseurs (B, E en W) op zowel junior als senior niveau, en een Bouwprojectmanager. Dat is een aanzienlijke groeiopgave — en tegelijk een signaal dat de vraag naar uw diensten de beschikbare capaciteit overtreft.
+Wat we vaak zien bij adviesbureaus in jullie domein: veel tijd gaat nog naar terugkerend werk zoals rapportages, Excel-berekeningen en het uitzoeken van actuele regelgeving (DUMAVA, labels, Paris Proof).
 
-Duurzaamheidsadviseurs zijn schaars. De combinatie van DUMAVA-subsidietrajecten, energielabel-assessments en Paris Proof-trajecten vraagt om mensen die zowel technisch als procesmatig sterk zijn — en die zijn moeilijk te vinden. Ondertussen legt de WKB (Wet Kwaliteitsborging voor het Bouwen) ook op duurzaamheidsprojecten meer documentatieverplichtingen op. Uw huidige medewerkers doen meer administratief werk per project dan een paar jaar geleden.
+Daar hebben wij een tool voor gebouwd die dit automatiseert.
 
-Wij denken dat slimme tooling een deel van die druk kan wegnemen — zodat uw huidige team meer projecten aankan en die vijftien vacatures minder urgent worden.
+Concreet in de demo:
+– energielabel- of DUMAVA-rapport in minuten opgesteld
+– Excel-sheets automatisch aangevuld en doorgerekend
+– direct inzicht in label en effect van maatregelen
+– actuele regelgeving verwerkt in de output
 
-Daarom hebben wij voor DVTadvies een werkend demo-platform gebouwd.
+We staan nog aan het begin en zoeken een eerste partij om dit samen in de praktijk te toetsen en scherp te maken.
 
-Het platform neemt de terugkerende taken over:
+Ik heb een demo klaarstaan in jullie stijl met herkenbare voorbeelden.
 
-→ Rapport Schrijver
-   Stel een energielabelrapport, DUMAVA-subsidieadvies of CO₂-routekaart op in minuten.
-   Het platform werkt met de actuele NTA 8800-methode en geldende DUMAVA-voorwaarden,
-   en past de output automatisch aan op de gebouwcategorie.
-
-→ Excel Assistent
-   Laad een energieprestatie-sheet van een bestaand gebouw. Het platform vult
-   ontbrekende EP-waarden in via NTA 8800, berekent het huidige energielabel én
-   de prognose na verduurzamingsmaatregelen — inclusief DUMAVA-subsidiabiliteit.
-
-→ Energielabel / BENG Checker
-   Direct inzicht in huidig label, verwacht label na maatregelen en een eerste
-   inschatting van de subsidie-aanspraak onder DUMAVA 2026.
-
-→ Norm Monitor
-   Wijzigingen in de DUMAVA-regeling, energielabelverplichting en Paris Proof-doelstellingen
-   worden automatisch bijgehouden — zodat uw adviezen altijd actueel zijn.
-
-→ Kennisbank
-   Uw projectarchief wordt doorzoekbaar op gebouwtype, bouwjaar, label en locatie.
-   Vind snel het referentieproject dat het meest lijkt op de volgende opdracht.
-
-Uw projectdata blijft volledig privé.
-
-DVTadvies werkt met gevoelige vastgoedgegevens van opdrachtgevers. Dit platform draait op uw eigen server — niet in een externe cloud. Geen externe partij heeft toegang tot uw energiedata, labelberekeningen of opdrachtgeversgegevens. Alles versleuteld opgeslagen, volledig onder uw beheer. GDPR-conform.
-
-Duurzaamheid begint bij uw eigen bedrijfsvoering — ook als het gaat om dataveiligheid.
-
-De tijdsbesparing die wij in de praktijk zien: 25–35 uur per maand op rapportage, labelberekeningen en subsidiedossiers. Genoeg om de druk op uw huidige team merkbaar te verlichten en meer opdrachten aan te nemen zonder evenredig meer mensen nodig te hebben.
-
-Heeft u 20 minuten voor een korte demo? Het platform is al opgebouwd in de uitstraling van DVTadvies en bevat voorbeeldprojecten uit uw eigen werkveld.
+Heeft u volgende week 20 minuten om te kijken of dit relevant is voor DVTadvies?
 
 Met vriendelijke groet,
-
-[Uw naam]
-[Telefoonnummer]
-[E-mailadres]
+[Naam]
+[Telefoon]
+[E-mail]
