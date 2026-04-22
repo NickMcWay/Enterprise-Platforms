@@ -51,6 +51,7 @@
     <div class="topbar-right">
       <div class="topbar-offices">Utrecht · Zwolle · Rotterdam</div>
       <div class="topbar-badge">● Systeem Actief — Alle systemen operationeel</div>
+      <button class="btn btn-outline btn-sm intro-trigger" onclick="openOnboarding(true)">👋 Introductie</button>
     </div>
   </div>
   <div class="content">
@@ -548,6 +549,31 @@
     </div>
     <div id="qa-badge-wrap"></div>
     <div class="qa-list" id="qa-list"></div>
+  </div>
+</div>
+
+<div class="intro-ov" id="introOv" aria-hidden="true">
+  <div class="intro-card" role="dialog" aria-modal="true" aria-labelledby="introTitle">
+    <div class="intro-head">
+      <div>
+        <div class="intro-kicker">Nieuw op het platform?</div>
+        <h2 id="introTitle">Snelle rondleiding</h2>
+      </div>
+      <button class="intro-close" onclick="closeOnboarding(true)" aria-label="Sluiten">&times;</button>
+    </div>
+    <p class="intro-body" id="introBody"></p>
+    <div class="intro-progress-wrap">
+      <div class="intro-progress"><div class="intro-progress-bar" id="introProgressBar"></div></div>
+      <div class="intro-step" id="introStepLabel">Stap 1 van 5</div>
+    </div>
+    <div class="intro-dots" id="introDots"></div>
+    <div class="intro-actions">
+      <button class="btn btn-outline btn-sm" id="introPrev" onclick="onboardingPrev()">← Vorige</button>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-outline btn-sm" onclick="closeOnboarding(false)">Later</button>
+        <button class="btn btn-primary btn-sm" id="introNext" onclick="onboardingNext()">Volgende →</button>
+      </div>
+    </div>
   </div>
 </div>
 
