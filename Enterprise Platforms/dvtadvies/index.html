@@ -118,6 +118,49 @@ tr:hover td{background:#F0F8F2;}
 .page{display:none;}
 .page.active{display:block;animation:fi .25s ease;}
 @keyframes fi{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.qa-ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;display:none;align-items:center;justify-content:center;}
+.qa-ov.show{display:flex;}
+.qa-modal{background:var(--white);border-radius:14px;width:640px;max-width:92vw;max-height:80vh;overflow-y:auto;box-shadow:0 16px 64px rgba(0,0,0,.35);border-top:4px solid var(--forest);}
+.qa-mhead{padding:20px 24px 0;display:flex;align-items:center;justify-content:space-between;}
+.qa-title{font-family:'Raleway',sans-serif;font-size:17px;font-weight:700;color:var(--forest);}
+.qa-close{background:none;border:none;font-size:22px;cursor:pointer;color:var(--soft);}
+.qa-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700;margin:14px 24px;}
+.qa-score-ok{background:#D8F3DC;color:var(--forest);}
+.qa-score-warn{background:#FEF3E2;color:var(--amber);}
+.qa-score-err{background:#FDECEA;color:var(--red);}
+.qa-list{padding:0 24px 24px;display:flex;flex-direction:column;gap:10px;}
+.qa-item{border-radius:9px;padding:13px 15px;border:1px solid var(--border);}
+.qa-item-h{background:#FDECEA;border-color:#F5C0BB;}
+.qa-item-m{background:#FEF3E2;border-color:#F2D79A;}
+.qa-item-l{background:#EEF8F2;border-color:#A8DABC;}
+.qa-risk{font-size:10px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;}
+.qa-risk-h{color:var(--red);}
+.qa-risk-m{color:var(--amber);}
+.qa-risk-l{color:var(--green);}
+.qa-ititle{font-size:13px;font-weight:700;color:var(--text);margin:2px 0;}
+.qa-isub{font-size:12px;color:var(--mid);}
+.expl-btn{margin-top:10px;background:var(--forest-light);color:var(--forest);border:none;border-radius:7px;padding:6px 14px;font-size:11.5px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;}
+.expl-btn:hover{background:var(--sage-soft);}
+.expl-pan{display:none;background:var(--forest-light);border-radius:8px;padding:14px;font-size:12px;color:var(--forest);margin-top:6px;line-height:1.75;border:1px solid var(--sage-soft);}
+.expl-pan.show{display:block;}
+.expl-pan strong{color:var(--forest);}
+.cmp-btn{margin-top:8px;background:var(--forest-light);color:var(--forest);border:1px solid var(--border);border-radius:7px;padding:5px 12px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;}
+.cmp-btn:hover{background:var(--sage-soft);}
+.cmp-pan{display:none;background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:12px;margin-top:6px;font-size:12px;}
+.cmp-pan.show{display:block;}
+.cmp-row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);}
+.cmp-row:last-child{border-bottom:none;}
+.cmp-key{color:var(--soft);font-weight:600;}
+.cmp-val{color:var(--text);font-weight:700;}
+.cg-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;}
+.cg-card{background:var(--white);border:2px solid var(--border);border-radius:10px;padding:18px;transition:border-color .18s;}
+.cg-card:hover{border-color:var(--forest-mid);}
+.cg-name{font-family:'Raleway',sans-serif;font-size:14px;font-weight:700;color:var(--forest);margin-bottom:6px;}
+.cg-desc{font-size:12px;color:var(--mid);margin-bottom:10px;line-height:1.6;}
+.cg-pros,.cg-cons{font-size:11.5px;margin-bottom:6px;}
+.cg-pros strong{color:var(--green);}
+.cg-cons strong{color:var(--red);}
+.pc-box{background:var(--cream);border-radius:8px;padding:12px;margin-top:10px;}
 </style>
 </head>
 <body>
@@ -137,6 +180,7 @@ tr:hover td{background:#F0F8F2;}
     <div class="nav-item" onclick="show('beng',this)"><span class="nav-icon">⟁</span> BENG Checker</div>
     <div class="nav-item" onclick="show('normen',this)"><span class="nav-icon">⚖</span> Norm Monitor</div>
     <div class="nav-item" onclick="show('kennis',this)"><span class="nav-icon">◎</span> Kennisbank</div>
+    <div class="nav-item" onclick="show('concept',this)"><span class="nav-icon">◐</span> Concept Generator</div>
   </nav>
   <div class="sidebar-footer">
     <div class="user-block">
@@ -163,7 +207,7 @@ tr:hover td{background:#F0F8F2;}
         <div class="stat-card"><div class="stat-num">412 t</div><div class="stat-label">CO₂ bespaard dit jaar</div><div class="stat-delta up">↑ op schema Paris Proof</div></div>
         <div class="stat-card"><div class="stat-num">38.4</div><div class="stat-label">Uren bespaard</div><div class="stat-delta up">↑ deze maand · €5.376 waarde</div></div>
       </div>
-      <div class="section-header"><div class="section-title">Actieve Projecten</div></div>
+      <div class="section-header"><div class="section-title">Actieve Projecten</div><button class="btn btn-outline btn-sm" onclick="qaAnalyse()">⚡ Analyseer projecten</button></div>
       <div class="table-card">
         <div class="table-header"><div class="table-title">Lopende opdrachten</div><button class="btn btn-outline btn-sm">Filter ▾</button></div>
         <table>
@@ -320,11 +364,45 @@ tr:hover td{background:#F0F8F2;}
       <div id="kb-results"></div>
     </div>
 
+    <!-- CONCEPT GENERATOR -->
+    <div class="page" id="page-concept">
+      <div class="panel-grid">
+        <div class="panel">
+          <div class="panel-head"><div class="panel-icon">◐</div><div class="panel-title">Concept configuratie</div></div>
+          <div class="panel-body">
+            <div style="margin-bottom:14px;"><label class="lbl">Gebouwtype</label>
+              <select class="inp" id="cg-type" style="padding:8px 10px;">
+                <option>Kantoor</option>
+                <option>Woning</option>
+                <option>Zorggebouw</option>
+                <option>School</option>
+                <option>Logistiek</option>
+                <option>Horeca / Hotel</option>
+              </select>
+            </div>
+            <div style="margin-bottom:14px;"><label class="lbl">Gebruiksoppervlak (m²)</label><input class="inp" type="number" id="cg-m2" value="2500" style="padding:8px 10px;"></div>
+            <div style="margin-bottom:18px;"><label class="lbl">Bouwstaat</label>
+              <select class="inp" id="cg-state" style="padding:8px 10px;">
+                <option>Nieuwbouw</option>
+                <option>Renovatie bestaande bouw</option>
+                <option>Transformatie (functiewijziging)</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" style="width:100%;" onclick="genConcept()">🌿 Genereer concepten</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="panel-icon">💡</div><div class="panel-title">Systeem suggesties</div></div>
+          <div class="panel-body" id="cg-out"><div style="color:var(--soft);font-size:13px;text-align:center;padding:20px 0;">Vul de parameters in en klik op genereren voor conceptuele systeemopties.</div></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <script>
-const titles={dashboard:'Dashboard',rapport:'Rapport Schrijver',excel:'Excel Assistent',beng:'BENG Checker',normen:'Norm Monitor',kennis:'Kennisbank'};
+const titles={dashboard:'Dashboard',rapport:'Rapport Schrijver',excel:'Excel Assistent',beng:'BENG Checker',normen:'Norm Monitor',kennis:'Kennisbank',concept:'Concept Generator'};
 
 function show(id,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -364,7 +442,9 @@ function genRapport(){
       prog.style.display='none';
       acts.style.display='flex';
       acts.innerHTML='<button class="btn btn-primary btn-sm">⬇ Download .docx</button><button class="btn btn-outline btn-sm">✏ Bewerk</button><button class="btn btn-outline btn-sm">📤 Verstuur naar klant</button>';
-      out.innerHTML=`<strong style="color:var(--forest);font-family:'Raleway',sans-serif;font-size:14px;">Duurzaamheidsscan — Papendorp-Noord</strong><br><br><strong>Opdrachtgever:</strong> Amvest Vastgoed BV<br><strong>Adviseur:</strong> D. van Tienen · DVTadvies · 21 april 2026<br><br><strong>1. Gebouwomschrijving</strong><br>Kantoorcomplex Papendorp-Noord, bouwjaar 1997, 4.200 m² BVO verdeeld over 3 bouwlagen. Huidig energielabel C. Gasgestookte HR-ketels, geen hernieuwbare energie aanwezig.<br><br><strong>2. Energieprestatie nulmeting</strong><br>Huidig primair energiegebruik: <strong>187 kWh/m²/jr</strong>. CO₂-emissie gebouwgebonden: 38,4 ton/jr. Paris Proof target 2030: 55 kWh/m²/jr — <span style="color:var(--red)">niet gehaald</span>.<br><br><strong>3. Maatregelplan naar label A</strong><br>• Lucht-water warmtepomp (COP 3,9) — vervanging gasketels<br>• PV installatie 64 kWp dakoppervlak<br>• Gevelisolatie Rc 4,5 m²K/W<br>• WTW ventilatie η=88%<br><br><strong>4. CO₂-reductie &amp; financieel</strong><br>Verwachte CO₂-reductie: <strong style="color:var(--green)">74%</strong> · van 38,4 t naar 10,1 t/jr.<br>Energielabel na maatregelen: <strong style="color:var(--green)">A+</strong><br>Investeringskosten: ca. €485.000 · Terugverdientijd: 7,2 jaar.<br><br><strong>5. DUMAVA subsidie</strong><br>Geschatte DUMAVA subsidie: <strong style="color:var(--green)">€112.000</strong> (23% van subsidiabele kosten).<br><br><em style="color:var(--soft);font-size:11px;">Gegenereerd door DVTadvies Digitaal Platform · NTA 8800:2026 · DUMAVA 2026 · Paris Proof 2030</em>`;
+      out.innerHTML=`<strong style="color:var(--forest);font-family:'Raleway',sans-serif;font-size:14px;">Duurzaamheidsscan — Papendorp-Noord</strong><br><br><strong>Opdrachtgever:</strong> Amvest Vastgoed BV<br><strong>Adviseur:</strong> D. van Tienen · DVTadvies · 21 april 2026<br><br><strong>1. Gebouwomschrijving</strong><br>Kantoorcomplex Papendorp-Noord, bouwjaar 1997, 4.200 m² BVO verdeeld over 3 bouwlagen. Huidig energielabel C. Gasgestookte HR-ketels, geen hernieuwbare energie aanwezig.<br><br><strong>2. Energieprestatie nulmeting</strong><br>Huidig primair energiegebruik: <strong>187 kWh/m²/jr</strong>. CO₂-emissie gebouwgebonden: 38,4 ton/jr. Paris Proof target 2030: 55 kWh/m²/jr — <span style="color:var(--red)">niet gehaald</span>.<br><br><strong>3. Maatregelplan naar label A</strong><br>• Lucht-water warmtepomp (COP 3,9) — vervanging gasketels<br>• PV installatie 64 kWp dakoppervlak<br>• Gevelisolatie Rc 4,5 m²K/W<br>• WTW ventilatie η=88%<br><br><strong>4. CO₂-reductie &amp; financieel</strong><br>Verwachte CO₂-reductie: <strong style="color:var(--green)">74%</strong> · van 38,4 t naar 10,1 t/jr.<br>Energielabel na maatregelen: <strong style="color:var(--green)">A+</strong><br>Investeringskosten: ca. €485.000 · Terugverdientijd: 7,2 jaar.<br><br><strong>5. DUMAVA subsidie</strong><br>Geschatte DUMAVA subsidie: <strong style="color:var(--green)">€112.000</strong> (23% van subsidiabele kosten).<br><br><em style="color:var(--soft);font-size:11px;">Gegenereerd door DVTadvies Digitaal Platform · NTA 8800:2026 · DUMAVA 2026 · Paris Proof 2030</em>
+<button class="expl-btn" onclick="toggleExplain('ep-rapport')">▶ Waarom is dit correct?</button>
+<div class="expl-pan" id="ep-rapport"><strong>Normen &amp; bronnen:</strong><br>• <strong>NTA 8800:2026</strong> — Bepalingsmethode energieprestatie gebouwen, bijlage C: standaardwaarden installaties<br>• <strong>DUMAVA 2026</strong> — Subsidieregeling verduurzaming utiliteitsbouw, art. 4.1: subsidiabele maatregelen en percentages<br>• <strong>Paris Proof 2030</strong> (DGBC) — Sectorale doelstelling kantoren 55 kWh/m²/jr<br>• <strong>Bbl art. 5.2</strong> — Energieprestatie-eis bij renovatie, formule Rc ≥ 3,5 m²K/W<br><br><strong>Formule EP-reductie:</strong> EP_nieuw = EP_huidig × (1 − η_wp × f_wp) − E_pv/A<br><strong>Aannames:</strong> COP warmtepomp 3,9 conform fabrieksspec, PV-opbrengst 900 kWh/kWp/jr Utrecht, η WTW = 88%.</div>`;
     }
   };
   run();
@@ -410,7 +490,9 @@ function procXLS(){
       <div style="margin-top:10px;display:flex;gap:8px;">
         <button class="btn btn-primary btn-sm">⬇ Download Excel</button>
         <button class="btn btn-outline btn-sm">📄 Naar rapport</button>
-      </div>`;
+      </div>
+      <button class="expl-btn" onclick="toggleExplain('ep-excel')">▶ Waarom is dit correct?</button>
+      <div class="expl-pan" id="ep-excel"><strong>Normen &amp; bronnen:</strong><br>• <strong>NTA 8800:2026 tabel 9</strong> — Standaardwaarden EP per functie (warm tapwater kantoor: 0,17; verlichting: 0,28)<br>• <strong>NEN 2916:2004</strong> — Energieprestatienorm utiliteitsbouw, weegfactoren per functie<br>• <strong>Bbl art. 5.3</strong> — Berekening energieprestatie bestaande bouw via EP-methode<br><br><strong>Formule EP-totaal:</strong> EP = Σ(EP_i × w_i) waarbij w_i de weegfactor per deelfunctie is conform NTA 8800 bijlage A.<br><strong>Aanname:</strong> ontbrekende waarden vervangen door NTA 8800 standaardwaarden voor kantoorgebouwen bouwjaar 1990–2005.</div>`;
     }
   },100);
 }
@@ -445,42 +527,129 @@ function checkBENG(){
       <div style="margin-top:10px;display:flex;gap:8px;">
         <button class="btn btn-primary btn-sm">📄 Genereer Energielabel Rapport</button>
         <button class="btn btn-outline btn-sm">⬇ PDF</button>
-      </div>`;
+      </div>
+      <button class="expl-btn" onclick="toggleExplain('ep-beng')">▶ Waarom is dit correct?</button>
+      <div class="expl-pan" id="ep-beng"><strong>Normen &amp; bronnen:</strong><br>• <strong>BENG 1</strong> — Energiebehoefte: NTA 8800:2026 §6.3, eis bestaande kantoren ≤ 50 kWh/m²/jr (Bbl bijlage I)<br>• <strong>BENG 2</strong> — Primair fossiel energiegebruik: NTA 8800 §6.4, eis kantoren 2027 ≤ 30 kWh/m²/jr<br>• <strong>BENG 3</strong> — Hernieuwbaar aandeel: berekend als E_hernieuwbaar / E_totaal_primair × 100%, eis ≥ 50%<br><br><strong>Formule BENG 1:</strong> Q_netto = (Q_trans + Q_vent − Q_intern − Q_zon) × f_gc conform NEN-EN ISO 13790<br><strong>Aanname:</strong> WP COP 3,9 jaargemiddeld, PV-opbrengst 875 kWh/kWp/jr, η WTW = 88% conform NTA 8800 tabel B.12.</div>`;
     }
   },100);
 }
 
 const kbData=[
-  {title:'Energielabel A+ traject wooncomplex Overvecht Utrecht',meta:'Woningbouw · 2024 · 8.200 m² · Utrecht',snip:'NTA 8800 berekening, warmtepomp, PV 88 kWp, gevelisolatie Rc 4,5. Energielabel van D naar A+. DUMAVA subsidie €94.000 verkregen.',score:98},
-  {title:'DUMAVA subsidieaanvraag kantoor Leidsche Rijn',meta:'Kantoor · 2025 · 3.600 m² · Utrecht',snip:'Complete DUMAVA dossier: subsidiabele kosten €380.000, toegekend €87.400. Warmtepomp + PV + bouwkundige maatregelen. Paris Proof 2030 gehaald.',score:94},
-  {title:'CO₂-routekaart wijk Hoograven Den Haag',meta:'Gemengd wonen · 2023 · 340 woningen · Den Haag',snip:'Wijkgerichte aanpak klimaatneutraliteit 2035. Warmtenet aansluiting, hybride warmtepomp, collectieve PV. CO₂-reductie 68% gerealiseerd.',score:89},
-  {title:'Circulaire renovatie schoolgebouw Amersfoort',meta:'Onderwijs · 2024 · 2.800 m² · Amersfoort',snip:'Materiaalpasspoort opgesteld, 74% materiaalhergebruik, energielabel G naar A. Bbl circulaire sloopmelding toegepast. Frisse Scholen klasse B behaald.',score:85},
+  {title:'Energielabel A+ traject wooncomplex Overvecht Utrecht',meta:'Woningbouw · 2024 · 8.200 m² · Utrecht',snip:'NTA 8800 berekening, warmtepomp, PV 88 kWp, gevelisolatie Rc 4,5. Energielabel van D naar A+. DUMAVA subsidie €94.000 verkregen.',score:98,
+   cmp:{type:'Wooncomplex',m2:'8.200',tech:'Warmtepomp + PV 88 kWp + Rc 4,5',beng2:'26 kWh/m²/jr',saving:'71%',reuse:'Gevelisolatie aanpak + DUMAVA dossier herbruikbaar'}},
+  {title:'DUMAVA subsidieaanvraag kantoor Leidsche Rijn',meta:'Kantoor · 2025 · 3.600 m² · Utrecht',snip:'Complete DUMAVA dossier: subsidiabele kosten €380.000, toegekend €87.400. Warmtepomp + PV + bouwkundige maatregelen. Paris Proof 2030 gehaald.',score:94,
+   cmp:{type:'Kantoor',m2:'3.600',tech:'Warmtepomp + PV 48 kWp + WTW',beng2:'29 kWh/m²/jr',saving:'68%',reuse:'DUMAVA aanvraagstructuur volledig herbruikbaar'}},
+  {title:'CO₂-routekaart wijk Hoograven Den Haag',meta:'Gemengd wonen · 2023 · 340 woningen · Den Haag',snip:'Wijkgerichte aanpak klimaatneutraliteit 2035. Warmtenet aansluiting, hybride warmtepomp, collectieve PV. CO₂-reductie 68% gerealiseerd.',score:89,
+   cmp:{type:'Woonwijk',m2:'28.900 (340 won.)',tech:'Warmtenet + hybride WP + collectieve PV',beng2:'31 kWh/m²/jr',saving:'68%',reuse:'Wijkmaatwerk aanpak en monitoring KPI's herbruikbaar'}},
+  {title:'Circulaire renovatie schoolgebouw Amersfoort',meta:'Onderwijs · 2024 · 2.800 m² · Amersfoort',snip:'Materiaalpasspoort opgesteld, 74% materiaalhergebruik, energielabel G naar A. Bbl circulaire sloopmelding toegepast. Frisse Scholen klasse B behaald.',score:85,
+   cmp:{type:'School',m2:'2.800',tech:'HR++ glas + PV 32 kWp + WTW Frisse Scholen',beng2:'34 kWh/m²/jr',saving:'62%',reuse:'Materiaalpasspoort template + Frisse Scholen checklist herbruikbaar'}},
 ];
 
 function searchKB(){
   const q=document.getElementById('kb-q').value;
   document.getElementById('kb-meta').textContent=kbData.length+` resultaten voor "${q}" — gesorteerd op relevantie`;
-  document.getElementById('kb-results').innerHTML=kbData.map(k=>`<div class="kb-item"><span class="match">${k.score}% match</span><div class="kb-title">${k.title}</div><div class="kb-meta">${k.meta}</div><div class="kb-snip">${k.snip}</div></div>`).join('');
+  document.getElementById('kb-results').innerHTML=kbData.map((k,i)=>`<div class="kb-item"><span class="match">${k.score}% match</span><div class="kb-title">${k.title}</div><div class="kb-meta">${k.meta}</div><div class="kb-snip">${k.snip}</div>
+<button class="cmp-btn" onclick="showCompare(${i})">◎ Vergelijk met huidig project</button>
+<div class="cmp-pan" id="cmp-${i}">
+  <div class="cmp-row"><span class="cmp-key">Type</span><span class="cmp-val">${k.cmp.type}</span></div>
+  <div class="cmp-row"><span class="cmp-key">Projectomvang</span><span class="cmp-val">${k.cmp.m2} m²</span></div>
+  <div class="cmp-row"><span class="cmp-key">Techniek</span><span class="cmp-val">${k.cmp.tech}</span></div>
+  <div class="cmp-row"><span class="cmp-key">BENG 2 uitkomst</span><span class="cmp-val">${k.cmp.beng2}</span></div>
+  <div class="cmp-row"><span class="cmp-key">CO₂-besparing</span><span class="cmp-val">${k.cmp.saving}</span></div>
+  <div class="cmp-row"><span class="cmp-key">Herbruikbare aanpak</span><span class="cmp-val" style="font-size:11px;">${k.cmp.reuse}</span></div>
+</div></div>`).join('');
+}
+
+function qaAnalyse(){
+  const issues=[
+    {level:'h',title:'Papendorp-Noord: EP-invoer onvolledig',sub:'Verlichtingsvermogen (W/m²) ontbreekt — NTA 8800 standaardwaarde toegepast. Valideer met actuele installatielijst.'},
+    {level:'h',title:'DUMAVA deadline Leidsche Rijn: 9 dagen resterend',sub:'Aanvraagdeadline 30 apr 2026 nadert. Dossier is nog in review-status. Actie vereist voor indiening.'},
+    {level:'m',title:'Overvecht: COP-aanname warmtepomp niet gedocumenteerd',sub:'COP 3,9 toegepast als gemiddelde, maar geen meting of fabricagespec aanwezig in projectdossier.'},
+    {level:'m',title:'Lombok: bouwjaargegevens niet geverifieerd',sub:'Bouwjaar 1973 uit kadaster — EPcalculatie gevoelig voor jaar. Advies: verifieer via originele omgevingsvergunning.'},
+    {level:'l',title:'Transwijk: materiaalpasspoort nog niet gestart',sub:'Circulaire sloopmelding deadline juli 2026. Materiaalpasspoort fase 0 aanbevolen vóór 1 juni voor buffer.'},
+    {level:'l',title:'Papendorp-Noord: PV-opbrengst aanname conservatief',sub:'900 kWh/kWp/jr gebruikt. PVGIS 2024 toont 952 kWh/kWp/jr voor Utrecht. Kleine positieve marge beschikbaar.'},
+  ];
+  const score=62;
+  const sc=score<60?'qa-score-err':score<80?'qa-score-warn':'qa-score-ok';
+  document.getElementById('qa-badge-wrap').innerHTML=`<div class="qa-badge ${sc}">QA Score: ${score}/100 — ${score<60?'Kritieke aandachtspunten':score<80?'Verbeteringen aanbevolen':'Goed'}</div>`;
+  document.getElementById('qa-list').innerHTML=issues.map(it=>`<div class="qa-item qa-item-${it.level}"><div class="qa-risk qa-risk-${it.level}">${it.level==='h'?'● Hoog':it.level==='m'?'● Middel':'● Laag'}</div><div class="qa-ititle">${it.title}</div><div class="qa-isub">${it.sub}</div></div>`).join('');
+  document.getElementById('qaOv').classList.add('show');
+}
+
+function closeQA(){document.getElementById('qaOv').classList.remove('show');}
+
+function toggleExplain(id){
+  const el=document.getElementById(id);if(!el)return;
+  el.classList.toggle('show');
+  const btn=el.previousElementSibling;
+  if(btn&&btn.classList.contains('expl-btn'))btn.innerHTML=el.classList.contains('show')?'▲ Verberg uitleg':'▶ Waarom is dit correct?';
+}
+
+function showCompare(idx){const el=document.getElementById('cmp-'+idx);if(el)el.classList.toggle('show');}
+
+const cgConcepts={
+  'Kantoor':[
+    {name:'All-electric kantoor — WKO + WP + PV',desc:'Warmte-koudeopslag gekoppeld aan reversibele warmtepomp. Dak volledig benut met PV. Toekomstbestendig en DUMAVA-subsidiabel.',pros:['BENG 2 ruim onder 30 kWh/m²/jr','Hoge DUMAVA subsidie (tot 30%)','Paris Proof 2030 haalbaar'],cons:['Hoge investeringskosten (€120–180/m²)','WKO vereist grondwatervergunning']},
+    {name:'Hybride systeem — HR-ketel + WP + PV',desc:'Overgangsoplossing met hybride warmtepomp als aanvulling op bestaande ketel. Lagere investering, snelle terugverdientijd.',pros:['Lage instapkosten (€55–85/m²)','Snel uitvoerbaar','Gedeeltelijk DUMAVA subsidiabel'],cons:['BENG 2 grens 30 kWh/m²/jr lastiger haalbaar','Fossiele afhankelijkheid blijft deels']}
+  ],
+  'Woning':[
+    {name:'Warmtepomp (bodem) + PV + triple glas',desc:'Bodemwarmtepomp als primaire warmtebron, aangevuld met PV-systeem. Hoge comfortniveau en toekomstbestendige installatie.',pros:['Energielabel A++ haalbaar','Lage energierekening gebruiker','Goed voor verhuurverplichting 2030'],cons:['Hoge initiële investering','Voldoende dakoppervlak nodig voor PV']},
+    {name:'Hybride warmtepomp + zonnecollector',desc:'Lucht-water hybride warmtepomp gecombineerd met zonnecollector voor tapwater. Flexibele en kostenefficiënte aanpak.',pros:['Lagere investering dan volledig elektrisch','Bruikbaar bij gaskookpunt-omgeving','Subsidie via ISDE mogelijk'],cons:['Iets lagere CO₂-reductie dan all-electric','Onderhoud twee systemen']}
+  ],
+  'Zorggebouw':[
+    {name:'Warmtenet aansluiting + PV + WTW',desc:'Collectieve warmtelevering via stadsnet of buurt-WKO. Ideaal voor zorggebouwen met 24/7 warmtebehoefte en hoog tapwaterverbruik.',pros:['Geen onderhoud eigen installatie','Stabiele energiekosten','BENG 2 goed haalbaar'],cons:['Afhankelijk van netbeschikbaarheid','Lagere eigen sturing energieverbruik']},
+    {name:'WKO + absorptiewarmtepomp + PV',desc:'Eigen WKO-systeem met absorptiewarmtepomp geschikt voor hoog warmtapwaterverbruik in zorgfuncties. Maximale duurzaamheidsscore.',pros:['Maximale CO₂-reductie','Onafhankelijk van warmtenet','GPR Gebouw score > 8 haalbaar'],cons:['Complexe installatie, hoge CAPEX','Grondwatervergunning verplicht']}
+  ],
+  'School':[
+    {name:'Frisse Scholen klasse A — WTW + WP + PV',desc:'Volledig elektrisch concept met hoog-rendement WTW-ventilatie voor Frisse Scholen klasse A. PV op schooldak, warmtepomp voor verwarming.',pros:['Frisse Scholen klasse A haalbaar','Gezond binnenklimaat leerlingen','DUMAVA + IKC subsidie combineerbaar'],cons:['Dakoppervlak intensief gebruik','Inregeling ventilatie vraagt expertise']},
+    {name:'Hybride aanpak — bestaande bouw',desc:'Renovatie-eerste aanpak: isolatie upgraden, HR++ glas, hybride warmtepomp en WTW. Gefaseerd uitvoerbaar per schoolvakantie.',pros:['Minimale schoolonderbreking','Lagere kosten per fase','Energielabel C → A in 2 fasen'],cons:['Langere terugverdientijd totaal','Frisse Scholen klasse B maximaal in fase 1']}
+  ],
+  'Logistiek':[
+    {name:'PV-dak + luchtbehandeling + LED',desc:'Grootschalig PV-systeem op logistiek dak (groot dakoppervlak beschikbaar), efficiënte luchtbehandeling en LED-armaturen.',pros:['PV-opbrengst zeer hoog door groot dakoppervlak','Energieneutraal of leverend haalbaar','SDE++ subsidie combineerbaar'],cons:['Dak moet verstevigd worden bij grote PV-last','Weinig warmtebehoefte in hal']},
+    {name:'WKO + vloerverwarming (kantoorvleugel) + PV',desc:'Hybride concept: WKO voor kantoorvleugel, luchtcurtains en PV voor de loods. Maatwerk voor gemengd gebruik.',pros:['Optimale verduurzaming per zone','Goed scorend bij energielabel kantoor+loods','DUMAVA subsidiabel voor kantoorvleugel'],cons:['Twee systemen verhogen complexiteit','WKO economisch alleen bij > 500 m² kantoor']}
+  ],
+  'Horeca / Hotel':[
+    {name:'WKO + absorptiewarmtepomp + PV + zonnecollector',desc:'Maximaal duurzaam concept voor hotels met hoog warmtapwaterverbruik. WKO levert basis, zonnecollector piekt tapwater, PV compenseert elektra.',pros:['Energielabel A+ haalbaar','Minimale fossiele afhankelijkheid','Zichtbaar duurzaam voor gasten'],cons:['Hoge investering (€150–220/m²)','WKO vergunningstraject']},
+    {name:'Warmteterugwinning keuken + WP + PV',desc:'Warmteterugwinning uit keukenafzuiging gekoppeld aan warmtepomp en PV. Praktisch en haalbaar voor bestaande horecapanden.',pros:['Goede ROI door hoge keukenafvalwarmte','Minder invasief dan WKO','Relatief korte terugverdientijd'],cons:['Minder geschikt voor grote hotels','WTR installatie vraagt aanpassing keuken']}
+  ]
+};
+
+function genConcept(){
+  const type=document.getElementById('cg-type').value;
+  const m2=document.getElementById('cg-m2').value;
+  const state=document.getElementById('cg-state').value;
+  const opts=cgConcepts[type]||cgConcepts['Kantoor'];
+  document.getElementById('cg-out').innerHTML=`<div style="font-size:12px;color:var(--mid);margin-bottom:12px;">Concepten voor <strong>${type}</strong> · ${m2} m² · ${state}</div><div class="cg-grid">${opts.map(o=>`<div class="cg-card"><div class="cg-name">💡 ${o.name}</div><div class="cg-desc">${o.desc}</div><div class="pc-box"><div class="cg-pros"><strong>+ Voordelen</strong><br>${o.pros.map(p=>'• '+p).join('<br>')}</div><div class="cg-cons" style="margin-top:8px;"><strong>− Aandachtspunten</strong><br>${o.cons.map(c=>'• '+c).join('<br>')}</div></div></div>`).join('')}</div>`;
 }
 </script>
 
-
+<!-- QA OVERLAY -->
+<div class="qa-ov" id="qaOv">
+  <div class="qa-modal">
+    <div class="qa-mhead">
+      <div class="qa-title">⚡ QA Analyse — Projecten</div>
+      <button class="qa-close" onclick="closeQA()">✕</button>
+    </div>
+    <div id="qa-badge-wrap"></div>
+    <div class="qa-list" id="qa-list"></div>
+  </div>
+</div>
 
 <!-- CHATBOT WIDGET -->
 <style>
-.chat-float{position:fixed;bottom:24px;right:24px;z-index:9999;}
-.chat-btn{width:54px;height:54px;border-radius:50%;background:var(--forest);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 24px rgba(0,0,0,.4);transition:transform .2s;position:relative;}
+.chat-float{position:fixed;bottom:24px;right:24px;z-index:1000;}
+.chat-btn{width:54px;height:54px;border-radius:50%;background:var(--forest);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 24px rgba(0,0,0,.35);transition:transform .2s;position:relative;}
 .chat-btn:hover{transform:scale(1.08);}
 .chat-dot{position:absolute;top:1px;right:1px;width:13px;height:13px;border-radius:50%;background:#E74C3C;border:2px solid var(--white);animation:chatpulse 2s infinite;}
-@keyframes chatpulse{0%,100%{opacity:1}50%{opacity:.3}}
-.chat-win{position:fixed;bottom:90px;right:24px;width:330px;background:var(--white);border:1px solid var(--border);border-radius:12px;flex-direction:column;overflow:hidden;box-shadow:0 8px 36px rgba(0,0,0,.3);z-index:9998;max-height:490px;display:none;}
-.chat-win.cw-open{display:flex;animation:chatIn .22s ease;}
+@keyframes chatpulse{0%,100%{opacity:1}50%{opacity:.35}}
+.chat-win{position:fixed;bottom:90px;right:24px;width:330px;background:var(--white);border:1px solid var(--border);border-radius:12px;display:none;flex-direction:column;overflow:hidden;box-shadow:0 8px 36px rgba(0,0,0,.35);z-index:999;max-height:490px;}
+.chat-win.open{display:flex;animation:chatIn .22s ease;}
 @keyframes chatIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 .chat-head{padding:14px 16px;background:var(--forest);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
 .chat-head-name{font-weight:600;color:#fff;font-size:14px;}
 .chat-head-sub{font-size:11px;color:rgba(255,255,255,.72);margin-top:2px;}
-.chat-xbtn{background:none;border:none;color:rgba(255,255,255,.85);font-size:26px;cursor:pointer;line-height:1;padding:0 2px;}
-.chat-xbtn:hover{color:#fff;}
+.chat-close{background:none;border:none;color:rgba(255,255,255,.8);font-size:24px;cursor:pointer;line-height:1;padding:0;transition:color .15s;}
+.chat-close:hover{color:#fff;}
 .chat-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px;min-height:180px;}
 .cmsg{max-width:88%;padding:9px 12px;border-radius:10px;font-size:13px;line-height:1.55;}
 .cmsg-bot{background:var(--cream);color:var(--text);border-bottom-left-radius:3px;align-self:flex-start;}
@@ -490,118 +659,109 @@ function searchKB(){
 .cdot:nth-child(2){animation-delay:.15s;}.cdot:nth-child(3){animation-delay:.3s;}
 @keyframes cdotb{0%,60%,100%{transform:translateY(0);}30%{transform:translateY(-5px);}}
 .chat-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 10px;flex-shrink:0;}
-.cchip{padding:5px 11px;border-radius:20px;border:1.5px solid var(--forest);background:transparent;color:var(--forest);font-size:12px;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;line-height:1.4;}
-.cchip:hover{background:var(--forest);color:#fff;border-color:var(--forest);}
+.chip{padding:5px 11px;border-radius:20px;border:1.5px solid var(--forest);background:transparent;color:var(--forest);font-size:12px;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;line-height:1.4;}
+.chip:hover{background:var(--forest);color:#fff;border-color:var(--forest);}
 .chat-inp-row{padding:10px 12px;border-top:1px solid var(--border);display:flex;gap:8px;flex-shrink:0;}
 .cinp{flex:1;background:var(--cream);border:1.5px solid var(--border);border-radius:20px;padding:8px 13px;font-size:13px;color:var(--text);outline:none;font-family:inherit;}
 .cinp:focus{border-color:var(--forest);}
-.csend{background:var(--forest);border:none;border-radius:50%;width:34px;height:34px;min-width:34px;color:#fff;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:opacity .15s;}
+.csend{background:var(--forest);border:none;border-radius:50%;width:34px;height:34px;min-width:34px;color:#fff;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:opacity .15s;}
 .csend:hover{opacity:.82;}
 </style>
 <div class="chat-float">
-  <button class="chat-btn" id="chatToggleBtn" title="Assistent">&#128172;<span class="chat-dot"></span></button>
+  <button class="chat-btn" onclick="toggleChat()" title="Assistent">💬<span class="chat-dot"></span></button>
 </div>
 <div class="chat-win" id="chatWin">
   <div class="chat-head">
-    <div><div class="chat-head-name">DVTadvies Assistent</div><div class="chat-head-sub">&#128994; Online &middot; stel gerust een vraag</div></div>
-    <button class="chat-xbtn" id="chatCloseBtn">&#215;</button>
+    <div><div class="chat-head-name">DVTadvies Assistent</div><div class="chat-head-sub">🟢 Online &middot; stel gerust een vraag</div></div>
+    <button class="chat-close" onclick="toggleChat()">&#215;</button>
   </div>
   <div class="chat-msgs" id="chatMsgs"></div>
   <div class="chat-chips" id="chatChips"></div>
   <div class="chat-inp-row">
-    <input class="cinp" id="chatInp" placeholder="Stel een vraag...">
-    <button class="csend" id="chatSendBtn">&#8593;</button>
+    <input class="cinp" id="chatInp" placeholder="Stel een vraag..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button class="csend" onclick="sendChat()">&#8593;</button>
   </div>
 </div>
 <script>
 (function(){
-  var open=false,inited=false;
-  var faq=[{"keys": ["beng", "indicator"], "ans": "<strong>BENG</strong>: Bijna Energie Neutraal Gebouw.<br>&#8226; BENG 1: Energiebehoefte<br>&#8226; BENG 2: Primair fossiel energiegebruik<br>&#8226; BENG 3: Hernieuwbare energie", "chips": ["BENG Checker"]}, {"keys": ["dumava", "subsidie"], "ans": "<strong>DUMAVA</strong> is de subsidieregeling voor verduurzaming van utiliteitsgebouwen. De Rapport Schrijver stelt automatisch een DUMAVA-subsidieadvies op.", "chips": ["Rapport Schrijver"]}, {"keys": ["energielabel", "label", "nta 8800"], "ans": "De <strong>Excel Assistent</strong> berekent op basis van NTA 8800 het huidige energielabel en de prognose na verduurzamingsmaatregelen.", "chips": ["Excel Assistent", "Rapport Schrijver"]}, {"keys": ["paris proof", "klimaatneutraal", "co2"], "ans": "Paris Proof houdt in dat een gebouw richting 2050 klimaatneutraal opereert. DVTadvies stelt CO2-routekaarten op.", "chips": ["Rapport Schrijver"]}, {"keys": ["rapport", "rapportage"], "ans": "De <strong>Rapport Schrijver</strong> stelt energielabelrapporten, DUMAVA-subsidieadviezen en CO2-routekaarten op.", "chips": ["Rapport Schrijver"]}, {"keys": ["excel", "berekening"], "ans": "De <strong>Excel Assistent</strong> vult ontbrekende EP-waarden in via NTA 8800 en berekent het huidige energielabel.", "chips": ["Excel Assistent"]}, {"keys": ["norm", "nen", "bbl", "dumava"], "ans": "De <strong>Norm Monitor</strong> houdt wijzigingen in DUMAVA-regels, energielabelverplichtingen en Paris Proof bij.", "chips": ["Norm Monitor"]}, {"keys": ["kennis", "archief", "zoek"], "ans": "De <strong>Kennisbank</strong> maakt uw projectarchief doorzoekbaar op gebouwtype, bouwjaar en label.", "chips": ["Kennisbank"]}];
-  var welcome="Goedemiddag! Ik ben de assistent van DVTadvies. Waarmee kan ik u helpen?";
-  var navMap={"Dashboard":"dashboard","Rapport Schrijver":"rapport","Excel Assistent":"excel","BENG Checker":"beng","Norm Monitor":"normen","Kennisbank":"kennis"};
-  function toggle(){
-    open=!open;
-    document.getElementById("chatWin").classList.toggle("cw-open",open);
-    if(open&&!inited){inited=true;setTimeout(function(){botMsg(welcome);setChips(["Welke apps zijn er?","Rapport schrijven","BENG uitleg","Norm updates","WKB uitleg","Meer vragen"]);},350);}
-    if(open) document.getElementById("chatInp").focus();
-  }
-  document.getElementById("chatToggleBtn").addEventListener("click",toggle);
-  document.getElementById("chatCloseBtn").addEventListener("click",toggle);
-  function botMsg(html){
-    var m=document.getElementById("chatMsgs");
-    var el=document.createElement("div");
-    el.className="cmsg-typing";
-    el.innerHTML="<span class=\"cdot\"></span><span class=\"cdot\"></span><span class=\"cdot\"></span>";
-    m.appendChild(el);m.scrollTop=m.scrollHeight;
-    setTimeout(function(){el.className="cmsg cmsg-bot";el.innerHTML=html;m.scrollTop=m.scrollHeight;},650);
-  }
-  function userMsg(txt){
-    var m=document.getElementById("chatMsgs");
-    var el=document.createElement("div");
-    el.className="cmsg cmsg-user";el.textContent=txt;
-    m.appendChild(el);m.scrollTop=m.scrollHeight;
-  }
-  function setChips(arr){
-    var el=document.getElementById("chatChips");
-    el.innerHTML="";
-    arr.forEach(function(label){
-      var btn=document.createElement("button");
-      btn.className="cchip";btn.textContent=label;
-      btn.addEventListener("click",function(){
-        userMsg(label);
-        document.getElementById("chatChips").innerHTML="";
-        process(label);
-      });
-      el.appendChild(btn);
-    });
-  }
-  function navTo(id,label){
-    var nav=null;
-    document.querySelectorAll(".nav-item").forEach(function(el){
-      if(el.getAttribute("onclick")&&el.getAttribute("onclick").indexOf(id)!==-1) nav=el;
-    });
-    show(id,nav);
-    setTimeout(function(){
-      botMsg("U bent doorgestuurd naar <strong>"+label+"</strong>. Nog iets anders?");
-      setChips(["Welke apps zijn er?","Meer vragen"]);
-    },200);
-  }
-  function process(t){
-    var l=t.toLowerCase();
-    if(l.indexOf("welke")!==-1||l.indexOf("app")!==-1||l.indexOf("navigeer")!==-1){
-      setTimeout(function(){botMsg("Naar welke app wilt u?");setChips(["Dashboard","Rapport Schrijver","Excel Assistent","BENG Checker","Norm Monitor","Kennisbank"]);},500);
-      return;
-    }
-    if(navMap[t]){setTimeout(function(){navTo(navMap[t],t);},500);return;}
-    for(var page in navMap){
-      if(l.indexOf(page.toLowerCase())!==-1){
-        (function(p){setTimeout(function(){navTo(navMap[p],p);},500);})(page);
-        return;
-      }
-    }
+var _open=false,_init=false;
+var _faq=[
+  {keys:['beng','indicator','energieprestatie'],ans:'<strong>BENG</strong> staat voor Bijna Energie Neutraal Gebouw. Drie indicatoren:<br>• <strong>BENG 1</strong>: Energiebehoefte (kWh/m²/jr)<br>• <strong>BENG 2</strong>: Primair fossiel energiegebruik<br>• <strong>BENG 3</strong>: Aandeel hernieuwbare energie<br><br>DVTadvies werkt veelal met bestaande gebouwen — wilt u de checker gebruiken?',chips:['⟁ BENG Checker']},
+  {keys:['dumava','subsidie'],ans:'<strong>DUMAVA</strong> is de subsidieregeling voor verduurzaming van utiliteitsgebouwen. DVTadvies begeleidt de aanvraag. De Rapport Schrijver stelt automatisch een DUMAVA-subsidieadvies op conform de actuele voorwaarden.',chips:['📝 Rapport Schrijver']},
+  {keys:['energielabel','label','nta 8800','ep-waarde'],ans:'De <strong>Excel Assistent</strong> berekent op basis van NTA 8800 het huidige energielabel én de prognose na verduurzamingsmaatregelen — inclusief een inschatting van de DUMAVA-subsidiabiliteit.',chips:['⊞ Excel Assistent','📝 Rapport Schrijver']},
+  {keys:['paris proof','klimaatneutraal','co2','co₂'],ans:'Paris Proof houdt in dat een gebouw richting 2050 klimaatneutraal opereert. Voor kantoren: <strong>55 kWh/m²/jr</strong> in 2030. DVTadvies stelt CO₂-routekaarten op voor de weg daar naartoe.',chips:['📝 Rapport Schrijver']},
+  {keys:['circul','duurzaam'],ans:'DVTadvies heeft een sterke focus op <strong>duurzaamheid en circulariteit</strong>: materiaalstromen, sloopadvies en hergebruik van installatiecomponenten. Wilt u de Kennisbank doorzoeken op referentieprojecten?',chips:['◎ Kennisbank']},
+  {keys:['rapport','rapportage','document'],ans:'Met de <strong>Rapport Schrijver</strong> stelt u energielabelrapporten, DUMAVA-subsidieadviezen en CO₂-routekaarten op — gebaseerd op DVTadvies-templates, NTA 8800 en DUMAVA 2026.',chips:['📝 Rapport Schrijver']},
+  {keys:['norm','nen','bbl','update','regelgev'],ans:'De <strong>Norm Monitor</strong> houdt wijzigingen in DUMAVA-regels, energielabelverplichtingen en Paris Proof-doelstellingen bij — zodat uw adviezen altijd actueel zijn.',chips:['⚖ Norm Monitor']},
+  {keys:['kennis','archief','zoek','project'],ans:'De <strong>Kennisbank</strong> maakt uw projectarchief doorzoekbaar op gebouwtype, bouwjaar, label en locatie.',chips:['◎ Kennisbank']},
+  {keys:['meer','vraag','help','wat kan'],ans:'U kunt mij vragen naar:',chips:['📊 Dashboard','📝 Rapport Schrijver','⊞ Excel Assistent','⟁ BENG Checker','⚖ Norm Monitor','◎ Kennisbank','💶 DUMAVA subsidie','🏷 Energielabel','🌍 Paris Proof']}
+];
+function toggleChat(){
+  _open=!_open;
+  document.getElementById('chatWin').classList.toggle('open',_open);
+  if(_open&&!_init){_init=true;setTimeout(function(){_botMsg('Goedemiddag! Ik ben de assistent van <strong>DVTadvies</strong>. Waarmee kan ik u helpen?');_chips(['🗂 Naar een app','📝 Rapport schrijven','⟁ BENG uitleg','📋 Norm updates','❓ Meer vragen']);},350);}
+  if(_open)document.getElementById('chatInp').focus();
+}
+window.toggleChat=toggleChat;
+function _botMsg(html){
+  var m=document.getElementById('chatMsgs');
+  var t=document.createElement('div');t.className='cmsg-typing';
+  t.innerHTML='<span class="cdot"></span><span class="cdot"></span><span class="cdot"></span>';
+  m.appendChild(t);m.scrollTop=m.scrollHeight;
+  setTimeout(function(){
+    t.className='cmsg cmsg-bot';t.innerHTML=html;m.scrollTop=m.scrollHeight;
+  },650);
+}
+function _userMsg(txt){
+  var m=document.getElementById('chatMsgs');
+  var d=document.createElement('div');d.className='cmsg cmsg-user';d.textContent=txt;
+  m.appendChild(d);m.scrollTop=m.scrollHeight;
+}
+function _chips(arr){
+  document.getElementById('chatChips').innerHTML=arr.map(function(c){
+    return '<button class="chip" onclick="_chip(''+c.replace(/'/g,"\'")+'')">'+ c +'</button>';
+  }).join('');
+}
+function _clearChips(){document.getElementById('chatChips').innerHTML='';}
+window._chip=function(t){_userMsg(t);_clearChips();_process(t);};
+window.sendChat=function(){
+  var i=document.getElementById('chatInp'),v=i.value.trim();
+  if(!v)return;_userMsg(v);i.value='';_clearChips();_process(v);
+};
+function _navTo(id,label){
+  var nav=document.querySelector('.nav-item[onclick*="''+id+''"]');
+  show(id,nav);
+  setTimeout(function(){
+    _botMsg('U bent doorgestuurd naar <strong>'+label+'</strong>. Nog iets anders?');
+    _chips(['🗂 Naar een app','❓ Meer vragen']);
+  },200);
+}
+function _process(t){
+  var l=t.toLowerCase();
+  if(l.includes('app')||l.includes('navigeer')||l.includes('naar een')){
+    setTimeout(function(){_botMsg('Naar welke app wilt u?');_chips(['📊 Dashboard','📝 Rapport Schrijver','⊞ Excel Assistent','⟁ BENG Checker','⚖ Norm Monitor','◎ Kennisbank']);}),500);
+  }else if(l.includes('dashboard')){setTimeout(function(){_navTo('dashboard','Dashboard');},500);
+  }else if(l.includes('rapport schrijver')||l.includes('rapport schrijv')){setTimeout(function(){_navTo('rapport','Rapport Schrijver');},500);
+  }else if(l.includes('excel')){setTimeout(function(){_navTo('excel','Excel Assistent');},500);
+  }else if(l.includes('beng checker')||l.includes('beng check')){setTimeout(function(){_navTo('beng','BENG Checker');},500);
+  }else if(l.includes('norm monitor')||l.includes('norm update')){setTimeout(function(){_navTo('normen','Norm Monitor');},500);
+  }else if(l.includes('kennisbank')||l.includes('kennis bank')){setTimeout(function(){_navTo('kennis','Kennisbank');},500);
+  }else{
     var match=null;
-    for(var i=0;i<faq.length&&!match;i++){
-      for(var j=0;j<faq[i].keys.length&&!match;j++){
-        if(l.indexOf(faq[i].keys[j])!==-1) match=faq[i];
-      }
+    for(var i=0;i<_faq.length;i++){
+      var f=_faq[i];
+      for(var j=0;j<f.keys.length;j++){if(l.includes(f.keys[j])){match=f;break;}}
+      if(match)break;
     }
     if(match){
-      (function(m){setTimeout(function(){botMsg(m.ans);if(m.chips)setChips(m.chips);},500);})(match);
-    } else {
-      setTimeout(function(){botMsg("Dat weet ik helaas niet direct. Kan ik u ergens naartoe sturen?");setChips(["Welke apps zijn er?","Meer vragen"]);},500);
+      setTimeout(function(){_botMsg(match.ans);if(match.chips)_chips(match.chips);},500);
+    }else{
+      setTimeout(function(){_botMsg('Dat weet ik helaas niet direct. Kan ik u ergens naartoe sturen?');_chips(['🗂 Naar een app','❓ Meer vragen']);},500);
     }
   }
-  document.getElementById("chatSendBtn").addEventListener("click",function(){
-    var inp=document.getElementById("chatInp"),v=inp.value.trim();
-    if(!v) return;
-    userMsg(v);inp.value="";
-    document.getElementById("chatChips").innerHTML="";
-    process(v);
-  });
-  document.getElementById("chatInp").addEventListener("keydown",function(e){
-    if(e.key==="Enter") document.getElementById("chatSendBtn").click();
-  });
+}
 })();
 </script>
+
 </body>
 </html>
